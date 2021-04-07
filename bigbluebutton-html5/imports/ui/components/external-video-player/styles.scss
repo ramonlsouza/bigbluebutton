@@ -10,6 +10,10 @@
   border-bottom: none;
 }
 
+.noClick iframe{
+  pointer-events: none;
+}
+
 .autoPlayWarning {
   position: absolute;
   z-index: 100;

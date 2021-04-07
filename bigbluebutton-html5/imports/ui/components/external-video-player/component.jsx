@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import injectWbResizeEvent from '/imports/ui/components/presentation/resize-wrapper/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import ReactPlayer from 'react-player';
+import cx from 'classnames';
 import { sendMessage, onMessage, removeAllListeners } from './service';
 import logger from '/imports/startup/client/logger';
 
@@ -53,18 +54,18 @@ class VideoPlayer extends Component {
       playerOptions: {
         autoplay: true,
         playsinline: true,
-        controls: true,
+        controls: !!isPresenter,
       },
       file: {
         attributes: {
-          controls: true,
+          controls: !!isPresenter,
           autoPlay: true,
           playsInline: true,
         },
       },
       dailymotion: {
         params: {
-          controls: true,
+          controls: !!isPresenter,
         },
       },
       youtube: {
@@ -74,7 +75,7 @@ class VideoPlayer extends Component {
           autohide: 1,
           rel: 0,
           ecver: 2,
-          controls: isPresenter ? 1 : 2,
+          controls: isPresenter ? 1 : 0,
         },
       },
       peertube: {
@@ -82,7 +83,7 @@ class VideoPlayer extends Component {
       },
       twitch: {
         options: {
-          controls: true,
+          controls: !!isPresenter,
         },
         playerId: 'externalVideoPlayerTwitch',
       },
@@ -200,6 +201,7 @@ class VideoPlayer extends Component {
 
   autoPlayBlockDetected() {
     this.setState({ autoPlayBlocked: true });
+    this.handleResize();
   }
 
   handleFirstPlay() {
@@ -209,6 +211,7 @@ class VideoPlayer extends Component {
     if (!hasPlayedBefore) {
       this.hasPlayedBefore = true;
       this.setState({ autoPlayBlocked: false });
+      this.handleResize();
 
       clearTimeout(this.autoPlayTimeout);
 
@@ -396,6 +399,10 @@ class VideoPlayer extends Component {
     this.setState({ playing: true });
 
     this.handleFirstPlay();
+
+    if (!isPresenter && !playing) {
+      this.setState({ playing: false });
+    }
   }
 
   handleOnPause() {
@@ -413,10 +420,12 @@ class VideoPlayer extends Component {
   }
 
   render() {
-    const { videoUrl, intl } = this.props;
+    const { videoUrl, intl, isPresenter } = this.props;
     const {
       playing, playbackRate, mutedByEchoTest, autoPlayBlocked,
     } = this.state;
+
+    const className = !isPresenter ? styles.noClick : null;
 
     return (
       <div
@@ -426,24 +435,40 @@ class VideoPlayer extends Component {
       >
         {autoPlayBlocked
           ? (
-            <p className={styles.autoPlayWarning}>
-              {intl.formatMessage(intlMessages.autoPlayWarning)}
-            </p>
+            <>
+              <p className={styles.autoPlayWarning}>
+                {intl.formatMessage(intlMessages.autoPlayWarning)}
+              </p>
+              <ReactPlayer
+                className={styles.videoPlayer}
+                url={videoUrl}
+                config={this.opts}
+                muted={mutedByEchoTest}
+                playing={playing}
+                playbackRate={playbackRate}
+                onReady={this.handleOnReady}
+                onPlay={this.handleOnPlay}
+                onPause={this.handleOnPause}
+                ref={(ref) => { this.player = ref; }}
+              />
+            </>
           )
-          : ''
+          : (
+            <ReactPlayer
+              className={cx(styles.videoPlayer, className)}
+              url={videoUrl}
+              config={this.opts}
+              muted={mutedByEchoTest}
+              playing={playing}
+              playbackRate={playbackRate}
+              onReady={this.handleOnReady}
+              onPlay={this.handleOnPlay}
+              onPause={this.handleOnPause}
+              ref={(ref) => { this.player = ref; }}
+            />
+          )
+
         }
-        <ReactPlayer
-          className={styles.videoPlayer}
-          url={videoUrl}
-          config={this.opts}
-          muted={mutedByEchoTest}
-          playing={playing}
-          playbackRate={playbackRate}
-          onReady={this.handleOnReady}
-          onPlay={this.handleOnPlay}
-          onPause={this.handleOnPause}
-          ref={(ref) => { this.player = ref; }}
-        />
       </div>
     );
   }
