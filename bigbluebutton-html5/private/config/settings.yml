@@ -61,14 +61,14 @@ public:
     defaultSettings:
       application:
         animations: true
-        chatAudioAlerts: false
+        chatAudioAlerts: true
         chatPushAlerts: false
         userJoinAudioAlerts: false
         userJoinPushAlerts: false
-        raiseHandAudioAlerts: true
-        raiseHandPushAlerts: true
-        guestWaitingAudioAlerts: true
-        guestWaitingPushAlerts: true
+        raiseHandAudioAlerts: false
+        raiseHandPushAlerts: false
+        guestWaitingAudioAlerts: false
+        guestWaitingPushAlerts: false
         paginationEnabled: true
         # fallbackLocale: if the locale the client is loaded in does not have a
         # translation a string, it will use the translation from the locale

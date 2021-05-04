@@ -70,6 +70,8 @@ export const GroupChatContextConsumer = Component => props => (
   </GroupChatContext.Consumer>
 );
 
+export const withGroupChatConsumer = Component => GroupChatContextConsumer(Component);
+
 export default {
   GroupChatContextConsumer,
   GroupChatContextProvider,

@@ -370,6 +370,8 @@ export const ContextConsumer = Component => props => (
   </ChatContext.Consumer>
 );
 
+export const withChatConsumer = Component => ContextConsumer(Component);
+
 export default {
   ContextConsumer,
   ChatContextProvider,

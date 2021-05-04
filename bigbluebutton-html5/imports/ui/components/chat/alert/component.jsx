@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import _ from 'lodash';
 import UnreadMessages from '/imports/ui/services/unread-messages';
-import ChatAudioAlert from './audio-alert/component';
 import ChatPushAlert from './push-alert/component';
 import Service from '../service';
 import { styles } from '../styles';
+import AudioService from '/imports/ui/components/audio/service';
+import {Meteor} from "meteor/meteor";
 
 const propTypes = {
   pushAlertDisabled: PropTypes.bool.isRequired,
@@ -55,7 +56,7 @@ class ChatAlert extends PureComponent {
     };
   }
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     const {
       activeChats,
       idChatOpen,
@@ -63,6 +64,8 @@ class ChatAlert extends PureComponent {
       pushAlertDisabled,
       messages,
       publicChatId,
+      hasUnreadMessages,
+      audioAlertDisabled
     } = this.props;
 
     const {
@@ -70,6 +73,13 @@ class ChatAlert extends PureComponent {
       lastAlertTimestampByChat,
       pendingNotificationsByChat,
     } = this.state;
+
+    if(!audioAlertDisabled && hasUnreadMessages){
+      AudioService.playAlertSound(`${Meteor.settings.public.app.cdn
+        + Meteor.settings.public.app.basename
+        + Meteor.settings.public.app.instanceId}`
+        + '/resources/sounds/notify.mp3');
+    }
 
     // Avoid alerting messages received before enabling alerts
     if (prevProps.pushAlertDisabled && !pushAlertDisabled) {
@@ -145,7 +155,6 @@ class ChatAlert extends PureComponent {
     this.setState({ pendingNotificationsByChat, lastAlertTimestampByChat });
   }
 
-
   mapContentText(message) {
     const {
       intl,
@@ -179,8 +188,6 @@ class ChatAlert extends PureComponent {
 
   render() {
     const {
-      audioAlertDisabled,
-      idChatOpen,
       pushAlertDisabled,
       intl,
     } = this.props;
@@ -189,19 +196,8 @@ class ChatAlert extends PureComponent {
       pendingNotificationsByChat,
     } = this.state;
 
-    const notCurrentTabOrMinimized = document.hidden;
-    const hasPendingNotifications = Object.keys(pendingNotificationsByChat).length > 0;
-
-    const shouldPlayChatAlert = notCurrentTabOrMinimized
-      || (hasPendingNotifications && !idChatOpen);
-
     return (
       <Fragment>
-        {
-          !audioAlertDisabled || (!audioAlertDisabled && notCurrentTabOrMinimized)
-            ? <ChatAudioAlert play={shouldPlayChatAlert} />
-            : null
-        }
         {
           !pushAlertDisabled
             ? Object.keys(pendingNotificationsByChat)

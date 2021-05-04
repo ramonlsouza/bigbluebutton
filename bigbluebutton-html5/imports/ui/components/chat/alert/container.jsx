@@ -4,29 +4,29 @@ import Settings from '/imports/ui/services/settings';
 import ChatAlert from './component';
 import Auth from '/imports/ui/services/auth';
 import { UsersContext } from '/imports/ui/components/components-data/users-context/context';
-import { ChatContext } from '/imports/ui/components/components-data/chat-context/context';
-import { GroupChatContext } from '/imports/ui/components/components-data/group-chat-context/context';
+import { withChatConsumer } from '/imports/ui/components/components-data/chat-context/context';
+import { withGroupChatConsumer } from '/imports/ui/components/components-data/group-chat-context/context';
 import userListService from '/imports/ui/components/user-list/service';
 
 const ChatAlertContainer = (props) => {
   const usingUsersContext = useContext(UsersContext);
-  const usingChatContext = useContext(ChatContext);
-  const usingGroupChatContext = useContext(GroupChatContext);
 
   const { users } = usingUsersContext;
   const currentUser = users[Auth.meetingID][Auth.userID];
   const { authTokenValidatedTime } = currentUser;
-  const { chats: groupChatsMessages } = usingChatContext;
-  const { groupChat: groupChats } = usingGroupChatContext;
 
-  const activeChats = userListService.getActiveChats({ groupChatsMessages, groupChats, users });
+  const {
+    groupChat,
+    chats,
+    ...restProps
+  } = props;
 
   return (
-    <ChatAlert {...props} activeChats={activeChats} messages={groupChatsMessages} joinTimestamp={authTokenValidatedTime} />
+    <ChatAlert {...restProps} messages={chats} joinTimestamp={authTokenValidatedTime}/>
   );
 };
 
-export default withTracker(() => {
+export default withChatConsumer(withGroupChatConsumer(withTracker(({ chats, groupChat }) => {
   const AppSettings = Settings.application;
 
   const openPanel = Session.get('openPanel');
@@ -39,10 +39,24 @@ export default withTracker(() => {
     idChatOpen = '';
   }
 
+  const activeChats = userListService.getActiveChats({ groupChatsMessages: chats, groupChats: groupChat }).map((item) => {
+    return {chatId:item.chatId, userId:item.userId, unreadCounter: item.unreadCounter};
+  });
+
+  let hasUnreadMessages = false;
+
+  for(chat in chats){
+    if(chats[chat].unreadTimeWindows.size > 0){
+      hasUnreadMessages = true;
+    }
+  }  
+
   return {
     audioAlertDisabled: !AppSettings.chatAudioAlerts,
     pushAlertDisabled: !AppSettings.chatPushAlerts,
     publicChatId: Meteor.settings.public.chat.public_group_id,
     idChatOpen,
+    activeChats,
+    hasUnreadMessages
   };
-})(memo(ChatAlertContainer));
+})(memo(ChatAlertContainer))));

@@ -206,7 +206,7 @@ const isMe = userId => userId === Auth.userID;
 
 const getActiveChats = ({ groupChatsMessages, groupChats, users }) => {
 
-  if (_.isEmpty(groupChats) && _.isEmpty(users)) return [];
+  if (_.isEmpty(groupChats)) return [];
   
   const chatIds = Object.keys(groupChats);
   const lastTimeWindows = chatIds.reduce((acc, chatId) => {
@@ -248,7 +248,7 @@ const getActiveChats = ({ groupChatsMessages, groupChats, users }) => {
     if (chatId !== PUBLIC_GROUP_CHAT_ID) {
       const groupChatsParticipants = groupChats[chatId].participants;
     const otherParticipant = groupChatsParticipants.filter((user)=> user.id !== Auth.userID)[0];
-    const user = users[otherParticipant.id]; 
+    const user = (typeof users === Array) ? users[otherParticipant.id] : {};
 
     return {
       color: user?.color || '#7b1fa2',
