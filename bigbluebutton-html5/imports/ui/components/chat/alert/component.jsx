@@ -65,7 +65,7 @@ class ChatAlert extends PureComponent {
       messages,
       publicChatId,
       hasUnreadMessages,
-      audioAlertDisabled
+      audioAlertDisabled,
     } = this.props;
 
     const {
@@ -74,11 +74,25 @@ class ChatAlert extends PureComponent {
       pendingNotificationsByChat,
     } = this.state;
 
-    if(!audioAlertDisabled && hasUnreadMessages){
+    const hasPendingNotifications = Object.keys(pendingNotificationsByChat).length > 0;
+
+    if(!audioAlertDisabled && hasPendingNotifications && hasUnreadMessages){
+      var today = new Date();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      console.log(time, "/ui/components/chat/alert/component - play alert")
+
       AudioService.playAlertSound(`${Meteor.settings.public.app.cdn
         + Meteor.settings.public.app.basename
         + Meteor.settings.public.app.instanceId}`
-        + '/resources/sounds/notify.mp3');
+        + '/resources/sounds/notify.mp3').then(() => {
+          if(pushAlertDisabled){
+            var today = new Date();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            console.log(time, "/ui/components/chat/alert/component - play alert (then)")
+      
+            this.setState({ pendingNotificationsByChat: {} });
+          }
+        });
     }
 
     // Avoid alerting messages received before enabling alerts
@@ -92,7 +106,6 @@ class ChatAlert extends PureComponent {
     const unalertedMessagesByChatId = {};
 
     activeChats
-      .filter(chat => chat.userId !== idChatOpen)
       .filter(chat => chat.unreadCounter > 0)
       .forEach((chat) => {
         const chatId = (chat.userId === 'public') ? publicChatId : chat.chatId;
@@ -103,7 +116,7 @@ class ChatAlert extends PureComponent {
             && msg.timestamp > alertEnabledTimestamp
             && msg.timestamp > joinTimestamp
             && msg.timestamp > (lastAlertTimestampByChat[chatId] || 0)
-            && !pushAlertDisabled
+            && (!pushAlertDisabled || !audioAlertDisabled)
           );
           return retorno;
         });
