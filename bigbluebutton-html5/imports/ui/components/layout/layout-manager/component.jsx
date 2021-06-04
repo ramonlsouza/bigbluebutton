@@ -112,7 +112,7 @@ class LayoutManagerComponent extends Component {
     });
 
     window.addEventListener('localeChanged', () => {
-      this.setLayoutSizes();
+      setTimeout(() => this.setLayoutSizes(), 200);
     });
   }
 
