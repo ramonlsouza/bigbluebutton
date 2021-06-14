@@ -14,6 +14,7 @@ import deviceInfo from '/imports/utils/deviceInfo';
 import UserInfos from '/imports/api/users-infos';
 import { NLayoutContext } from '../layout/context/context';
 import Settings from '/imports/ui/services/settings';
+import MediaService from '/imports/ui/components/media/service';
 
 import {
   getFontSize,
@@ -139,6 +140,8 @@ export default injectIntl(withModalMounter(withTracker(({ intl, baseControls }) 
   const layoutManagerLoaded = Session.get('layoutManagerLoaded');
   const AppSettings = Settings.application;
 
+  const { viewScreenshare } = Settings.dataSaving;
+
   return {
     captions: CaptionsService.isCaptionsActive() ? <CaptionsContainer /> : null,
     fontSize: getFontSize(),
@@ -159,6 +162,7 @@ export default injectIntl(withModalMounter(withTracker(({ intl, baseControls }) 
     isPresenter: currentUser.presenter,
     audioAlertEnabled: AppSettings.chatAudioAlerts,
     pushAlertEnabled: AppSettings.chatPushAlerts,
+    shouldShowScreenshare: MediaService.shouldShowScreenshare() && (viewScreenshare || MediaService.isUserPresenter())
   };
 })(AppContainer)));
 
