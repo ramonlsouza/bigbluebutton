@@ -24,9 +24,7 @@ const BREAKOUT_MAX_WIDTH = 400;
 
 const WEBCAMSAREA_MIN_PERCENT = 0.2;
 const WEBCAMSAREA_MAX_PERCENT = 0.8;
-// const PRESENTATIONAREA_MIN_PERCENT = 0.2;
 const PRESENTATIONAREA_MIN_WIDTH = 385; // Value based on presentation toolbar
-// const PRESENTATIONAREA_MAX_PERCENT = 0.8;
 const storageLayoutData = () => Storage.getItem('layoutData');
 
 class LayoutManagerComponent extends Component {
@@ -98,7 +96,7 @@ class LayoutManagerComponent extends Component {
     window.addEventListener('webcamPlacementChange', () => {
       this.setLayoutSizes(false, false, true);
     });
-    
+
     window.addEventListener('fullscreenchange', () => {
       setTimeout(() => this.setLayoutSizes(), 200);
     });
@@ -518,7 +516,6 @@ class LayoutManagerComponent extends Component {
       height: webcamsAreaHeight,
     };
     let newPresentationAreaSize;
-    let newScreenShareAreaSize;
     const { presentationAreaWidth, presentationAreaHeight } = this.calculatesPresentationAreaSize(
       mediaAreaWidth, mediaAreaHeight, webcamsAreaWidth, webcamsAreaHeight,
     );
@@ -534,7 +531,7 @@ class LayoutManagerComponent extends Component {
       };
     }
 
-    newScreenShareAreaSize = {
+    const newScreenShareAreaSize = {
       width: presentationAreaWidth || 0,
       height: presentationAreaHeight || 0,
     };
