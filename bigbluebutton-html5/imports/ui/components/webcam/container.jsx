@@ -19,8 +19,10 @@ const WebcamContainer = ({
 }) => {
   const LayoutContext = useContext(NLayoutContext);
   const { newLayoutContextState, newLayoutContextDispatch } = LayoutContext;
-  const { fullscreen, output } = newLayoutContextState;
-  const { cameraDock, cameraOptimalGridSize } = output;
+  const { fullscreen, output, input } = newLayoutContextState;
+  const { cameraDock } = output;
+  const { cameraDock: cameraDockInput } = input;
+  const { cameraOptimalGridSize } = cameraDockInput;
 
   return !disableVideo
     && !audioModalIsOpen
