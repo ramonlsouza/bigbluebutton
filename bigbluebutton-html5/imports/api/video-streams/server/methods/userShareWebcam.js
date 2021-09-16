@@ -16,7 +16,6 @@ export default function userShareWebcam(stream) {
 
   Logger.info(`user sharing webcam: ${meetingId} ${requesterUserId}`);
 
-
   // const actionName = 'joinVideo';
   /* TODO throw an error if user has no permission to share webcam
   if (!isAllowedTo(actionName, credentials)) {

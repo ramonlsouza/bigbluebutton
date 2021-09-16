@@ -50,7 +50,7 @@ const intlMessages = defineMessages({
   [CHAT_CLEAR_MESSAGE]: {
     id: 'app.chat.clearPublicChatMessage',
     description: 'message of when clear the public chat',
-  }
+  },
 });
 
 class TimeWindowChatItem extends PureComponent {
@@ -85,15 +85,15 @@ class TimeWindowChatItem extends PureComponent {
     return (
       <div className={styles.item} key={`time-window-chat-item-${messageKey}`}>
         <div className={styles.messages}>
-          {messages.map(message => (
+          {messages.map((message) => (
             message.text !== ''
               ? (
                 <MessageChatItem
                   className={(message.id ? styles.systemMessage : styles.systemMessageNoBorder)}
                   key={message.id ? message.id : _.uniqueId('id-')}
-                  text={intlMessages[message.text] ? intl.formatMessage(intlMessages[message.text]) : message.text }
+                  text={intlMessages[message.text] ? intl.formatMessage(intlMessages[message.text]) : message.text}
                   time={message.time}
-                  isSystemMessage={message.id ? true : false}
+                  isSystemMessage={!!message.id}
                   systemMessageType={message.text === 'PUBLIC_CHAT_CLEAR' ? 'chatClearMessageText' : 'chatWelcomeMessageText'}
                   chatAreaId={chatAreaId}
                   handleReadMessage={handleReadMessage}
@@ -126,7 +126,7 @@ class TimeWindowChatItem extends PureComponent {
     const dateTime = new Date(timestamp);
     const regEx = /<a[^>]+>/i;
     ChatLogger.debug('TimeWindowChatItem::renderMessageItem', this.props);
-    const defaultAvatarString = name?.toLowerCase().slice(0, 2) || "  ";
+    const defaultAvatarString = name?.toLowerCase().slice(0, 2) || '  ';
     return (
       <div className={styles.item} key={`time-window-${messageKey}`}>
         <div className={styles.wrapper}>
@@ -157,7 +157,7 @@ class TimeWindowChatItem extends PureComponent {
               </time>
             </div>
             <div className={styles.messages}>
-              {messages.map(message => (
+              {messages.map((message) => (
                 <MessageChatItem
                   className={(regEx.test(message.text) ? styles.hyperlink : styles.message)}
                   key={message.id}
@@ -166,7 +166,7 @@ class TimeWindowChatItem extends PureComponent {
                   chatAreaId={chatAreaId}
                   dispatch={dispatch}
                   read={message.read}
-                  chatUserMessageItem={true}
+                  chatUserMessageItem
                   handleReadMessage={(timestamp) => {
                     if (!read) {
                       dispatch({
@@ -207,13 +207,13 @@ class TimeWindowChatItem extends PureComponent {
     return messages ? (
       <div className={styles.item} key={_.uniqueId('message-poll-item-')}>
         <div className={styles.wrapper} ref={(ref) => { this.item = ref; }}>
-        <div className={styles.avatarWrapper}>
+          <div className={styles.avatarWrapper}>
             <UserAvatar
               className={styles.avatar}
               color={PollService.POLL_AVATAR_COLOR}
-              moderator={true}
+              moderator
             >
-              {<Icon className={styles.isPoll} iconName="polling" />}
+              <Icon className={styles.isPoll} iconName="polling" />
             </UserAvatar>
           </div>
           <div className={styles.content}>
@@ -249,7 +249,7 @@ class TimeWindowChatItem extends PureComponent {
     const {
       systemMessage,
     } = this.props;
-    ChatLogger.debug('TimeWindowChatItem::render', {...this.props});
+    ChatLogger.debug('TimeWindowChatItem::render', { ...this.props });
     if (systemMessage) {
       return this.renderSystemMessage();
     }

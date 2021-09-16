@@ -5,8 +5,7 @@ import AudioManager from '/imports/ui/services/audio-manager';
 import BreakoutComponent from './component';
 import Service from './service';
 
-const BreakoutContainer = props => <BreakoutComponent {...props} />;
-
+const BreakoutContainer = (props) => <BreakoutComponent {...props} />;
 
 export default withTracker((props) => {
   const {

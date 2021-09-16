@@ -41,7 +41,7 @@ export default class ModalBase extends Component {
 ModalBase.propTypes = propTypes;
 ModalBase.defaultProps = defaultProps;
 
-export const withModalState = ComponentToWrap => class ModalStateWrapper extends Component {
+export const withModalState = (ComponentToWrap) => class ModalStateWrapper extends Component {
   constructor(props) {
     super(props);
 

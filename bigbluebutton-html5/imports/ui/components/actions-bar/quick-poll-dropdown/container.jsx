@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { injectIntl } from 'react-intl';
 import QuickPollDropdown from './component';
 
-const QuickPollDropdownContainer = props => <QuickPollDropdown {...props} />;
+const QuickPollDropdownContainer = (props) => <QuickPollDropdown {...props} />;
 
 export default withTracker(() => ({
   activePoll: Session.get('pollInitiated') || false,

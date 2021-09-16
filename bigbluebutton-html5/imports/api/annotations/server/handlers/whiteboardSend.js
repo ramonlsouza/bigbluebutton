@@ -30,8 +30,8 @@ const process = () => {
 };
 
 export default function handleWhiteboardSend({ header, body }, meetingId) {
-  const userId = header.userId;
-  const annotation = body.annotation;
+  const { userId } = header;
+  const { annotation } = body;
 
   check(userId, String);
   check(annotation, Object);
@@ -43,7 +43,9 @@ export default function handleWhiteboardSend({ header, body }, meetingId) {
     annotationsQueue[meetingId] = [];
   }
 
-  annotationsQueue[meetingId].push({ meetingId, whiteboardId, userId, annotation });
+  annotationsQueue[meetingId].push({
+    meetingId, whiteboardId, userId, annotation,
+  });
   if (queueMetrics) {
     Metrics.setAnnotationQueueLength(meetingId, annotationsQueue[meetingId].length);
   }

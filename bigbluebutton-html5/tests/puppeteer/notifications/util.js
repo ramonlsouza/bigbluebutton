@@ -1,4 +1,4 @@
-const ne = require('../notifications/elements');
+const ne = require('./elements');
 const ule = require('../user/elements');
 const ce = require('../chat/elements');
 const e = require('../core/elements');

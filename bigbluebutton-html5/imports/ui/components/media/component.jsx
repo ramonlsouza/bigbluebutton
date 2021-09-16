@@ -28,7 +28,6 @@ const defaultProps = {
   audioModalIsOpen: false,
 };
 
-
 export default class Media extends Component {
   constructor(props) {
     super(props);

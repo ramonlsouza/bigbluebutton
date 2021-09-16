@@ -102,7 +102,7 @@ Meteor.startup(() => {
     Meteor.setInterval(() => {
       for (const session of Meteor.server.sessions.values()) {
         const { socket } = session;
-        const recv = socket._session.recv;
+        const { recv } = socket._session;
 
         if (session.bbbFixApplied || !recv || !recv.ws) {
           continue;
@@ -149,16 +149,14 @@ Meteor.startup(() => {
   CDN=${CDN_URL}\n`, APP_CONFIG);
 });
 
-
 const generateLocaleOptions = () => {
   try {
     Logger.warn('Calculating aggregateLocales (heavy)');
 
-
     // remove duplicated locales (always remove more generic if same name)
     const tempAggregateLocales = AVAILABLE_LOCALES
-      .map(file => file.replace('.json', ''))
-      .map(file => file.replace('_', '-'))
+      .map((file) => file.replace('.json', ''))
+      .map((file) => file.replace('_', '-'))
       .map((locale) => {
         const localeName = (Langmap[locale] || {}).nativeName
           || (FALLBACK_LOCALES[locale] || {}).nativeName
@@ -168,7 +166,7 @@ const generateLocaleOptions = () => {
           name: localeName,
         };
       }).reverse()
-      .filter((item, index, self) => index === self.findIndex(i => (
+      .filter((item, index, self) => index === self.findIndex((i) => (
         i.name === item.name
       )))
       .reverse();
@@ -202,7 +200,7 @@ WebApp.connectHandlers.use('/locale', (req, res) => {
   let localeFile = fallback;
 
   const usableLocales = AVAILABLE_LOCALES
-    .map(file => file.replace('.json', ''))
+    .map((file) => file.replace('.json', ''))
     .reduce((locales, locale) => (locale.match(browserLocale[0])
       ? [...locales, locale]
       : locales), []);
@@ -212,11 +210,11 @@ WebApp.connectHandlers.use('/locale', (req, res) => {
   if (browserLocale.length > 1) {
     normalizedLocale = `${browserLocale[0]}_${browserLocale[1].toUpperCase()}`;
 
-    const normDefault = usableLocales.find(locale => normalizedLocale === locale);
+    const normDefault = usableLocales.find((locale) => normalizedLocale === locale);
     if (normDefault) localeFile = normDefault;
   }
 
-  const regionDefault = usableLocales.find(locale => browserLocale[0] === locale);
+  const regionDefault = usableLocales.find((locale) => browserLocale[0] === locale);
 
   if (localeFile === fallback && regionDefault !== localeFile) {
     localeFile = regionDefault;
@@ -308,7 +306,6 @@ WebApp.connectHandlers.use('/guestWait', (req, res) => {
   res.writeHead(200);
   res.end(guestWaitHtml);
 });
-
 
 export const eventEmitter = Redis.emitter;
 

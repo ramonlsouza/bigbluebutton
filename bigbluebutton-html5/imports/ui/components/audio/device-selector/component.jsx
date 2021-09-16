@@ -35,7 +35,7 @@ class DeviceSelector extends Component {
   componentDidMount() {
     const { kind } = this.props;
     const handleEnumerateDevicesSuccess = (deviceInfos) => {
-      const devices = deviceInfos.filter(d => d.kind === kind);
+      const devices = deviceInfos.filter((d) => d.kind === kind);
       logger.info({
         logCode: 'audiodeviceselector_component_enumeratedevices_success',
         extraInfo: {
@@ -71,7 +71,7 @@ class DeviceSelector extends Component {
     const { onChange } = this.props;
     const { devices } = this.state;
     this.setState({ value }, () => {
-      const selectedDevice = devices.find(d => d.deviceId === value);
+      const selectedDevice = devices.find((d) => d.deviceId === value);
       onChange(selectedDevice.deviceId, selectedDevice, event);
     });
   }
@@ -94,7 +94,7 @@ class DeviceSelector extends Component {
       >
         {
           options.length
-            ? options.map(option => (
+            ? options.map((option) => (
               <option
                 key={option.key}
                 value={option.value}

@@ -64,9 +64,9 @@ export const GroupChatContextProvider = (props) => {
   );
 };
 
-export const GroupChatContextConsumer = Component => props => (
+export const GroupChatContextConsumer = (Component) => (props) => (
   <GroupChatContext.Consumer>
-    {contexts => <Component {...props} {...contexts} />}
+    {(contexts) => <Component {...props} {...contexts} />}
   </GroupChatContext.Consumer>
 );
 

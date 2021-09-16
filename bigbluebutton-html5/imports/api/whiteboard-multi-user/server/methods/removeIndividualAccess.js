@@ -21,7 +21,7 @@ export default function removeIndividualAccess(whiteboardId, userId) {
 
   if (multiUser.includes(userId)) {
     const payload = {
-      multiUser: multiUser.filter(id => id !== userId),
+      multiUser: multiUser.filter((id) => id !== userId),
       whiteboardId,
     };
 

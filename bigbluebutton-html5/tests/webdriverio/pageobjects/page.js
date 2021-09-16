@@ -1,5 +1,3 @@
-
-
 class Page {
   pressEnter() {
     browser.keys('Enter');

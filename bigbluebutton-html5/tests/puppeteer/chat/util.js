@@ -19,7 +19,7 @@ async function sendPublicChatMessage(page1, page2) {
 
 async function openPrivateChatMessage(page1, page2) {
   // Open private Chat with the other User
-  Object.values(arguments).forEach(async argument => await argument.waitForSelector(ule.userListItem, ELEMENT_WAIT_TIME));
+  Object.values(arguments).forEach(async (argument) => await argument.waitForSelector(ule.userListItem, ELEMENT_WAIT_TIME));
   await page1.page.evaluate(clickOnTheOtherUser, ule.userListItem);
   await page2.page.evaluate(clickOnTheOtherUser, ule.userListItem);
   await page1.page.evaluate(clickThePrivateChatButton, e.activeChat);
@@ -51,8 +51,8 @@ async function checkForPublicMessageReception(page1, page2) {
   const publicChat1 = await page1.page.$$(`${e.chatUserMessage} ${e.chatMessageText}`);
   const publicChat2 = await page2.page.$$(`${e.chatUserMessage} ${e.chatMessageText}`);
 
-  const checkPublicMessage1 = await publicChat1[0].evaluate(n => n.innerText);
-  const checkPublicMessage2 = await publicChat2[1].evaluate(n => n.innerText);
+  const checkPublicMessage1 = await publicChat1[0].evaluate((n) => n.innerText);
+  const checkPublicMessage2 = await publicChat2[1].evaluate((n) => n.innerText);
 
   const response = checkPublicMessage1 == e.publicMessage1 && checkPublicMessage2 == e.publicMessage2;
   return response;
@@ -62,8 +62,8 @@ async function checkForPrivateMessageReception(page1, page2) {
   const privateChat1 = await page1.page.$$(`${e.chatUserMessage} ${e.chatMessageText}`);
   const privateChat2 = await page2.page.$$(`${e.chatUserMessage} ${e.chatMessageText}`);
 
-  const checkPrivateMessage1 = await privateChat1[0].evaluate(n => n.innerText);
-  const checkPrivateMessage2 = await privateChat2[1].evaluate(n => n.innerText);
+  const checkPrivateMessage1 = await privateChat1[0].evaluate((n) => n.innerText);
+  const checkPrivateMessage2 = await privateChat2[1].evaluate((n) => n.innerText);
 
   const response = checkPrivateMessage1 == e.message1 && checkPrivateMessage2 == e.message2;
   return response;

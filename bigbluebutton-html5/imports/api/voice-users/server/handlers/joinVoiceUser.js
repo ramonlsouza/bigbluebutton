@@ -3,7 +3,6 @@ import Users from '/imports/api/users';
 import addDialInUser from '/imports/api/users/server/modifiers/addDialInUser';
 import addVoiceUser from '../modifiers/addVoiceUser';
 
-
 export default function handleJoinVoiceUser({ body }, meetingId) {
   const voiceUser = body;
   voiceUser.joined = true;

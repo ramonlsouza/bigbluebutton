@@ -1,7 +1,7 @@
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const Page = require('./core/page');
 const Slide = require('./presentation/slide');
 const Upload = require('./presentation/upload');
-const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const { MAX_PRESENTATION_TEST_TIMEOUT } = require('./core/constants'); // core constants (Timeouts vars imported)
 
 expect.extend({ toMatchImageSnapshot });

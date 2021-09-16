@@ -106,7 +106,7 @@ class VideoMenu extends BaseMenu {
                   icons={false}
                   defaultChecked={this.state.viewParticipantsWebcams}
                   onChange={() => this.handleToggle('viewParticipantsWebcams')}
-                  ariaLabelledBy={'viewCamLabel'}
+                  ariaLabelledBy="viewCamLabel"
                   ariaLabel={intl.formatMessage(intlMessages.participantsCamLabel)}
                 />
               </div>

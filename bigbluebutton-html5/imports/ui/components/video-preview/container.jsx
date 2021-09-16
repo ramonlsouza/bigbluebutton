@@ -9,7 +9,7 @@ import Service from './service';
 import VideoPreview from './component';
 import VideoService from '../video-provider/service';
 
-const VideoPreviewContainer = props => <VideoPreview {...props} />;
+const VideoPreviewContainer = (props) => <VideoPreview {...props} />;
 
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
@@ -44,9 +44,9 @@ export default withModalMounter(withTracker(({ mountModal }) => ({
   sharedDevices: VideoService.getSharedDevices(),
   isCamLocked: isCamLocked(),
   closeModal: () => mountModal(null),
-  changeWebcam: deviceId => Service.changeWebcam(deviceId),
+  changeWebcam: (deviceId) => Service.changeWebcam(deviceId),
   webcamDeviceId: Service.webcamDeviceId(),
-  changeProfile: profileId => Service.changeProfile(profileId),
+  changeProfile: (profileId) => Service.changeProfile(profileId),
   hasMediaDevices: deviceInfo.hasMediaDevices,
   hasVideoStream: VideoService.hasVideoStream(),
 }))(VideoPreviewContainer));

@@ -77,15 +77,15 @@ export const startBandwidthMonitoring = () => {
 
     const usersOnline = Users.find({
       userId: { $ne: Auth.userID },
-    }, { fields: { userId: 1 } }).map(user => user.userId);
+    }, { fields: { userId: 1 } }).map((user) => user.userId);
 
     const usersWithViewWebcamsEnabled = LocalSettings.find({
       meetingId: Auth.meetingID,
       'settings.dataSaving.viewParticipantsWebcams': true,
-    }, { fields: { userId: 1 } }).map(user => user.userId);
+    }, { fields: { userId: 1 } }).map((user) => user.userId);
 
     const usersWatchingWebcams = usersOnline.filter(
-      user => usersWithViewWebcamsEnabled.includes(user),
+      (user) => usersWithViewWebcamsEnabled.includes(user),
     );
 
     const warningZone = NetworkInformationLocal

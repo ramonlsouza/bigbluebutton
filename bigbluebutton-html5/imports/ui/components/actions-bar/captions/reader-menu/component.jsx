@@ -255,14 +255,15 @@ class ReaderMenu extends PureComponent {
                   >
                     {intl.formatMessage(intlMessages.select)}
                   </option>
-                  {ownedLocales.map(loc => (
+                  {ownedLocales.map((loc) => (
                     <option
                       key={loc.locale}
                       value={loc.locale}
                       lang={loc.locale}
                     >
                       {loc.name}
-                    </option>))}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -292,8 +293,7 @@ class ReaderMenu extends PureComponent {
                         triangle="hide"
                       />
                     </div>
-                  ) : null
-              }
+                  ) : null}
               </div>
 
               <div className={styles.row}>
@@ -322,8 +322,7 @@ class ReaderMenu extends PureComponent {
                         triangle="hide"
                       />
                     </div>
-                  ) : null
-              }
+                  ) : null}
               </div>
 
               <div className={styles.row}>

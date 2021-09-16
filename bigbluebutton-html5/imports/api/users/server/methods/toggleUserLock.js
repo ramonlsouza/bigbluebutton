@@ -26,6 +26,5 @@ export default function toggleUserLock(userId, lock) {
     meetingId, userId, lock, lockedBy,
   });
 
-
   return RedisPubSub.publishUserMessage(CHANNEL, EVENT_NAME, meetingId, lockedBy, payload);
 }

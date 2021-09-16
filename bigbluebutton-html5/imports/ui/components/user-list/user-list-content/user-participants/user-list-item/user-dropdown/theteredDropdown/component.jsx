@@ -33,8 +33,8 @@ const propTypes = {
         + ` \`${componentName}\`. Validation failed.`);
     }
 
-    const trigger = children.find(x => x.type === DropdownTrigger);
-    const content = children.find(x => x.type === DropdownContent);
+    const trigger = children.find((x) => x.type === DropdownTrigger);
+    const content = children.find((x) => x.type === DropdownContent);
 
     if (!trigger) {
       return new Error(`Invalid prop \`${propName}\` supplied to`
@@ -182,8 +182,8 @@ class Dropdown extends Component {
 
     const { isMobile } = deviceInfo;
 
-    let trigger = children.find(x => x.type === DropdownTrigger);
-    let content = children.find(x => x.type === DropdownContent);
+    let trigger = children.find((x) => x.type === DropdownTrigger);
+    let content = children.find((x) => x.type === DropdownContent);
 
     trigger = React.cloneElement(trigger, {
       ref: (ref) => { this.trigger = ref; },
@@ -248,11 +248,12 @@ class Dropdown extends Component {
             },
           ]}
 
-          renderTarget={ref => (
+          renderTarget={(ref) => (
             <span ref={ref}>
               {trigger}
-            </span>)}
-          renderElement={ref => (
+            </span>
+          )}
+          renderElement={(ref) => (
             <div
               ref={ref}
             >
@@ -268,8 +269,7 @@ class Dropdown extends Component {
                   />
                 ) : null}
             </div>
-          )
-          }
+          )}
         />
       </div>
     );

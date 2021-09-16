@@ -51,7 +51,6 @@ export default function changeLockSettings(meetingId, payload) {
     },
   };
 
-
   try {
     const { numberAffected } = Meetings.upsert(selector, modifier);
 

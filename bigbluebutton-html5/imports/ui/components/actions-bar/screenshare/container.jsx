@@ -8,7 +8,7 @@ import {
   dataSavingSetting,
 } from '/imports/ui/components/screenshare/service';
 
-const ScreenshareButtonContainer = props => <ScreenshareButton {...props} />;
+const ScreenshareButtonContainer = (props) => <ScreenshareButton {...props} />;
 
 /*
  * All props, including the ones that are inherited from actions-bar

@@ -153,7 +153,6 @@ class AudioSettings extends React.Component {
           </div>
         </div>
 
-
         <div className={styles.enterAudio}>
           <Button
             className={styles.backBtn}

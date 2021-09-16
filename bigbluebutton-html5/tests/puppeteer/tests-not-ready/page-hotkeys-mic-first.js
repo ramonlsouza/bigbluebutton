@@ -5,8 +5,7 @@ const e = require('./elements');
 class HotkeysMicFirstTestPage extends Page {
   constructor() {
     super();
-    this.tabCounts =
-    {
+    this.tabCounts = {
       audioNoMic: 12,
       audioMic: 13,
     };

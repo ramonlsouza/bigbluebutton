@@ -1,5 +1,3 @@
-
-
 const chai = require('chai');
 const LandingPage = require('../pageobjects/landing.page');
 const ModalPage = require('../pageobjects/modal.page');
@@ -40,7 +38,7 @@ describe('Settings', () => {
       openSettingsDropdown();
       openSettingsModal();
       browser.waitForExist(`${SettingsPage.languageSelectSelector} option:not([disabled]`, WAIT_TIME);
-      const locales = browser.elements('#langSelector option:not([disabled]').value.map(e => e.getValue());
+      const locales = browser.elements('#langSelector option:not([disabled]').value.map((e) => e.getValue());
       browser.refresh();
 
       browser.cdp('Console', 'enable');

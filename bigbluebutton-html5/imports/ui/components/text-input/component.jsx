@@ -57,7 +57,7 @@ class TextInput extends PureComponent {
         <TextareaAutosize
           className={styles.textarea}
           maxLength={maxLength}
-          onChange={e => this.handleOnChange(e)}
+          onChange={(e) => this.handleOnChange(e)}
           placeholder={placeholder}
           value={message}
         />

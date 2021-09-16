@@ -29,7 +29,6 @@ function publishCurrentPoll(...args) {
 
 Meteor.publish('current-poll', publishCurrentPoll);
 
-
 function polls() {
   const tokenValidation = AuthTokenValidation.findOne({ connectionId: this.connection.id });
 

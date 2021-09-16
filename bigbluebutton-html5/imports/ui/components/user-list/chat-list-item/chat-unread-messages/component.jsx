@@ -22,7 +22,7 @@ const propTypes = {
 const defaultProps = {
 };
 
-const ChatUnreadCounter = props => (
+const ChatUnreadCounter = (props) => (
   <div
     className={styles.unreadMessages}
     aria-label={props.counter > 0

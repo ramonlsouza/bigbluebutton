@@ -79,7 +79,7 @@ class Settings {
 
         if (!values) return;
         const changedValues = Object.keys(values)
-          .filter(item => values[item] !== defaultValues[item])
+          .filter((item) => values[item] !== defaultValues[item])
           .reduce((acc, item) => ({
             ...acc,
             [item]: values[item],
@@ -93,7 +93,6 @@ class Settings {
         Storage.setItem(`${settings}${k}`, this[k].value);
       });
     }
-
 
     const userSettings = {};
 

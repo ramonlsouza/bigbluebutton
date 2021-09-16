@@ -12,9 +12,9 @@ import { ValidationStates } from '/imports/api/auth-token-validation';
 const clearOtherSessions = (sessionUserId, current = false) => {
   const serverSessions = Meteor.server.sessions;
   Object.keys(serverSessions)
-    .filter(i => serverSessions[i].userId === sessionUserId)
-    .filter(i => i !== current)
-    .forEach(i => serverSessions[i].close());
+    .filter((i) => serverSessions[i].userId === sessionUserId)
+    .filter((i) => i !== current)
+    .forEach((i) => serverSessions[i].close());
 };
 
 export default function handleValidateAuthToken({ body }, meetingId) {

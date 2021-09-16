@@ -12,6 +12,6 @@ export default function sendBulkAnnotations(payload) {
     return false;
   }
 
-  payload.forEach(annotation => sendAnnotationHelper(annotation, meetingId, requesterUserId));
+  payload.forEach((annotation) => sendAnnotationHelper(annotation, meetingId, requesterUserId));
   return true;
 }

@@ -12,7 +12,7 @@ export default function clearSlidesPresentation(meetingId, presentationId) {
     presentationId,
   };
 
-  const whiteboardIds = Slides.find(selector, { fields: { id: 1 } }).map(row => row.id);
+  const whiteboardIds = Slides.find(selector, { fields: { id: 1 } }).map((row) => row.id);
 
   try {
     SlidePositions.remove(selector);
@@ -20,7 +20,7 @@ export default function clearSlidesPresentation(meetingId, presentationId) {
     const numberAffected = Slides.remove(selector);
 
     if (numberAffected) {
-      whiteboardIds.forEach(whiteboardId => clearAnnotations(meetingId, whiteboardId));
+      whiteboardIds.forEach((whiteboardId) => clearAnnotations(meetingId, whiteboardId));
 
       Logger.info(`Removed Slides where presentationId=${presentationId}`);
     }

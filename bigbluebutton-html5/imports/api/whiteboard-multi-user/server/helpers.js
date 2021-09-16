@@ -22,7 +22,7 @@ const getUsers = (meetingId) => {
 
   if (!data) return [];
 
-  return data.map(user => user.userId);
+  return data.map((user) => user.userId);
 };
 
 export {

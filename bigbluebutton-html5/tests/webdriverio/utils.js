@@ -1,5 +1,3 @@
-
-
 class Utils {
   configureViewport() {
     browser.setViewportSize({

@@ -4,7 +4,7 @@ import { Session } from 'meteor/session';
 import { getVideoUrl } from './service';
 import ExternalVideo from './component';
 
-const ExternalVideoContainer = props => (
+const ExternalVideoContainer = (props) => (
   <ExternalVideo {...{ ...props }} />
 );
 

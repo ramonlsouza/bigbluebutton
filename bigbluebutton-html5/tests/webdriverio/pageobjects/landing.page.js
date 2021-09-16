@@ -1,4 +1,3 @@
-
 const chai = require('chai');
 const sha1 = require('sha1');
 const Page = require('./page');

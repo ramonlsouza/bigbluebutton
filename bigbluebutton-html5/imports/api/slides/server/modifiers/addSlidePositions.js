@@ -32,14 +32,14 @@ export default function addSlidePositions(
   };
 
   const modifier = {
-    $set: Object.assign(
-      { meetingId },
-      { podId },
-      { presentationId },
-      { id: slideId },
-      flat(slidePosition),
-      { safe: true },
-    ),
+    $set: {
+      meetingId,
+      podId,
+      presentationId,
+      id: slideId,
+      ...flat(slidePosition),
+      safe: true,
+    },
   };
 
   try {

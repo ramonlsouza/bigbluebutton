@@ -10,7 +10,9 @@ export default function validateAuthToken(meetingId, requesterUserId, requesterT
   const CHANNEL = REDIS_CONFIG.channels.toAkkaApps;
   const EVENT_NAME = 'ValidateAuthTokenReqMsg';
 
-  Logger.debug('ValidateAuthToken method called', { meetingId, requesterUserId, requesterToken, externalId });
+  Logger.debug('ValidateAuthToken method called', {
+    meetingId, requesterUserId, requesterToken, externalId,
+  });
 
   if (!meetingId) return false;
 

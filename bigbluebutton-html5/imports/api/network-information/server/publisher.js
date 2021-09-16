@@ -3,7 +3,6 @@ import NetworkInformation from '/imports/api/network-information';
 import Logger from '/imports/startup/server/logger';
 import AuthTokenValidation, { ValidationStates } from '/imports/api/auth-token-validation';
 
-
 function networkInformation() {
   const tokenValidation = AuthTokenValidation.findOne({ connectionId: this.connection.id });
 

@@ -49,7 +49,7 @@ class UserCaptions extends Component {
       ownedLocales,
     } = this.props;
 
-    return ownedLocales.map(locale => (
+    return ownedLocales.map((locale) => (
       <CSSTransition
         classNames={listTransition}
         appear

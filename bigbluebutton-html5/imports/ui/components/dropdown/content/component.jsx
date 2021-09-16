@@ -39,7 +39,7 @@ export default class DropdownContent extends Component {
 
     const placementName = placement.split(' ').join('-');
 
-    const boundChildren = Children.map(children, child => cloneElement(child, {
+    const boundChildren = Children.map(children, (child) => cloneElement(child, {
       dropdownIsOpen,
       dropdownToggle,
       dropdownShow,

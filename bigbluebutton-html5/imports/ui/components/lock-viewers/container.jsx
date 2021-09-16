@@ -6,7 +6,7 @@ import Auth from '/imports/ui/services/auth';
 import LockViewersComponent from './component';
 import { updateLockSettings, updateWebcamsOnlyForModerator } from './service';
 
-const LockViewersContainer = props => <LockViewersComponent {...props} />;
+const LockViewersContainer = (props) => <LockViewersComponent {...props} />;
 
 export default withModalMounter(withTracker(({ mountModal }) => ({
   closeModal: () => mountModal(null),

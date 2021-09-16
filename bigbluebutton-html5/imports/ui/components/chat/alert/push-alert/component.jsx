@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import injectNotify from '/imports/ui/components/toast/inject-notify/component';
 import { Session } from 'meteor/session';
 
-
 const propTypes = {
   notify: PropTypes.func.isRequired,
   onOpen: PropTypes.func.isRequired,

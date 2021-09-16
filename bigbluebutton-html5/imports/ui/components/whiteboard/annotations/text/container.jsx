@@ -4,7 +4,7 @@ import TextShapeService from './service';
 import TextDrawComponent from './component';
 import WhiteboardService from '/imports/ui/components/whiteboard/service';
 
-const TextDrawContainer = props => (
+const TextDrawContainer = (props) => (
   <TextDrawComponent {...props} />
 );
 

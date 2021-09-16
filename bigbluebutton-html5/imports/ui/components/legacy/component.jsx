@@ -4,7 +4,6 @@ import browserInfo from '/imports/utils/browserInfo';
 import deviceInfo from '/imports/utils/deviceInfo';
 import './styles.css';
 
-
 // currently supported locales.
 // import ar from 'react-intl/locale-data/ar';
 // import bg from 'react-intl/locale-data/bg';
@@ -192,8 +191,7 @@ export default class Legacy extends Component {
                 <a href="https://getfirefox.com">Firefox</a>
                 <span> for full support.</span>
               </span>
-            )
-            }
+            )}
           </p>
         );
       case FETCHING:

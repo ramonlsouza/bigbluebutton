@@ -19,7 +19,7 @@ const parseMessage = (message) => {
   parsedMessage = parsedMessage.replace(/<br\s*[\\/]?>/gi, '\n\r');
 
   // Sanitize. See: http://shebang.brandonmintern.com/foolproof-html-escaping-in-javascript/
-  parsedMessage = parsedMessage.replace(/[<>'"]/g, c => HTML_SAFE_MAP[c]);
+  parsedMessage = parsedMessage.replace(/[<>'"]/g, (c) => HTML_SAFE_MAP[c]);
 
   // Replace flash links to flash valid ones
   parsedMessage = parsedMessage.replace(RegexWebUrl, "<a href='event:$&'><u>$&</u></a>");

@@ -2,7 +2,7 @@ const path = require('path');
 const { ELEMENT_WAIT_TIME, ELEMENT_WAIT_LONGER_TIME } = require('../core/constants');
 const ne = require('../notifications/elements');
 const pe = require('../presentation/elements');
-const ce = require('../customparameters/elements');
+const ce = require('./elements');
 const we = require('../whiteboard/elements');
 const poe = require('../polling/elemens');
 

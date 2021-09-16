@@ -76,7 +76,6 @@ class PresentationArea extends PureComponent {
     this.getPresentationSizesAvailable = this.getPresentationSizesAvailable.bind(this);
     this.handleResize = this.handleResize.bind(this);
 
-
     this.onResize = () => setTimeout(this.handleResize.bind(this), 0);
     this.renderCurrentPresentationToast = this.renderCurrentPresentationToast.bind(this);
   }
@@ -169,7 +168,7 @@ class PresentationArea extends PureComponent {
       this.onResize();
     }
 
-    if(prevProps?.slidePosition && slidePosition){
+    if (prevProps?.slidePosition && slidePosition) {
       const { width: prevWidth, height: prevHeight } = prevProps.slidePosition;
       const { width: currWidth, height: currHeight } = slidePosition;
 
@@ -208,49 +207,49 @@ class PresentationArea extends PureComponent {
         }
       }
 
-    const downloadableOn = !prevProps.currentPresentation.downloadable
+      const downloadableOn = !prevProps.currentPresentation.downloadable
       && currentPresentation.downloadable;
 
-    const shouldCloseToast = !(currentPresentation.downloadable && !userIsPresenter);
+      const shouldCloseToast = !(currentPresentation.downloadable && !userIsPresenter);
 
-    if (
-      prevProps.currentPresentation.name !== currentPresentation.name
+      if (
+        prevProps.currentPresentation.name !== currentPresentation.name
       || (downloadableOn && !userIsPresenter)
-    ) {
-      if (this.currentPresentationToastId) {
-        toast.update(this.currentPresentationToastId, {
-          autoClose: shouldCloseToast,
-          render: this.renderCurrentPresentationToast(),
-        });
-      } else {
-        this.currentPresentationToastId = toast(this.renderCurrentPresentationToast(), {
-          onClose: () => { this.currentPresentationToastId = null; },
-          autoClose: shouldCloseToast,
-          className: toastStyles.actionToast,
-        });
+      ) {
+        if (this.currentPresentationToastId) {
+          toast.update(this.currentPresentationToastId, {
+            autoClose: shouldCloseToast,
+            render: this.renderCurrentPresentationToast(),
+          });
+        } else {
+          this.currentPresentationToastId = toast(this.renderCurrentPresentationToast(), {
+            onClose: () => { this.currentPresentationToastId = null; },
+            autoClose: shouldCloseToast,
+            className: toastStyles.actionToast,
+          });
+        }
       }
-    }
 
-    const downloadableOff = prevProps.currentPresentation.downloadable
+      const downloadableOff = prevProps.currentPresentation.downloadable
       && !currentPresentation.downloadable;
 
-    if (this.currentPresentationToastId && downloadableOff) {
-      toast.update(this.currentPresentationToastId, {
-        autoClose: true,
-        render: this.renderCurrentPresentationToast(),
-      });
-    }
+      if (this.currentPresentationToastId && downloadableOff) {
+        toast.update(this.currentPresentationToastId, {
+          autoClose: true,
+          render: this.renderCurrentPresentationToast(),
+        });
+      }
 
-    if (layoutSwapped && restoreOnUpdate && isViewer && currentSlide) {
-      const slideChanged = currentSlide.id !== prevProps.currentSlide.id;
-      const positionChanged = slidePosition.viewBoxHeight !== prevProps.slidePosition.viewBoxHeight
+      if (layoutSwapped && restoreOnUpdate && isViewer && currentSlide) {
+        const slideChanged = currentSlide.id !== prevProps.currentSlide.id;
+        const positionChanged = slidePosition.viewBoxHeight !== prevProps.slidePosition.viewBoxHeight
         || slidePosition.viewBoxWidth !== prevProps.slidePosition.viewBoxWidth;
-      const pollPublished = publishedPoll && !prevProps.publishedPoll;
-      if (slideChanged || positionChanged || pollPublished) {
-        toggleSwapLayout();
+        const pollPublished = publishedPoll && !prevProps.publishedPoll;
+        if (slideChanged || positionChanged || pollPublished) {
+          toggleSwapLayout();
+        }
       }
     }
-  }
   }
 
   componentWillUnmount() {
@@ -767,8 +766,7 @@ class PresentationArea extends PureComponent {
                 {intl.formatMessage(intlMessages.downloadLabel)}
               </a>
             </span>
-          ) : null
-        }
+          ) : null}
       </div>
     );
   }
@@ -824,7 +822,7 @@ class PresentationArea extends PureComponent {
         className={styles.presentationContainer}
       >
         {isFullscreen && <PollingContainer />}
-        
+
         <div
           ref={(ref) => { this.refPresentationArea = ref; }}
           className={styles.presentationArea}

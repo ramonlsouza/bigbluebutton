@@ -56,7 +56,6 @@ const isVideoBroadcasting = () => {
   return sharing || screenIsShared;
 };
 
-
 const screenshareHasAudio = () => {
   const screenshareEntry = Screenshare.findOne({ meetingId: Auth.meetingID },
     { fields: { 'screenshare.hasAudio': 1 } });
@@ -88,13 +87,13 @@ const attachLocalPreviewStream = (mediaElement) => {
 
 const stopStreamTracks = (stream) => {
   if (stream && typeof stream.getTracks === 'function') {
-    stream.getTracks().forEach(track => {
+    stream.getTracks().forEach((track) => {
       if (typeof track.stop === 'function') {
         track.stop();
       }
     });
   }
-}
+};
 
 const screenshareHasStarted = () => {
   // Presenter's screen preview is local, so skip
@@ -113,7 +112,7 @@ const shareScreen = async (onFail) => {
 
   try {
     const stream = await BridgeService.getScreenStream();
-    if(!UserListService.isUserPresenter(Auth.userID)) return stopStreamTracks(stream);
+    if (!UserListService.isUserPresenter(Auth.userID)) return stopStreamTracks(stream);
     await KurentoBridge.share(stream, onFail);
     setSharingScreen(true);
   } catch (error) {

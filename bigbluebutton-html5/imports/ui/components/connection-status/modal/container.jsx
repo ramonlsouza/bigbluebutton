@@ -6,7 +6,7 @@ import Settings from '/imports/ui/services/settings';
 import ConnectionStatusService from '../service';
 import ConnectionStatusComponent from './component';
 
-const connectionStatusContainer = props => <ConnectionStatusComponent {...props} />;
+const connectionStatusContainer = (props) => <ConnectionStatusComponent {...props} />;
 
 export default withModalMounter(withTracker(({ mountModal }) => ({
   closeModal: (dataSaving, intl) => {

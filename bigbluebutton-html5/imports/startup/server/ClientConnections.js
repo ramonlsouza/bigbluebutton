@@ -1,9 +1,9 @@
+import { check } from 'meteor/check';
 import Logger from './logger';
 import userLeaving from '/imports/api/users/server/methods/userLeaving';
 import { extractCredentials } from '/imports/api/common/server/helpers';
 import AuthTokenValidation from '/imports/api/auth-token-validation';
 import Users from '/imports/api/users';
-import { check } from 'meteor/check';
 
 const { enabled, syncInterval } = Meteor.settings.public.syncUsersWithConnectionManager;
 
@@ -31,8 +31,7 @@ class ClientConnections {
     Logger.info('Client connections add called', { logCode: 'client_connections_add', extraInfo: { sessionId, connection } });
     if (!sessionId || !connection) {
       Logger.error(`Error on add new client connection. sessionId=${sessionId} connection=${connection.id}`,
-        { logCode: 'client_connections_add_error', extraInfo: { sessionId, connection } }
-      );
+        { logCode: 'client_connections_add_error', extraInfo: { sessionId, connection } });
 
       return;
     }
@@ -41,11 +40,10 @@ class ClientConnections {
 
     check(meetingId, String);
     check(userId, String);
-      
+
     if (!meetingId) {
       Logger.error('Error on add new client connection. sessionId=${sessionId} connection=${connection.id}',
-        { logCode: 'client_connections_add_error_meeting_id_null', extraInfo: { meetingId, userId } }
-      );
+        { logCode: 'client_connections_add_error_meeting_id_null', extraInfo: { meetingId, userId } });
       return false;
     }
 
@@ -73,16 +71,14 @@ class ClientConnections {
 
       sessionConnections.set(userId, []);
       return sessionConnections.get(userId).push(connection.id);
-    } else {
-      return sessionConnections.get(userId).push(connection.id);
     }
+    return sessionConnections.get(userId).push(connection.id);
   }
 
   createMeetingConnections(meetingId) {
     Logger.info(`Creating meeting in connections. meetingId=${meetingId}`);
 
-    if (!this.exists(meetingId))
-      return this.connections.set(meetingId, new Map());
+    if (!this.exists(meetingId)) return this.connections.set(meetingId, new Map());
   }
 
   exists(meetingId) {
@@ -94,7 +90,7 @@ class ClientConnections {
 
     check(meetingId, String);
     check(userId, String);
-  
+
     return this.connections.get(meetingId)?.get(userId);
   }
 
@@ -106,7 +102,6 @@ class ClientConnections {
       value.forEach((v, k) => {
         mapConnectionsObj[key][k] = v;
       });
-
     });
     Logger.info('Active connections', mapConnectionsObj);
   }
@@ -117,11 +112,11 @@ class ClientConnections {
 
     check(meetingId, String);
     check(userId, String);
-  
+
     const meetingConnections = this.connections.get(meetingId);
 
     if (meetingConnections?.has(userId)) {
-      const filteredConnections = meetingConnections.get(userId).filter(c => c !== connectionId);
+      const filteredConnections = meetingConnections.get(userId).filter((c) => c !== connectionId);
 
       return connectionId && filteredConnections.length ? meetingConnections.set(userId, filteredConnections) : meetingConnections.delete(userId);
     }
@@ -143,7 +138,7 @@ class ClientConnections {
     const onlineUsers = AuthTokenValidation
       .find(
         { connectionId: { $in: activeConnections } },
-        { fields: { meetingId: 1, userId: 1 } }
+        { fields: { meetingId: 1, userId: 1 } },
       )
       .fetch();
 
@@ -157,7 +152,7 @@ class ClientConnections {
 
     if (removedUsersWithoutConnection) {
       Logger.info(`Removed ${removedUsersWithoutConnection} users that are not connected`);
-      Logger.info(`Clearing connections`);
+      Logger.info('Clearing connections');
       try {
         userWithoutConnectionIds
           .forEach(({ meetingId, userId }) => {
@@ -168,7 +163,6 @@ class ClientConnections {
       }
     }
   }
-
 }
 
 const ClientConnectionsSingleton = new ClientConnections();

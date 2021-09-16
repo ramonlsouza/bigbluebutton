@@ -151,7 +151,7 @@ class BaseBroker {
   handleConnectionStateChange(eventIdentifier) {
     if (this.webRtcPeer) {
       const { peerConnection } = this.webRtcPeer;
-      const connectionState = peerConnection.connectionState;
+      const { connectionState } = peerConnection;
       if (eventIdentifier) {
         notifyStreamStateChange(eventIdentifier, connectionState);
       }

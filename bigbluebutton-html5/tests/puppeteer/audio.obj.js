@@ -1,6 +1,6 @@
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const Audio = require('./audio/audio');
 const Page = require('./core/page');
-const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const { MAX_AUDIO_TEST_TIMEOUT } = require('./core/constants');
 
 expect.extend({ toMatchImageSnapshot });

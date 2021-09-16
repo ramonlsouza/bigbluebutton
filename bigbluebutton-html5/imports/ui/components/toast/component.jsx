@@ -49,8 +49,7 @@ const Toast = ({
             {content}
           </div>
         </div>
-      ) : null
-    }
+      ) : null}
   </div>
 );
 

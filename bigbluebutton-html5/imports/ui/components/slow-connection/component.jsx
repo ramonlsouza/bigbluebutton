@@ -18,7 +18,7 @@ const SLOW_CONNECTIONS_TYPES = {
 };
 
 const SlowConnection = ({ children, effectiveConnectionType, iconOnly }) => (
-  <Fragment>
+  <>
     <div className={cx(styles.signalBars, styles.sizingBox, SLOW_CONNECTIONS_TYPES[effectiveConnectionType].level, SLOW_CONNECTIONS_TYPES[effectiveConnectionType].bars)}>
       <div className={cx(styles.firstBar, styles.bar)} />
       <div className={cx(styles.secondBar, styles.bar)} />
@@ -26,7 +26,7 @@ const SlowConnection = ({ children, effectiveConnectionType, iconOnly }) => (
       <div className={cx(styles.fourthBar, styles.bar)} />
     </div>
     {!iconOnly ? (<span>{children}</span>) : null}
-  </Fragment>
+  </>
 );
 
 export default SlowConnection;

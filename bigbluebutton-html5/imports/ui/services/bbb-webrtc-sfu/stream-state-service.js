@@ -36,6 +36,6 @@ export const unsubscribeFromStreamStateChange = (eventTag, callback) => {
   window.removeEventListener(eventName, callback);
 };
 
-export const isStreamStateUnhealthy = streamState => streamState === 'failed' || streamState === 'closed';
+export const isStreamStateUnhealthy = (streamState) => streamState === 'failed' || streamState === 'closed';
 
-export const isStreamStateHealthy = streamState => streamState === 'connected' || streamState === 'completed';
+export const isStreamStateHealthy = (streamState) => streamState === 'connected' || streamState === 'completed';

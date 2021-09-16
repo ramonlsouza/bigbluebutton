@@ -23,7 +23,7 @@ export default async function addBulkGroupChatMsgs(msgs) {
         sender: sender.id,
       };
     })
-    .map(el => flat(el, { safe: true }));
+    .map((el) => flat(el, { safe: true }));
 
   try {
     const { insertedCount } = await GroupChatMsg.rawCollection().insertMany(mappedMsgs);

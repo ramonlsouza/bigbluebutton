@@ -27,7 +27,7 @@ const fetchStunTurnServers = function (sessionToken) {
     });
 
     const stDictionary = {
-      stun: stunServers.map(server => server.url),
+      stun: stunServers.map((server) => server.url),
       turn: turnReply,
     };
 
@@ -38,13 +38,13 @@ const fetchStunTurnServers = function (sessionToken) {
 
   const url = `${STUN_TURN_FETCH_URL}?sessionToken=${sessionToken}`;
   return fetch(url, { credentials: 'same-origin' })
-    .then(res => res.json())
+    .then((res) => res.json())
     .then(handleStunTurnResponse);
 };
 
 const mapStunTurn = ({ stun, turn }) => {
-  const rtcStuns = stun.map(url => ({ urls: url }));
-  const rtcTurns = turn.map(t => ({ urls: t.urls, credential: t.password, username: t.username }));
+  const rtcStuns = stun.map((url) => ({ urls: url }));
+  const rtcTurns = turn.map((t) => ({ urls: t.urls, credential: t.password, username: t.username }));
   return rtcStuns.concat(rtcTurns);
 };
 

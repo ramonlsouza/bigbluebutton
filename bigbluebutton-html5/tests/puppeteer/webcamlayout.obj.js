@@ -1,6 +1,6 @@
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const Page = require('./core/page');
 const Share = require('./webcam/share');
-const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const { MAX_WEBCAM_LAYOUT_TEST_TIMEOUT } = require('./core/constants');
 
 expect.extend({ toMatchImageSnapshot });

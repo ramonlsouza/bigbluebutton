@@ -3,7 +3,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import CaptionsService from './service';
 import Captions from './component';
 
-const CaptionsContainer = props => (
+const CaptionsContainer = (props) => (
   <Captions {...props} />
 );
 

@@ -78,7 +78,6 @@ class MeteorStream {
   }
 }
 
-
 function createStreamForTarget(target, options) {
   const TARGET_EXTERNAL = 'external';
   const TARGET_CONSOLE = 'console';
@@ -121,6 +120,5 @@ const logger = createLogger({
   serializers: stdSerializers,
   src: true,
 });
-
 
 export default logger;

@@ -1,6 +1,6 @@
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const VirtualizedList = require('./virtualizedlist/virtualize');
 const { TEST_DURATION_TIME } = require('./core/constants');
-const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 expect.extend({ toMatchImageSnapshot });
 

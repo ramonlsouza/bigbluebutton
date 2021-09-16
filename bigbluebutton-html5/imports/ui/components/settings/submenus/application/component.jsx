@@ -142,7 +142,7 @@ class ApplicationMenu extends BaseMenu {
       : _constraints || {};
 
     isAnyFilterEnabled = Object.values(constraints).find(
-      constraintValue => _isConstraintEnabled(constraintValue),
+      (constraintValue) => _isConstraintEnabled(constraintValue),
     );
 
     return isAnyFilterEnabled;
@@ -322,7 +322,7 @@ class ApplicationMenu extends BaseMenu {
                 {showSelect ? (
                   <LocalesDropdown
                     allLocales={allLocales}
-                    handleChange={e => this.handleSelectChange('locale', allLocales, e)}
+                    handleChange={(e) => this.handleSelectChange('locale', allLocales, e)}
                     value={this.state.settings.locale}
                     elementId="langSelector"
                     elementClass={styles.select}
@@ -335,8 +335,7 @@ class ApplicationMenu extends BaseMenu {
                       <div className={styles.bounce2} />
                       <div />
                     </div>
-                  )
-                }
+                  )}
               </span>
             </div>
           </div>

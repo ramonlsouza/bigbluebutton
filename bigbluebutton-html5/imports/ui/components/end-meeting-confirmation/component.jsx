@@ -56,8 +56,7 @@ class EndMeetingComponent extends React.PureComponent {
           <div className={styles.description}>
             {users > 0
               ? intl.formatMessage(intlMessages.endMeetingDescription, { 0: users })
-              : intl.formatMessage(intlMessages.endMeetingNoUserDescription)
-            }
+              : intl.formatMessage(intlMessages.endMeetingNoUserDescription)}
           </div>
           <div className={styles.footer}>
             <Button

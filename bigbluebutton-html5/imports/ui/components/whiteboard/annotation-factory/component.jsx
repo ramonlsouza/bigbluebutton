@@ -72,7 +72,7 @@ export default class AnnotationFactory extends Component {
     return (
       <g>
         {annotationsInfo
-          ? annotationsInfo.map(annotationInfo => this.renderAnnotation(annotationInfo))
+          ? annotationsInfo.map((annotationInfo) => this.renderAnnotation(annotationInfo))
           : null }
       </g>
     );

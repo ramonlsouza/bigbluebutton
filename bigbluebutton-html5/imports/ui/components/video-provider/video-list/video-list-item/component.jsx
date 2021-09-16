@@ -143,7 +143,7 @@ class VideoListItem extends Component {
     return _.compact([
       <DropdownListTitle className={styles.hiddenDesktop} key="name">{name}</DropdownListTitle>,
       <DropdownListSeparator className={styles.hiddenDesktop} key="sep" />,
-      ...actions.map(action => (<DropdownListItem key={`${cameraId}-${action.actionName}`} {...action} />)),
+      ...actions.map((action) => (<DropdownListItem key={`${cameraId}-${action.actionName}`} {...action} />)),
     ]);
   }
 
@@ -264,14 +264,12 @@ class VideoListItem extends Component {
                     {name}
                   </span>
                 </div>
-              )
-          }
+              )}
             {voiceUser.muted && !voiceUser.listenOnly ? <Icon className={styles.muted} iconName="unmute_filled" /> : null}
             {voiceUser.listenOnly ? <Icon className={styles.voice} iconName="listen" /> : null}
             {voiceUser.joined && !voiceUser.muted ? <Icon className={styles.voice} iconName="unmute" /> : null}
           </div>
-          )
-        }
+          )}
       </div>
     );
   }

@@ -71,7 +71,6 @@ async function webcamContentCheck(test) {
   return check === true;
 }
 
-
 async function clickTestElement(element) {
   document.querySelectorAll(element)[0].click();
 }

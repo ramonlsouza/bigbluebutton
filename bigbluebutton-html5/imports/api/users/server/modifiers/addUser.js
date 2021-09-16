@@ -58,23 +58,21 @@ export default function addUser(meetingId, userData) {
     from a list based on the userId */
   const color = COLOR_LIST[stringHash(user.intId) % COLOR_LIST.length];
 
-  const userInfos = Object.assign(
-    {
-      meetingId,
-      sortName: user.name.trim().toLowerCase(),
-      color,
-      mobile: false,
-      breakoutProps: {
-        isBreakoutUser: Meeting.meetingProp.isBreakout,
-        parentId: Meeting.breakoutProps.parentId,
-      },
-      effectiveConnectionType: null,
-      inactivityCheck: false,
-      responseDelay: 0,
-      loggedOut: false,
+  const userInfos = {
+    meetingId,
+    sortName: user.name.trim().toLowerCase(),
+    color,
+    mobile: false,
+    breakoutProps: {
+      isBreakoutUser: Meeting.meetingProp.isBreakout,
+      parentId: Meeting.breakoutProps.parentId,
     },
-    flat(user),
-  );
+    effectiveConnectionType: null,
+    inactivityCheck: false,
+    responseDelay: 0,
+    loggedOut: false,
+    ...flat(user),
+  };
 
   const modifier = {
     $set: userInfos,

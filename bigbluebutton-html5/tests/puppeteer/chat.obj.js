@@ -1,3 +1,4 @@
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const Page = require('./core/page');
 const Send = require('./chat/send');
 const Clear = require('./chat/clear');
@@ -5,7 +6,6 @@ const Copy = require('./chat/copy');
 const Save = require('./chat/save');
 const Poll = require('./chat/poll');
 const MultiUsers = require('./user/multiusers');
-const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const { MAX_CHAT_TEST_TIMEOUT } = require('./core/constants'); // core constants (Timeouts vars imported)
 
 expect.extend({ toMatchImageSnapshot });

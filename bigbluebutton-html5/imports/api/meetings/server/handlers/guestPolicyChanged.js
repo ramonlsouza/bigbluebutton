@@ -7,6 +7,5 @@ export default function handleGuestPolicyChanged({ body }, meetingId) {
   check(meetingId, String);
   check(policy, String);
 
-
   return setGuestPolicy(meetingId, policy);
 }

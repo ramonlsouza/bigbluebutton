@@ -4,7 +4,7 @@ import { makeCall } from '/imports/ui/services/api';
 
 const guestUsersCall = (guestsArray, status) => makeCall('allowPendingUsers', guestsArray, status);
 
-const changeGuestPolicy = policyRule => makeCall('changeGuestPolicy', policyRule);
+const changeGuestPolicy = (policyRule) => makeCall('changeGuestPolicy', policyRule);
 
 const getGuestPolicy = () => {
   const meeting = Meetings.findOne(
@@ -28,7 +28,7 @@ const getGuestLobbyMessage = () => {
   return '';
 };
 
-const setGuestLobbyMessage = message => makeCall('setGuestLobbyMessage', message);
+const setGuestLobbyMessage = (message) => makeCall('setGuestLobbyMessage', message);
 
 export default {
   guestUsersCall,

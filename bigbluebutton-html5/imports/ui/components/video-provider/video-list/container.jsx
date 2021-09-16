@@ -8,7 +8,7 @@ const VideoListContainer = ({ children, ...props }) => {
   return (!streams.length ? null : <VideoList {...props}>{children}</VideoList>);
 };
 
-export default withTracker(props => ({
+export default withTracker((props) => ({
   streams: props.streams,
   onVideoItemMount: props.onVideoItemMount,
   onVideoItemUnmount: props.onVideoItemUnmount,

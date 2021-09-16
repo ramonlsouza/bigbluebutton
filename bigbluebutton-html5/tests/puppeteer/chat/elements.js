@@ -13,7 +13,6 @@ exports.chatClearMessageText = 'p[data-test="chatClearMessageText"]';
 exports.chatPollMessageText = 'p[data-test="chatPollMessageText"]';
 exports.chatWelcomeMessageText = 'p[data-test="chatWelcomeMessageText"]';
 
-
 exports.activeChat = '[data-test="activeChat"]';
 exports.publicChat = '[data-test="publicChat"]';
 exports.privateChat = '[data-test="privateChat"]';

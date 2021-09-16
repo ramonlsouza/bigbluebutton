@@ -27,10 +27,11 @@ export default function addVoiceUser(meetingId, voiceUser) {
   };
 
   const modifier = {
-    $set: Object.assign(
-      { meetingId, spoke: talking },
-      flat(voiceUser),
-    ),
+    $set: {
+      meetingId,
+      spoke: talking,
+      ...flat(voiceUser),
+    },
   };
 
   const user = Users.findOne({ meetingId, userId: intId }, {

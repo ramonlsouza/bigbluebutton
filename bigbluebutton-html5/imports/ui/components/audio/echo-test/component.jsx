@@ -52,7 +52,7 @@ class EchoTest extends Component {
     const {
       intl,
     } = this.props;
-    const disableYesButtonClicked = callback => () => {
+    const disableYesButtonClicked = (callback) => () => {
       this.setState({ disabled: true }, callback);
     };
     return (

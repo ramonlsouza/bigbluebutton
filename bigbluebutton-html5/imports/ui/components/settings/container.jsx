@@ -9,7 +9,7 @@ import {
   getAvailableLocales,
 } from './service';
 
-const SettingsContainer = props => (
+const SettingsContainer = (props) => (
   <Settings {...props} />
 );
 

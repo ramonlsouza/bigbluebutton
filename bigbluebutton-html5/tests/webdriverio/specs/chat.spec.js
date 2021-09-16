@@ -1,4 +1,3 @@
-
 const chai = require('chai');
 const clipboardy = require('clipboardy');
 const LandingPage = require('../pageobjects/landing.page');

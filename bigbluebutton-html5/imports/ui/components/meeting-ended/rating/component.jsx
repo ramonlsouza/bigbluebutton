@@ -46,7 +46,7 @@ class Rating extends Component {
           <legend className={styles.legend}>{intl.formatMessage(intlMessages.legendTitle)}</legend>
           {
             _.range(num)
-              .map(i => [
+              .map((i) => [
                 (
                   <input
                     type="radio"

@@ -1,5 +1,5 @@
 const caseInsensitiveReducer = (acc, item) => {
-  const index = acc.findIndex(ans => ans.key.toLowerCase() === item.key.toLowerCase());
+  const index = acc.findIndex((ans) => ans.key.toLowerCase() === item.key.toLowerCase());
   if (index !== -1) {
     if (acc[index].numVotes >= item.numVotes) acc[index].numVotes += item.numVotes;
     else {

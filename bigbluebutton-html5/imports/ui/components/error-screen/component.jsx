@@ -89,7 +89,8 @@ class ErrorScreen extends PureComponent {
           !errorMessageDescription || (
             <div className={styles.sessionMessage}>
               {errorMessageDescription}
-            </div>)
+            </div>
+          )
         }
         <div className={styles.separator} />
         <h1 className={styles.codeError}>

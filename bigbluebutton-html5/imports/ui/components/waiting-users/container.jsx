@@ -22,7 +22,6 @@ export default withTracker(() => {
     denied: false,
   }).fetch();
 
-
   const authenticatedUsers = GuestUsers.find({
     meetingId: Auth.meetingID,
     authenticated: true,
@@ -31,7 +30,7 @@ export default withTracker(() => {
     denied: false,
   }).fetch();
 
-  const authenticatedGuest = Meetings.findOne({ meetingId: Auth.meetingID }).usersProp.authenticatedGuest;
+  const { authenticatedGuest } = Meetings.findOne({ meetingId: Auth.meetingID }).usersProp;
 
   return {
     guestUsers,

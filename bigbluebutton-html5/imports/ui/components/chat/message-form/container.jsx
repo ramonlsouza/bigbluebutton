@@ -22,7 +22,7 @@ export default withTracker(() => {
     return ChatService.sendGroupMessage(message);
   };
 
-  const startUserTyping = chatId => makeCall('startUserTyping', chatId);
+  const startUserTyping = (chatId) => makeCall('startUserTyping', chatId);
 
   const stopUserTyping = () => makeCall('stopUserTyping');
 

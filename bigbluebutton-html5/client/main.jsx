@@ -56,7 +56,7 @@ Meteor.startup(() => {
   // TODO make this a Promise
   render(
     <ContextProviders>
-      <React.Fragment>
+      <>
         <JoinHandler>
           <AuthenticatedHandler>
             <Subscriptions>
@@ -69,7 +69,7 @@ Meteor.startup(() => {
         <UsersAdapter />
         <ChatAdapter />
         <GroupChatAdapter />
-      </React.Fragment>
+      </>
     </ContextProviders>,
     document.getElementById('app'),
   );

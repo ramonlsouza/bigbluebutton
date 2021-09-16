@@ -3,7 +3,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 
 import AboutComponent from './component';
 
-const AboutContainer = props => (
+const AboutContainer = (props) => (
   <AboutComponent {...props}>
     {props.children}
   </AboutComponent>

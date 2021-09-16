@@ -48,7 +48,7 @@ const setTextShapeActiveId = (id) => {
 
 const getCurrentUserId = () => Auth.userID;
 
-const contextMenuHandler = event => event.preventDefault();
+const contextMenuHandler = (event) => event.preventDefault();
 
 const updateCursor = (payload) => {
   publishCursorUpdate(payload);

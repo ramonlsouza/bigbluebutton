@@ -2,11 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import GroupChat from '/imports/api/group-chat';
 import { GroupChatContext, ACTIONS } from './context';
 
-
 const Adapter = () => {
   const usingGroupChatContext = useContext(GroupChatContext);
   const { dispatch } = usingGroupChatContext;
-
 
   useEffect(() => {
     const alreadyDispatched = new Set();
@@ -15,7 +13,7 @@ const Adapter = () => {
     const diffAndDispatch = () => {
       setTimeout(() => {
         const groupChatCursor = GroupChat.find({}, { reactive: false }).fetch();
-        const notDispatched = groupChatCursor.filter(objMsg => !alreadyDispatched.has(objMsg._id));
+        const notDispatched = groupChatCursor.filter((objMsg) => !alreadyDispatched.has(objMsg._id));
         notDispatchedCount.count = notDispatched.length;
 
         notDispatched.forEach((groupChat) => {

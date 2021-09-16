@@ -96,7 +96,7 @@ class AudioStreamVolume extends Component {
     const sum = input.reduce((a, b) => a + (b * b), 0);
     const instant = Math.sqrt(sum / input.length);
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       instant,
       slow: (0.75 * prevState.slow) + (0.25 * instant),
     }));

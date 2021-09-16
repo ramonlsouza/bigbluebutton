@@ -1,5 +1,3 @@
-
-
 const Page = require('./page');
 
 const pageObject = new Page();

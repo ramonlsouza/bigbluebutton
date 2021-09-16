@@ -11,7 +11,7 @@ const { isSafari, isValidSafariVersion } = browserInfo;
 
 const noIOSFullscreen = !!(((isSafari && !isValidSafariVersion) || isIphone));
 
-const SettingsDropdownContainer = props => (
+const SettingsDropdownContainer = (props) => (
   <SettingsDropdown {...props} />
 );
 

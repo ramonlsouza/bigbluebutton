@@ -335,7 +335,7 @@ class CustomParameters {
     await this.page1.closeAudioModal();
     await this.page1.waitForSelector(cpe.whiteboard, ELEMENT_WAIT_TIME);
     await this.page1.screenshot(`${testName}`, `02-${testName}`);
-    const isHidden = await this.page1.page.$eval('[class="presentationTitle--1LT79g"]', elem => elem.offsetHeight == 0);
+    const isHidden = await this.page1.page.$eval('[class="presentationTitle--1LT79g"]', (elem) => elem.offsetHeight == 0);
     if (isHidden === false) {
       await this.page1.screenshot(`${testName}`, `03-fail-${testName}`);
       this.page1.logger(testName, ' failed');
@@ -355,7 +355,7 @@ class CustomParameters {
     await this.page1.closeAudioModal();
     await this.page1.waitForSelector(cpe.whiteboard, ELEMENT_WAIT_TIME);
     await this.page1.screenshot(`${testName}`, `02-${testName}`);
-    const isHidden = await this.page1.page.$eval('[class="presentationTitle--1LT79g"]', elem => elem.offsetHeight == 0);
+    const isHidden = await this.page1.page.$eval('[class="presentationTitle--1LT79g"]', (elem) => elem.offsetHeight == 0);
     if (isHidden === false) {
       await this.page1.screenshot(`${testName}`, `03-fail-${testName}`);
       this.page1.logger(testName, ' failed');
@@ -375,7 +375,7 @@ class CustomParameters {
     await this.page1.closeAudioModal();
     await this.page1.waitForSelector(cpe.container, ELEMENT_WAIT_TIME);
     await this.page1.screenshot(`${testName}`, `02-${testName}`);
-    const isNotHidden = await this.page1.page.$eval(cpe.restorePresentation, elem => elem.offsetHeight !== 0);
+    const isNotHidden = await this.page1.page.$eval(cpe.restorePresentation, (elem) => elem.offsetHeight !== 0);
     console.log(isNotHidden);
     if (isNotHidden === false) {
       await this.page1.screenshot(`${testName}`, `03-fail-${testName}`);
@@ -432,7 +432,7 @@ class CustomParameters {
     await this.page1.closeAudioModal();
     await this.page1.waitForSelector(cpe.notificationBar, ELEMENT_WAIT_TIME);
     await this.page1.screenshot(`${testName}`, `02-${testName}`);
-    const notificationBarColor = await this.page1.page.$eval('div[class^="notificationsBar--"]', elem => getComputedStyle(elem).backgroundColor);
+    const notificationBarColor = await this.page1.page.$eval('div[class^="notificationsBar--"]', (elem) => getComputedStyle(elem).backgroundColor);
     console.log('colorToRGB => ', colorToRGB);
     console.log('notificationBarColor => ', notificationBarColor);
     if (notificationBarColor !== colorToRGB) {
