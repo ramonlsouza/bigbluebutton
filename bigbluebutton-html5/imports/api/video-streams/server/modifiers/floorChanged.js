@@ -11,7 +11,7 @@ export default function floorChanged(meetingId, userId, floor, lastFloorTime) {
   const selector = {
     meetingId,
     userId,
-  }
+  };
 
   const modifier = {
     $set: {

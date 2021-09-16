@@ -111,7 +111,7 @@ export default class Button extends BaseButton {
   }
 
   _cleanProps(otherProps) {
-    const remainingProps = Object.assign({}, otherProps);
+    const remainingProps = { ...otherProps };
     delete remainingProps.icon;
     delete remainingProps.customIcon;
     delete remainingProps.size;

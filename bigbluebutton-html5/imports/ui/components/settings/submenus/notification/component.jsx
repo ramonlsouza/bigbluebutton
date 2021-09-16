@@ -118,8 +118,8 @@ class NotificationMenu extends BaseMenu {
                   />
                 </div>
               </div>
-            </div>) : null
-            }
+            </div>
+          ) : null}
 
           <div className={styles.row}>
             <div className={styles.col}>

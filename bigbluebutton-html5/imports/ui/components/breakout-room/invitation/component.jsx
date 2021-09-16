@@ -70,7 +70,7 @@ class BreakoutRoomInvitation extends Component {
       // Have to check for freeJoin breakouts first because currentBreakoutUser will
       // populate after a room has been joined
       const breakoutRoom = getBreakoutByUser(currentBreakoutUser);
-      const freeJoinBreakout = breakouts.find(breakout => breakout.freeJoin);
+      const freeJoinBreakout = breakouts.find((breakout) => breakout.freeJoin);
       if (freeJoinBreakout) {
         if (!didSendBreakoutInvite) {
           this.inviteUserToBreakout(breakoutRoom || freeJoinBreakout);

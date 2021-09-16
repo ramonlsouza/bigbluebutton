@@ -16,7 +16,7 @@ export default withTracker(() => {
   }, { fields: { 'usersProp.webcamsOnlyForModerator': 1, lockSettingsProps: 1 } });
   const videoStreams = VideoStreams.find({ meetingId: Auth.meetingID },
     { fields: { userId: 1 } }).fetch();
-  const videoUsersIds = videoStreams.map(u => u.userId);
+  const videoUsersIds = videoStreams.map((u) => u.userId);
   return {
     viewersInWebcam: Users.find({
       meetingId: Auth.meetingID,

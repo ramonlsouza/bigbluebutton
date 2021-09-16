@@ -230,85 +230,81 @@ class PresentationToolbar extends PureComponent {
       : `${intl.formatMessage(intlMessages.nextSlideLabel)} (${currentSlideNum >= 1 ? (currentSlideNum + 1) : ''})`;
 
     return (
-      <div id="presentationToolbarWrapper"
+      <div
+        id="presentationToolbarWrapper"
         className={styles.presentationToolbarWrapper}
         style={
           {
             width: toolbarWidth,
           }
-        }>
+        }
+      >
         {this.renderAriaDescs()}
-        {
-          <div>
-            {isPollingEnabled
-              ? (
-                <QuickPollDropdownContainer
-                  {...{
-                    currentSlidHasContent,
-                    intl,
-                    amIPresenter,
-                    parseCurrentSlideContent,
-                    startPoll,
-                    currentSlide,
-                  }}
-                  className={styles.presentationBtn}
-                />
-              ) : null
-            }
-          </div>
-        }
-        {
-          <div className={styles.presentationSlideControls}>
-            <Button
-              role="button"
-              aria-label={prevSlideAriaLabel}
-              aria-describedby={startOfSlides ? 'noPrevSlideDesc' : 'prevSlideDesc'}
-              disabled={startOfSlides || !isMeteorConnected}
-              color="default"
-              icon="left_arrow"
-              size="md"
-              onClick={this.previousSlideHandler}
-              label={intl.formatMessage(intlMessages.previousSlideLabel)}
-              hideLabel
-              className={cx(styles.prevSlide, styles.presentationBtn)}
-              data-test="prevSlide"
-            />
+        <div>
+          {isPollingEnabled
+            ? (
+              <QuickPollDropdownContainer
+                {...{
+                  currentSlidHasContent,
+                  intl,
+                  amIPresenter,
+                  parseCurrentSlideContent,
+                  startPoll,
+                  currentSlide,
+                }}
+                className={styles.presentationBtn}
+              />
+            ) : null}
+        </div>
+        <div className={styles.presentationSlideControls}>
+          <Button
+            role="button"
+            aria-label={prevSlideAriaLabel}
+            aria-describedby={startOfSlides ? 'noPrevSlideDesc' : 'prevSlideDesc'}
+            disabled={startOfSlides || !isMeteorConnected}
+            color="default"
+            icon="left_arrow"
+            size="md"
+            onClick={this.previousSlideHandler}
+            label={intl.formatMessage(intlMessages.previousSlideLabel)}
+            hideLabel
+            className={cx(styles.prevSlide, styles.presentationBtn)}
+            data-test="prevSlide"
+          />
 
-            <TooltipContainer title={intl.formatMessage(intlMessages.selectLabel)}>
-              <select
-                id="skipSlide"
-                aria-label={intl.formatMessage(intlMessages.skipSlideLabel)}
-                aria-describedby="skipSlideDesc"
-                aria-live="polite"
-                aria-relevant="all"
-                disabled={!isMeteorConnected}
-                value={currentSlideNum}
-                onChange={this.handleSkipToSlideChange}
-                className={styles.skipSlideSelect}
-                data-test="skipSlide"
-              >
-                {this.renderSkipSlideOpts(numberOfSlides)}
-              </select>
-            </TooltipContainer>
-            <Button
-              role="button"
-              aria-label={nextSlideAriaLabel}
-              aria-describedby={endOfSlides ? 'noNextSlideDesc' : 'nextSlideDesc'}
-              disabled={endOfSlides || !isMeteorConnected}
-              color="default"
-              icon="right_arrow"
-              size="md"
-              onClick={this.nextSlideHandler}
-              label={intl.formatMessage(intlMessages.nextSlideLabel)}
-              hideLabel
-              className={cx(styles.skipSlide, styles.presentationBtn)}
-              data-test="nextSlide"
-            />
-          </div>
-        }
-        {
-          <div className={styles.presentationZoomControls}>
-            {
+          <TooltipContainer title={intl.formatMessage(intlMessages.selectLabel)}>
+            <select
+              id="skipSlide"
+              aria-label={intl.formatMessage(intlMessages.skipSlideLabel)}
+              aria-describedby="skipSlideDesc"
+              aria-live="polite"
+              aria-relevant="all"
+              disabled={!isMeteorConnected}
+              value={currentSlideNum}
+              onChange={this.handleSkipToSlideChange}
+              className={styles.skipSlideSelect}
+              data-test="skipSlide"
+            >
+              {this.renderSkipSlideOpts(numberOfSlides)}
+            </select>
+          </TooltipContainer>
+          <Button
+            role="button"
+            aria-label={nextSlideAriaLabel}
+            aria-describedby={endOfSlides ? 'noNextSlideDesc' : 'nextSlideDesc'}
+            disabled={endOfSlides || !isMeteorConnected}
+            color="default"
+            icon="right_arrow"
+            size="md"
+            onClick={this.nextSlideHandler}
+            label={intl.formatMessage(intlMessages.nextSlideLabel)}
+            hideLabel
+            className={cx(styles.skipSlide, styles.presentationBtn)}
+            data-test="nextSlide"
+          />
+        </div>
+        <div className={styles.presentationZoomControls}>
+          {
               !isMobile
                 ? (
                   <TooltipContainer>
@@ -324,28 +320,25 @@ class PresentationToolbar extends PureComponent {
                 )
                 : null
             }
-            <Button
-              role="button"
-              aria-describedby={fitToWidth ? 'fitPageDesc' : 'fitWidthDesc'}
-              aria-label={fitToWidth
-                ? `${intl.formatMessage(intlMessages.presentationLabel)} ${intl.formatMessage(intlMessages.fitToPage)}`
-                : `${intl.formatMessage(intlMessages.presentationLabel)} ${intl.formatMessage(intlMessages.fitToWidth)}`
-              }
-              color="default"
-              disabled={!isMeteorConnected}
-              icon="fit_to_width"
-              size="md"
-              circle={false}
-              onClick={fitToWidthHandler}
-              label={fitToWidth
-                ? intl.formatMessage(intlMessages.fitToPage)
-                : intl.formatMessage(intlMessages.fitToWidth)
-              }
-              hideLabel
-              className={cx(styles.fitToWidth, styles.presentationBtn)}
-            />
-          </div>
-        }
+          <Button
+            role="button"
+            aria-describedby={fitToWidth ? 'fitPageDesc' : 'fitWidthDesc'}
+            aria-label={fitToWidth
+              ? `${intl.formatMessage(intlMessages.presentationLabel)} ${intl.formatMessage(intlMessages.fitToPage)}`
+              : `${intl.formatMessage(intlMessages.presentationLabel)} ${intl.formatMessage(intlMessages.fitToWidth)}`}
+            color="default"
+            disabled={!isMeteorConnected}
+            icon="fit_to_width"
+            size="md"
+            circle={false}
+            onClick={fitToWidthHandler}
+            label={fitToWidth
+              ? intl.formatMessage(intlMessages.fitToPage)
+              : intl.formatMessage(intlMessages.fitToWidth)}
+            hideLabel
+            className={cx(styles.fitToWidth, styles.presentationBtn)}
+          />
+        </div>
       </div>
     );
   }

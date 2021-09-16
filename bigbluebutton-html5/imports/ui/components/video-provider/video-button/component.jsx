@@ -2,11 +2,11 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Button from '/imports/ui/components/button/component';
-import VideoService from '../service';
 import { defineMessages, injectIntl } from 'react-intl';
+import { debounce } from 'lodash';
+import VideoService from '../service';
 import { styles } from './styles';
 import { validIOSVersion } from '/imports/ui/components/app/service';
-import { debounce } from 'lodash';
 
 const intlMessages = defineMessages({
   joinVideo: {

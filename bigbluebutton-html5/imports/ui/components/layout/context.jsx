@@ -1147,18 +1147,10 @@ const LayoutContextProvider = (props) => {
 };
 LayoutContextProvider.propTypes = providerPropTypes;
 
-const layoutSelect = (selector) => {
-  return useContextSelector(LayoutContextSelector, layout => selector(layout[0]));
-};
-const layoutSelectInput = (selector) => {
-  return useContextSelector(LayoutContextSelector, layout => selector(layout[0].input));
-};
-const layoutSelectOutput = (selector) => {
-  return useContextSelector(LayoutContextSelector, layout => selector(layout[0].output));
-};
-const layoutDispatch = () => {
-  return useContextSelector(LayoutContextSelector, layout => layout[1]);
-};
+const layoutSelect = (selector) => useContextSelector(LayoutContextSelector, (layout) => selector(layout[0]));
+const layoutSelectInput = (selector) => useContextSelector(LayoutContextSelector, (layout) => selector(layout[0].input));
+const layoutSelectOutput = (selector) => useContextSelector(LayoutContextSelector, (layout) => selector(layout[0].output));
+const layoutDispatch = () => useContextSelector(LayoutContextSelector, (layout) => layout[1]);
 
 export {
   LayoutContextProvider,
@@ -1166,4 +1158,4 @@ export {
   layoutSelectInput,
   layoutSelectOutput,
   layoutDispatch,
-}
+};

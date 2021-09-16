@@ -7,5 +7,5 @@ export default function handleGuestApproved({ body }, meetingId) {
   check(approvedBy, String);
   check(guests, Array);
 
-  return guests.forEach(guest => setGuestStatus(meetingId, guest.guest, guest.status, approvedBy));
+  return guests.forEach((guest) => setGuestStatus(meetingId, guest.guest, guest.status, approvedBy));
 }

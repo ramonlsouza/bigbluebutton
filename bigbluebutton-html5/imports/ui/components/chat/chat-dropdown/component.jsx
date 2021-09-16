@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { withModalMounter } from '/imports/ui/components/modal/service';
 import _ from 'lodash';
-import BBBMenu from "/imports/ui/components/menu/component";
+import BBBMenu from '/imports/ui/components/menu/component';
 import Button from '/imports/ui/components/button/component';
 
 import { alertScreenReader } from '/imports/utils/dom-utils';
@@ -64,15 +64,15 @@ class ChatDropdown extends PureComponent {
     const clearIcon = 'delete';
     const saveIcon = 'download';
     const copyIcon = 'copy';
-    
+
     this.menuItems = [];
-      ENABLE_SAVE_AND_COPY_PUBLIC_CHAT
+    ENABLE_SAVE_AND_COPY_PUBLIC_CHAT
       && (
         this.menuItems.push(
           {
-            key: this.actionsKey[0],            
+            key: this.actionsKey[0],
             icon: saveIcon,
-            dataTest: "chatSave",
+            dataTest: 'chatSave',
             label: intl.formatMessage(intlMessages.save),
             onClick: () => {
               const link = document.createElement('a');
@@ -87,42 +87,42 @@ class ChatDropdown extends PureComponent {
                 + `${encodeURIComponent(ChatService.exportChat(timeWindowsValues, users, intl))}`,
               );
               link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-            }       
-          }          
-        )  
+            },
+          },
+        )
       ),
-      ENABLE_SAVE_AND_COPY_PUBLIC_CHAT
+    ENABLE_SAVE_AND_COPY_PUBLIC_CHAT
       && (
         this.menuItems.push(
           {
             key: this.actionsKey[1],
             icon: copyIcon,
-            id: "clipboardButton",
-            dataTest: "chatCopy",
+            id: 'clipboardButton',
+            dataTest: 'chatCopy',
             label: intl.formatMessage(intlMessages.copy),
             onClick: () => {
-              let chatHistory = ChatService.exportChat(timeWindowsValues, users, intl);
+              const chatHistory = ChatService.exportChat(timeWindowsValues, users, intl);
               navigator.clipboard.writeText(chatHistory).then(() => {
                 alertScreenReader(intl.formatMessage(intlMessages.copySuccess));
               }).catch(() => {
                 alertScreenReader(intl.formatMessage(intlMessages.copyErr));
               });
-            }
-          }
+            },
+          },
         )
-      )
+      );
 
-      if (!meetingIsBreakout && amIModerator && isMeteorConnected) {
-        this.menuItems.push(
-          {
-            key: this.actionsKey[2],
-            icon: clearIcon,
-            dataTest: "chatClear",
-            label: intl.formatMessage(intlMessages.clear),
-            onClick: () => ChatService.clearPublicChatHistory()
-          }
-        )     
-      }
+    if (!meetingIsBreakout && amIModerator && isMeteorConnected) {
+      this.menuItems.push(
+        {
+          key: this.actionsKey[2],
+          icon: clearIcon,
+          dataTest: 'chatClear',
+          label: intl.formatMessage(intlMessages.clear),
+          onClick: () => ChatService.clearPublicChatHistory(),
+        },
+      );
+    }
 
     return this.menuItems;
   }
@@ -136,33 +136,33 @@ class ChatDropdown extends PureComponent {
     if (!amIModerator && !ENABLE_SAVE_AND_COPY_PUBLIC_CHAT) return null;
     return (
       <>
-      <BBBMenu
-        trigger={
-          <Button
-            data-test="chatOptionsMenu"
-            icon="more"
-            size="sm"
-            ghost
-            circle
-            hideLabel
-            color="dark"
-            label={intl.formatMessage(intlMessages.options)}
-            aria-label={intl.formatMessage(intlMessages.options)}
-            onClick={() => null}
-          />                    
-        }
-        opts={{
-          id: "default-dropdown-menu",
-          keepMounted: true,
-          transitionDuration: 0,
-          elevation: 3,
-          getContentAnchorEl: null,
-          fullwidth: "true",
-          anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
-          transformorigin: { vertical: 'bottom', horizontal: 'left' },
-        }}
-        actions={this.getAvailableActions()}
-      />
+        <BBBMenu
+          trigger={(
+            <Button
+              data-test="chatOptionsMenu"
+              icon="more"
+              size="sm"
+              ghost
+              circle
+              hideLabel
+              color="dark"
+              label={intl.formatMessage(intlMessages.options)}
+              aria-label={intl.formatMessage(intlMessages.options)}
+              onClick={() => null}
+            />
+        )}
+          opts={{
+            id: 'default-dropdown-menu',
+            keepMounted: true,
+            transitionDuration: 0,
+            elevation: 3,
+            getContentAnchorEl: null,
+            fullwidth: 'true',
+            anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
+            transformorigin: { vertical: 'bottom', horizontal: 'left' },
+          }}
+          actions={this.getAvailableActions()}
+        />
       </>
     );
   }

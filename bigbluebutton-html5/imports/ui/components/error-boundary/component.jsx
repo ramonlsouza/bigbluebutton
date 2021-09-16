@@ -29,7 +29,7 @@ class ErrorBoundary extends Component {
 
 ErrorBoundary.propTypes = propTypes;
 
-export const withErrorBoundary = (WrappedComponent, FallbackComponent) => props => (
+export const withErrorBoundary = (WrappedComponent, FallbackComponent) => (props) => (
   <ErrorBoundary Fallback={FallbackComponent}>
     <WrappedComponent {...props} />
   </ErrorBoundary>

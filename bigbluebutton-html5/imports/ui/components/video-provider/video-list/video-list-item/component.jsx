@@ -132,24 +132,26 @@ class VideoListItem extends Component {
     const MAX_WIDTH = 640;
     const fullWidthMenu = window.innerWidth < MAX_WIDTH;
     const menuItems = [];
-    if (fullWidthMenu) menuItems.push({
-      key: `${cameraId}-${name}`,
-      label: name,
-      onClick: () => {},
-      disabled: true,
-    })
+    if (fullWidthMenu) {
+      menuItems.push({
+        key: `${cameraId}-${name}`,
+        label: name,
+        onClick: () => {},
+        disabled: true,
+      });
+    }
     actions?.map((a, i) => {
-        let topDivider = false;
-        if (i === 0 && fullWidthMenu) topDivider = true;
-        menuItems.push({
-          key: `${cameraId}-${a?.actionName}`,
-          label: a?.label,
-          description: a?.description,
-          onClick: a?.onClick,
-          dividerTop: topDivider,
-        });
+      let topDivider = false;
+      if (i === 0 && fullWidthMenu) topDivider = true;
+      menuItems.push({
+        key: `${cameraId}-${a?.actionName}`,
+        label: a?.label,
+        description: a?.description,
+        onClick: a?.onClick,
+        dividerTop: topDivider,
+      });
     });
-    return menuItems
+    return menuItems;
   }
 
   renderFullscreenButton() {
@@ -248,16 +250,16 @@ class VideoListItem extends Component {
                     trigger={<div className={styles.dropdownTrigger}><span>{name}</span></div>}
                     actions={this.getAvailableActions()}
                     opts={{
-                      id: "default-dropdown-menu",
+                      id: 'default-dropdown-menu',
                       keepMounted: true,
                       transitionDuration: 0,
                       elevation: 3,
                       getContentAnchorEl: null,
-                      fullwidth: "true",
+                      fullwidth: 'true',
                       anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
                       transformorigin: { vertical: 'bottom', horizontal: 'left' },
                     }}
-                  />                  
+                  />
                 )
                 : (
                   <div className={isFirefox ? styles.dropdownFireFox

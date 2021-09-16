@@ -12,7 +12,7 @@ const proccess = _.throttle(() => {
     Object.keys(cursorQueue).forEach((meetingId) => {
       try {
         const cursors = [];
-        for (let userId in cursorQueue[meetingId]){
+        for (const userId in cursorQueue[meetingId]) {
           cursorQueue[meetingId][userId].userId = userId;
           cursors.push(cursorQueue[meetingId][userId]);
         }

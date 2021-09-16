@@ -106,13 +106,13 @@ export const UsersContextProvider = (props) => {
   );
 };
 
-export const UsersContextConsumer = Component => props => (
+export const UsersContextConsumer = (Component) => (props) => (
   <UsersContext.Consumer>
-    {contexts => <Component {...props} {...contexts} />}
+    {(contexts) => <Component {...props} {...contexts} />}
   </UsersContext.Consumer>
 );
 
-export const withUsersConsumer = Component => UsersContextConsumer(Component);
+export const withUsersConsumer = (Component) => UsersContextConsumer(Component);
 
 export default {
   UsersContextConsumer,

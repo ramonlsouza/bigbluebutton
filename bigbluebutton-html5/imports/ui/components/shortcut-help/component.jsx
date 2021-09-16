@@ -192,8 +192,7 @@ const ShortcutHelpComponent = (props) => {
               </tbody>
             </table>
           </span>
-        )
-      }
+        )}
     </Modal>
   );
 };

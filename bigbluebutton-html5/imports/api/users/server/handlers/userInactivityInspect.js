@@ -9,6 +9,5 @@ export default function handleUserInactivityInspect({ header, body }, meetingId)
   check(responseDelay, Match.Integer);
   check(meetingId, String);
 
-
   userInactivityInspect(userId, responseDelay);
 }

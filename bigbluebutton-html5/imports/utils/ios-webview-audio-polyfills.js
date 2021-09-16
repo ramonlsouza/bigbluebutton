@@ -59,10 +59,10 @@ const iosWebviewAudioPolyfills = function () {
   }
 
   function shimCallbacksAPI(window) {
-    const prototype = window.RTCPeerConnection.prototype;
-    const createOffer = prototype.createOffer;
-    const setLocalDescription = prototype.setLocalDescription;
-    const setRemoteDescription = prototype.setRemoteDescription;
+    const { prototype } = window.RTCPeerConnection;
+    const { createOffer } = prototype;
+    const { setLocalDescription } = prototype;
+    const { setRemoteDescription } = prototype;
 
     prototype.createOffer = function (successCallback, failureCallback) {
       const options = arguments.length >= 2 ? arguments[2] : arguments[0];

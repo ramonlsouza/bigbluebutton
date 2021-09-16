@@ -25,7 +25,7 @@ export default function addPoll(meetingId, requesterId, poll, pollType, secretPo
 
   const userIds = Users.find(userSelector, { fields: { userId: 1 } })
     .fetch()
-    .map(user => user.userId);
+    .map((user) => user.userId);
 
   const selector = {
     meetingId,
@@ -33,14 +33,15 @@ export default function addPoll(meetingId, requesterId, poll, pollType, secretPo
     id: poll.id,
   };
 
-  const modifier = Object.assign(
-    { meetingId },
-    { requester: requesterId },
-    { users: userIds },
-    { question, pollType, secretPoll },
-    flat(poll, { safe: true }),
-  );
-
+  const modifier = {
+    meetingId,
+    requester: requesterId,
+    users: userIds,
+    question,
+    pollType,
+    secretPoll,
+    ...flat(poll, { safe: true }),
+  };
 
   try {
     const { insertedId } = Polls.upsert(selector, modifier);

@@ -74,7 +74,7 @@ export default function handlePresentationConversionUpdate({ body }, meetingId) 
   };
 
   const modifier = {
-    $set: Object.assign({ meetingId, podId }, statusModifier),
+    $set: { meetingId, podId, ...statusModifier },
   };
 
   try {

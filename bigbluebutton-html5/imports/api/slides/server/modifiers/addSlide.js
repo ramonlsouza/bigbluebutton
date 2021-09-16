@@ -26,7 +26,7 @@ const requestWhiteboardHistory = (meetingId, slideId) => {
 
 const SUPPORTED_TYPES = [SVG, PNG];
 
-const fetchImageSizes = imageUri => probe(imageUri)
+const fetchImageSizes = (imageUri) => probe(imageUri)
   .then((result) => {
     if (!SUPPORTED_TYPES.includes(result.mime)) {
       throw new Meteor.Error('invalid-image-type', `received ${result.mime} expecting ${SUPPORTED_TYPES.join()}`);
@@ -80,15 +80,15 @@ export default function addSlide(meetingId, podId, presentationId, slide) {
   const imageUri = slide.svgUri || slide.pngUri;
 
   const modifier = {
-    $set: Object.assign(
-      { meetingId },
-      { podId },
-      { presentationId },
-      { id: slideId },
-      { imageUri },
-      flat(restSlide),
-      { safe: true },
-    ),
+    $set: {
+      meetingId,
+      podId,
+      presentationId,
+      id: slideId,
+      imageUri,
+      ...flat(restSlide),
+      safe: true,
+    },
   };
 
   const imageSizeUri = (loadSlidesFromHttpAlways ? imageUri.replace(/^https/i, 'http') : imageUri);
@@ -127,5 +127,5 @@ export default function addSlide(meetingId, podId, presentationId, slide) {
         Logger.error(`Error on adding slide to collection: ${err}`);
       }
     })
-    .catch(reason => Logger.error(`Error parsing image size. ${reason}. slide=${slideId} uri=${imageUri}`));
+    .catch((reason) => Logger.error(`Error parsing image size. ${reason}. slide=${slideId} uri=${imageUri}`));
 }

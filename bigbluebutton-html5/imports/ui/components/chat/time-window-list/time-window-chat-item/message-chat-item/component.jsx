@@ -71,7 +71,7 @@ class MessageChatItem extends PureComponent {
 
     if (scrollArea) {
       eventsToBeBound.forEach(
-        e => scrollArea.addEventListener(e, this.handleMessageInViewport),
+        (e) => scrollArea.addEventListener(e, this.handleMessageInViewport),
       );
     }
   }
@@ -111,7 +111,7 @@ class MessageChatItem extends PureComponent {
 
     if (scrollArea && !read) {
       eventsToBeBound.forEach(
-        e => scrollArea.removeEventListener(e, this.handleMessageInViewport),
+        (e) => scrollArea.removeEventListener(e, this.handleMessageInViewport),
       );
     }
   }
@@ -170,16 +170,15 @@ class MessageChatItem extends PureComponent {
           data-test="chatPollMessageText"
         />
       );
-    } else {
-      return (
-        <p
-          className={className}
-          ref={(ref) => { this.text = ref; }}
-          dangerouslySetInnerHTML={{ __html: text }}
-          data-test={isSystemMessage ? systemMessageType : chatUserMessageItem ? 'chatUserMessageText' : ''}
-        />
-      );
     }
+    return (
+      <p
+        className={className}
+        ref={(ref) => { this.text = ref; }}
+        dangerouslySetInnerHTML={{ __html: text }}
+        data-test={isSystemMessage ? systemMessageType : chatUserMessageItem ? 'chatUserMessageText' : ''}
+      />
+    );
   }
 }
 

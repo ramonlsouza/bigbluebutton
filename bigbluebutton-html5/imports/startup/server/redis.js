@@ -2,13 +2,13 @@ import Redis from 'redis';
 import { Meteor } from 'meteor/meteor';
 import { EventEmitter2 } from 'eventemitter2';
 import { check } from 'meteor/check';
+import queue from 'queue';
 import {
   isPadMessage,
   getInstanceIdFromPadMessage,
 } from './etherpad';
 import Logger from './logger';
 import Metrics from './metrics';
-import queue from 'queue';
 
 // Fake meetingId used for messages that have no meetingId
 const NO_MEETING_ID = '_';
@@ -122,10 +122,9 @@ class MeetingMessageQueue {
   add(...args) {
     const { taskHandler } = this.queue;
 
-    this.queue.push(function (next) {
+    this.queue.push((next) => {
       taskHandler(...args, next);
-    })
-
+    });
   }
 }
 
@@ -208,10 +207,9 @@ class RedisPubSub {
   }
 
   updateConfig(config) {
-    this.config = Object.assign({}, this.config, config);
+    this.config = { ...this.config, ...config };
     this.redisDebugEnabled = this.config.debug;
   }
-
 
   // TODO: Move this out of this class, maybe pass as a callback to init?
   handleSubscribe() {
@@ -309,7 +307,7 @@ class RedisPubSub {
             // but we still need to process it on the backend which is processing the rest of the events
             // for this meetingId (it does not contain instanceId either, so we cannot compare that)
             const meetingIdForMeetingEnded = parsedMessage.core.body.meetingId;
-            if (!!this.meetingsQueues[meetingIdForMeetingEnded]) {
+            if (this.meetingsQueues[meetingIdForMeetingEnded]) {
               this.meetingsQueues[NO_MEETING_ID].add({
                 pattern,
                 channel,
@@ -322,7 +320,7 @@ class RedisPubSub {
         }
       } else {
         // add to existing queue
-        if (!!this.meetingsQueues[meetingIdFromMessageCoreHeader]) {
+        if (this.meetingsQueues[meetingIdFromMessageCoreHeader]) {
           // only handle message if we have a queue for the meeting. If we don't have a queue, it means it's for a different instanceId
           this.meetingsQueues[meetingIdFromMessageCoreHeader].add({
             pattern,

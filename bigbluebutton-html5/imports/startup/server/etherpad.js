@@ -1,7 +1,7 @@
 const INSTANCE_ID_REGEX = /\d+/;
 
 const isPadMessage = (message) => {
- const { name } = message.core.header;
+  const { name } = message.core.header;
 
   const isPadCreate = name === 'PadCreateSysMsg';
   const isPadUpdate = name === 'PadUpdateSysMsg';

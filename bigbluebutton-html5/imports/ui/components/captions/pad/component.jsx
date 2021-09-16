@@ -4,12 +4,12 @@ import { defineMessages, injectIntl } from 'react-intl';
 import injectWbResizeEvent from '/imports/ui/components/presentation/resize-wrapper/component';
 import Button from '/imports/ui/components/button/component';
 import logger from '/imports/startup/client/logger';
+import _ from 'lodash';
 import PadService from './service';
 import CaptionsService from '/imports/ui/components/captions/service';
 import { notify } from '/imports/ui/services/notification';
 import { styles } from './styles';
 import { PANELS, ACTIONS } from '../../layout/enums';
-import _ from 'lodash';
 
 const intlMessages = defineMessages({
   hide: {

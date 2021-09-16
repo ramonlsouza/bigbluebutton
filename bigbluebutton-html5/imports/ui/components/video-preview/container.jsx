@@ -8,7 +8,7 @@ import Service from './service';
 import VideoPreview from './component';
 import VideoService from '../video-provider/service';
 
-const VideoPreviewContainer = props => <VideoPreview {...props} />;
+const VideoPreviewContainer = (props) => <VideoPreview {...props} />;
 
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 

@@ -6,7 +6,7 @@ import EndMeetingComponent from './component';
 import Service from './service';
 import logger from '/imports/startup/client/logger';
 
-const EndMeetingContainer = props => <EndMeetingComponent {...props} />;
+const EndMeetingContainer = (props) => <EndMeetingComponent {...props} />;
 
 export default withModalMounter(withTracker(({ mountModal }) => ({
   closeModal: () => {

@@ -15,8 +15,8 @@ import VideoPreviewService from '../video-preview/service';
 import MediaStreamUtils from '/imports/utils/media-stream-utils';
 import { BBBVideoStream } from '/imports/ui/services/webrtc-base/bbb-video-stream';
 import {
-  getSessionVirtualBackgroundInfoWithDefault
-} from '/imports/ui/services/virtual-background/service'
+  getSessionVirtualBackgroundInfoWithDefault,
+} from '/imports/ui/services/virtual-background/service';
 
 // Default values and default empty object to be backwards compat with 2.2.
 // FIXME Remove hardcoded defaults 2.3.
@@ -251,7 +251,7 @@ class VideoProvider extends Component {
     const { threshold, profile } = VideoService.getThreshold(numberOfPublishers);
     if (profile) {
       const publishers = Object.values(this.webRtcPeers)
-        .filter(peer => peer.isPublisher)
+        .filter((peer) => peer.isPublisher)
         .forEach((peer) => {
           // 0 means no threshold in place. Reapply original one if needed
           const profileToApply = (threshold === 0) ? peer.originalProfileId : profile;
@@ -261,16 +261,12 @@ class VideoProvider extends Component {
   }
 
   getStreamsToConnectAndDisconnect(streams) {
-    const streamsCameraIds = streams.map(s => s.stream);
+    const streamsCameraIds = streams.map((s) => s.stream);
     const streamsConnected = Object.keys(this.webRtcPeers);
 
-    const streamsToConnect = streamsCameraIds.filter(stream => {
-      return !streamsConnected.includes(stream);
-    });
+    const streamsToConnect = streamsCameraIds.filter((stream) => !streamsConnected.includes(stream));
 
-    const streamsToDisconnect = streamsConnected.filter(stream => {
-      return !streamsCameraIds.includes(stream);
-    });
+    const streamsToDisconnect = streamsConnected.filter((stream) => !streamsCameraIds.includes(stream));
 
     return [streamsToConnect, streamsToDisconnect];
   }
@@ -283,7 +279,7 @@ class VideoProvider extends Component {
   }
 
   disconnectStreams(streamsToDisconnect) {
-    streamsToDisconnect.forEach(stream => this.stopWebRTCPeer(stream, false));
+    streamsToDisconnect.forEach((stream) => this.stopWebRTCPeer(stream, false));
   }
 
   updateStreams(streams, shouldDebounce = false) {
@@ -341,7 +337,7 @@ class VideoProvider extends Component {
     }
   }
 
-  sendLocalAnswer (peer, stream, answer) {
+  sendLocalAnswer(peer, stream, answer) {
     const message = {
       id: 'subscriberAnswer',
       type: 'video',
@@ -495,7 +491,7 @@ class VideoProvider extends Component {
     }
   }
 
-  _createPublisher (stream, peerOptions) {
+  _createPublisher(stream, peerOptions) {
     return new Promise((resolve, reject) => {
       try {
         const { id: profileId } = VideoService.getCameraProfile();
@@ -524,7 +520,7 @@ class VideoProvider extends Component {
             bbbVideoStream = new BBBVideoStream(peer.getLocalStream());
             VideoPreviewService.storeStream(
               MediaStreamUtils.extractVideoDeviceId(bbbVideoStream.mediaStream),
-              bbbVideoStream
+              bbbVideoStream,
             );
           }
 
@@ -542,7 +538,7 @@ class VideoProvider extends Component {
 
             return resolve(offerSdp);
           });
-        }
+        };
 
         this.webRtcPeers[stream] = new window.kurentoUtils.WebRtcPeer.WebRtcPeerSendonly(
           peerOptions,
@@ -554,7 +550,7 @@ class VideoProvider extends Component {
     });
   }
 
-  _createSubscriber (stream, peerOptions) {
+  _createSubscriber(stream, peerOptions) {
     return new Promise((resolve, reject) => {
       try {
         const handleSubPeerCreation = (error) => {
@@ -595,7 +591,7 @@ class VideoProvider extends Component {
 
     this.webRtcPeers[stream] = {};
     this.outboundIceQueues[stream] = [];
-    const { constraints, bitrate, } = VideoService.getCameraProfile();
+    const { constraints, bitrate } = VideoService.getCameraProfile();
     const peerOptions = {
       mediaConstraints: {
         audio: false,
@@ -662,11 +658,7 @@ class VideoProvider extends Component {
 
         this.sendMessage(message);
         this.setReconnectionTimeout(stream, isLocal, false);
-
-        return;
-      }).catch(error => {
-        return this._onWebRTCError(error, stream, isLocal);
-      });
+      }).catch((error) => this._onWebRTCError(error, stream, isLocal));
     }
   }
 
@@ -776,7 +768,7 @@ class VideoProvider extends Component {
 
       this.restartTimeout[stream] = setTimeout(
         this._getWebRTCStartTimeout(stream, isLocal),
-        this.restartTimer[stream]
+        this.restartTimer[stream],
       );
     }
   }
@@ -813,7 +805,7 @@ class VideoProvider extends Component {
 
     if (peer && peer.peerConnection) {
       const pc = peer.peerConnection;
-      const connectionState = pc.connectionState;
+      const { connectionState } = pc;
       notifyStreamStateChange(stream, connectionState);
 
       if (connectionState === 'failed' || connectionState === 'closed') {
@@ -841,7 +833,7 @@ class VideoProvider extends Component {
     }
   }
 
-  attach (peer, videoElement) {
+  attach(peer, videoElement) {
     if (peer && videoElement) {
       const stream = peer.isPublisher ? peer.getLocalStream() : peer.getRemoteStream();
       videoElement.pause();
@@ -982,7 +974,7 @@ class VideoProvider extends Component {
     }
   }
 
-  replacePCVideoTracks (streamId, mediaStream) {
+  replacePCVideoTracks(streamId, mediaStream) {
     let replaced = false;
     const peer = this.webRtcPeers[streamId];
     const videoElement = this.getVideoElement(streamId);

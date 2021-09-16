@@ -11,9 +11,10 @@ const providersList = [
   LayoutContextProvider,
 ];
 
-const ContextProvidersComponent = props => providersList.reduce((acc, Component) => (
+const ContextProvidersComponent = (props) => providersList.reduce((acc, Component) => (
   <Component>
     {acc}
-  </Component>), props.children);
+  </Component>
+), props.children);
 
 export default ContextProvidersComponent;

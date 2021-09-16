@@ -475,7 +475,7 @@ class PollDrawComponent extends Component {
           fill={backgroundColor}
           strokeWidth={thickness}
         />
-        {extendedTextArray.map(line => (
+        {extendedTextArray.map((line) => (
           <text
             x={line.keyColumn.xLeft}
             y={line.keyColumn.yLeft}
@@ -490,7 +490,7 @@ class PollDrawComponent extends Component {
             {line.keyColumn.keyString}
           </text>
         ))}
-        {extendedTextArray.map(line => (
+        {extendedTextArray.map((line) => (
           <rect
             key={`${line.key}_bar`}
             x={line.barColumn.xBar}
@@ -510,7 +510,7 @@ class PollDrawComponent extends Component {
           fontSize={calcFontSize}
           textAnchor={isRTL ? 'start' : 'end'}
         >
-          {extendedTextArray.map(line => (
+          {extendedTextArray.map((line) => (
             <tspan
               x={line.percentColumn.xRight}
               y={line.percentColumn.yRight}
@@ -530,7 +530,7 @@ class PollDrawComponent extends Component {
           fontSize={calcFontSize}
           textAnchor={isRTL ? 'end' : 'start'}
         >
-          {extendedTextArray.map(line => (
+          {extendedTextArray.map((line) => (
             <tspan
               x={line.barColumn.xNumVotes + (line.barColumn.barWidth / 2)}
               y={line.barColumn.yNumVotes + (line.barColumn.barHeight / 2)}
@@ -604,7 +604,7 @@ class PollDrawComponent extends Component {
     }
     return (
       <g aria-hidden>
-        {textArray.map(line => this.renderLine(line))}
+        {textArray.map((line) => this.renderLine(line))}
         <text
           fontFamily="Arial"
           fontSize={calcFontSize}
@@ -632,8 +632,7 @@ class PollDrawComponent extends Component {
       <g aria-label={ariaResultLabel} data-test="pollResultAria">
         {prepareToDisplay
           ? this.renderTestStrings()
-          : this.renderPoll()
-        }
+          : this.renderPoll()}
       </g>
     );
   }

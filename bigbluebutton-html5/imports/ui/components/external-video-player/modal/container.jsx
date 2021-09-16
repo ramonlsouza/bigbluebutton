@@ -4,7 +4,7 @@ import { withModalMounter } from '/imports/ui/components/modal/service';
 import ExternalVideoModal from './component';
 import { startWatching, getVideoUrl } from '../service';
 
-const ExternalVideoModalContainer = props => <ExternalVideoModal {...props} />;
+const ExternalVideoModalContainer = (props) => <ExternalVideoModal {...props} />;
 
 export default withModalMounter(withTracker(({ mountModal }) => ({
   closeModal: () => {

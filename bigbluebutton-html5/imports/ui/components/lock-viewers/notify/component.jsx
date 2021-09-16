@@ -88,11 +88,11 @@ class LockViewersNotifyComponent extends Component {
       const rejectedKeys = ['setBy', 'lockedLayout'];
 
       const disabledSettings = Object.keys(lockSettings)
-        .filter(key => prevLockSettings[key] !== lockSettings[key]
+        .filter((key) => prevLockSettings[key] !== lockSettings[key]
           && lockSettings[key]
           && !rejectedKeys.includes(key));
       const enableSettings = Object.keys(lockSettings)
-        .filter(key => prevLockSettings[key] !== lockSettings[key]
+        .filter((key) => prevLockSettings[key] !== lockSettings[key]
           && !lockSettings[key]
           && !rejectedKeys.includes(key));
 

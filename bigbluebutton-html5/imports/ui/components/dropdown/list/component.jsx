@@ -14,8 +14,8 @@ const propTypes = {
     if (propValue[key].type !== ListItem
       && propValue[key].type !== ListSeparator
       && propValue[key].type !== ListTitle) {
-      return new Error(`Invalid prop \`${propFullName}\` supplied to` +
-        ` \`${componentName}\`. Validation failed.`);
+      return new Error(`Invalid prop \`${propFullName}\` supplied to`
+        + ` \`${componentName}\`. Validation failed.`);
     }
     return true;
   }).isRequired,

@@ -8,7 +8,6 @@ import Users from '/imports/api/users';
 import AnnotationsTextService from '/imports/ui/components/whiteboard/annotations/text/service';
 import { Annotations as AnnotationsLocal } from '/imports/ui/components/whiteboard/service';
 
-
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const CHAT_ENABLED = CHAT_CONFIG.enabled;
 const PUBLIC_GROUP_CHAT_ID = CHAT_CONFIG.public_group_id;
@@ -40,7 +39,6 @@ class Subscriptions extends Component {
     return children;
   }
 }
-
 
 export default withTracker(() => {
   const { credentials } = Auth;
@@ -93,8 +91,8 @@ export default withTracker(() => {
     ...subscriptionErrorHandler,
   });
 
-  subscriptionsHandlers = subscriptionsHandlers.filter(obj => obj);
-  const ready = subscriptionsHandlers.every(handler => handler.ready());
+  subscriptionsHandlers = subscriptionsHandlers.filter((obj) => obj);
+  const ready = subscriptionsHandlers.every((handler) => handler.ready());
   let groupChatMessageHandler = {};
 
   if (CHAT_ENABLED && ready) {
@@ -109,7 +107,7 @@ export default withTracker(() => {
       ],
     }).fetch();
 
-    const chatIds = chats.map(chat => chat.chatId);
+    const chatIds = chats.map((chat) => chat.chatId);
 
     const subHandler = {
       ...subscriptionErrorHandler,

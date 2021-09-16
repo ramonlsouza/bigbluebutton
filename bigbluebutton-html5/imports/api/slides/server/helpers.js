@@ -1,4 +1,3 @@
-
 const calculateSlideData = (slideData) => {
   const {
     width, height, xOffset, yOffset, widthRatio, heightRatio,

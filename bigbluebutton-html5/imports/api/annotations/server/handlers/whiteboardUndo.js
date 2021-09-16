@@ -4,7 +4,7 @@ import AnnotationsStreamer from '/imports/api/annotations/server/streamer';
 import removeAnnotation from '../modifiers/removeAnnotation';
 
 export default function handleWhiteboardUndo({ body }, meetingId) {
-  const whiteboardId = body.whiteboardId;
+  const { whiteboardId } = body;
   const shapeId = body.annotationId;
 
   check(whiteboardId, String);

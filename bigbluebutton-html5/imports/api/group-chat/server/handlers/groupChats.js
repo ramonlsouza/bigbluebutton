@@ -7,5 +7,5 @@ export default function handleGroupChats({ body }, meetingId) {
   check(meetingId, String);
   check(chats, Array);
 
-  chats.forEach(chat => addGroupChat(meetingId, chat));
+  chats.forEach((chat) => addGroupChat(meetingId, chat));
 }

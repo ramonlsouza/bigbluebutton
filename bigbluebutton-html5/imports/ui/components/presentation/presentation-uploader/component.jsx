@@ -218,7 +218,7 @@ const intlMessages = defineMessages({
   uploadViewTitle: {
     id: 'app.presentationUploder.uploadViewTitle',
     description: 'view name apended to document title',
-  }
+  },
 });
 
 class PresentationUploader extends Component {
@@ -266,28 +266,25 @@ class PresentationUploader extends Component {
     // Updates presentation list when chat modal opens to avoid missing presentations
     if (isOpen && !prevProps.isOpen) {
       registerTitleView(intl.formatMessage(intlMessages.uploadViewTitle));
-      const  focusableElements =
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+      const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
       const modal = document.getElementById('upload-modal');
       const firstFocusableElement = modal?.querySelectorAll(focusableElements)[0];
       const focusableContent = modal?.querySelectorAll(focusableElements);
       const lastFocusableElement = focusableContent[focusableContent.length - 1];
-      
+
       firstFocusableElement.focus();
-  
-      modal.addEventListener('keydown', function(e) {
-        let tab = e.key === 'Tab' || e.keyCode === TAB;
+
+      modal.addEventListener('keydown', (e) => {
+        const tab = e.key === 'Tab' || e.keyCode === TAB;
         if (!tab) return;
         if (e.shiftKey) {
           if (document.activeElement === firstFocusableElement) {
             lastFocusableElement.focus();
             e.preventDefault();
           }
-        } else {
-          if (document.activeElement === lastFocusableElement) {
-            firstFocusableElement.focus();
-            e.preventDefault();
-          }
+        } else if (document.activeElement === lastFocusableElement) {
+          firstFocusableElement.focus();
+          e.preventDefault();
         }
       });
 
@@ -330,8 +327,8 @@ class PresentationUploader extends Component {
     const validExtentions = fileValidMimeTypes.map((fileValid) => fileValid.extension);
     const [accepted, rejected] = _.partition(files
       .concat(files2), (f) => (
-        validMimes.includes(f.type) || validExtentions.includes(`.${f.name.split('.').pop()}`)
-      ));
+      validMimes.includes(f.type) || validExtentions.includes(`.${f.name.split('.').pop()}`)
+    ));
 
     const presentationsToUpload = accepted.map((file) => {
       const id = _.uniqueId(file.name);
@@ -475,10 +472,10 @@ class PresentationUploader extends Component {
 
     this.setState({ disableActions: true });
 
-    presentations.forEach(item => {
+    presentations.forEach((item) => {
       if (item.upload.done) {
         const didDownloadableStateChange = propPresentations.some(
-          (p) => p.id === item.id && p.isDownloadable !== item.isDownloadable
+          (p) => p.id === item.id && p.isDownloadable !== item.isDownloadable,
         );
         if (didDownloadableStateChange) {
           dispatchTogglePresentationDownloadable(item, item.isDownloadable);

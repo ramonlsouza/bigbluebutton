@@ -17,9 +17,9 @@ const getDataFromResponse = (data, key) => {
   return null;
 };
 
-const isNotePad = padId => padId.search(TOKEN);
+const isNotePad = (padId) => padId.search(TOKEN);
 
-const processForNotePadOnly = fn => (message, ...args) => {
+const processForNotePadOnly = (fn) => (message, ...args) => {
   const { body } = message;
   const { pad } = body;
   const { id } = pad;
@@ -30,7 +30,7 @@ const processForNotePadOnly = fn => (message, ...args) => {
   return () => { };
 };
 
-const generatePadId = meetingId => hashSHA1(meetingId + ETHERPAD.apikey);
+const generatePadId = (meetingId) => hashSHA1(meetingId + ETHERPAD.apikey);
 
 export {
   generatePadId,

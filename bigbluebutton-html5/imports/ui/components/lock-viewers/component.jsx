@@ -134,8 +134,7 @@ class LockViewersComponent extends Component {
     return (
       <span className={styles.toggleLabel}>
         {status ? intl.formatMessage(intlMessages.lockedLabel)
-          : intl.formatMessage(intlMessages.unlockedLabel)
-        }
+          : intl.formatMessage(intlMessages.unlockedLabel)}
       </span>
     );
   }
@@ -256,7 +255,7 @@ class LockViewersComponent extends Component {
             </div>
 
             {CHAT_ENABLED ? (
-              <Fragment>
+              <>
                 <div className={styles.row}>
                   <div className={styles.col} aria-hidden="true">
                     <div className={styles.formElement}>
@@ -305,9 +304,8 @@ class LockViewersComponent extends Component {
                     </div>
                   </div>
                 </div>
-              </Fragment>
-            ) : null
-            }
+              </>
+            ) : null}
             {NoteService.isEnabled()
               ? (
                 <div className={styles.row}>
@@ -335,8 +333,7 @@ class LockViewersComponent extends Component {
                   </div>
                 </div>
               )
-              : null
-            }
+              : null}
             <div className={styles.row}>
               <div className={styles.col} aria-hidden="true">
                 <div className={styles.formElement}>

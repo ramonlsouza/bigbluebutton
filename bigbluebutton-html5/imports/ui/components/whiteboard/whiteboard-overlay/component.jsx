@@ -52,7 +52,6 @@ export default class WhiteboardOverlay extends Component {
     this.normalizeFont = this.normalizeFont.bind(this);
   }
 
-
   getCurrentShapeId() {
     return this.currentShapeId;
   }
@@ -109,7 +108,7 @@ export default class WhiteboardOverlay extends Component {
       userId,
     } = this.props;
 
-    this.count = this.count + 1;
+    this.count += 1;
     this.currentShapeId = `${userId}-${this.count}-${new Date().getTime()}`;
     return this.currentShapeId;
   }

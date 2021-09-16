@@ -20,7 +20,7 @@ export default function joinedUsersChanged({ body }) {
     breakoutId,
   };
 
-  const usersMapped = users.map(user => ({ userId: user.id, name: user.name }));
+  const usersMapped = users.map((user) => ({ userId: user.id, name: user.name }));
   const modifier = {
     $set: {
       joinedUsers: usersMapped,

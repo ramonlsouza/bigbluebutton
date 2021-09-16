@@ -79,7 +79,7 @@ class UserMessages extends PureComponent {
 
     let index = -1;
 
-    return activeChats.map(chat => (
+    return activeChats.map((chat) => (
       <CSSTransition
         classNames={listTransition}
         appear

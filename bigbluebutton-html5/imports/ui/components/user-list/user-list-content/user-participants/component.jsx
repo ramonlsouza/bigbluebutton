@@ -128,7 +128,7 @@ class UserParticipants extends Component {
     } = this.props;
     const { scrollArea } = this.state;
     const user = users[index];
-    const isRTL = Settings.application.isRTL;
+    const { isRTL } = Settings.application;
 
     return (
       <CellMeasurer
@@ -164,7 +164,7 @@ class UserParticipants extends Component {
   handleClickSelectedUser(event) {
     let selectedUser = null;
     if (event.path) {
-      selectedUser = event.path.find(p => p.className && p.className.includes('participantsList'));
+      selectedUser = event.path.find((p) => p.className && p.className.includes('participantsList'));
     }
     this.setState({ selectedUser });
   }
@@ -211,15 +211,14 @@ class UserParticipants extends Component {
                       meetingIsBreakout,
                     }}
                     />
-                  ) : null
-                }
+                  ) : null}
 
               </div>
             )
             : <hr className={styles.separator} />
         }
         <div
-          id={'user-list-virtualized-scroll'}
+          id="user-list-virtualized-scroll"
           className={styles.virtulizedScrollableList}
           tabIndex={0}
           ref={(ref) => {

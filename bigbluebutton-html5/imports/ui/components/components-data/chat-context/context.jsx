@@ -29,7 +29,7 @@ export const ACTIONS = {
 };
 
 export const MESSAGE_TYPES = {
-  //messages before user login, synced via makecall
+  // messages before user login, synced via makecall
   HISTORY: 'history',
   // messages after user login, synced via subscription
   STREAM: 'stream',
@@ -42,23 +42,22 @@ export const getLoginTime = () => (Users.findOne({ userId: Auth.userID }) || {})
 const generateTimeWindow = (timestamp) => {
   const groupingTime = getGroupingTime();
   dateInMilliseconds = Math.floor(timestamp);
-  groupIndex = Math.floor(dateInMilliseconds / groupingTime)
+  groupIndex = Math.floor(dateInMilliseconds / groupingTime);
   date = groupIndex * 30000;
   return date;
-}
+};
 
 export const ChatContext = createContext();
 
 const removedMessagesReadState = {};
 
 const generateStateWithNewMessage = (msg, state, msgType = MESSAGE_TYPES.HISTORY) => {
-  
   const timeWindow = generateTimeWindow(msg.timestamp);
   const userId = msg.sender;
-  const keyName = userId + '-' + timeWindow;
+  const keyName = `${userId}-${timeWindow}`;
   const msgBuilder = (msg, chat) => {
     const msgTimewindow = generateTimeWindow(msg.timestamp);
-    const key = msg.sender + '-' + msgTimewindow;
+    const key = `${msg.sender}-${msgTimewindow}`;
     const chatIndex = chat?.chatIndexes[key];
     const {
       _id,
@@ -66,7 +65,7 @@ const generateStateWithNewMessage = (msg, state, msgType = MESSAGE_TYPES.HISTORY
     } = msg;
 
     const indexValue = chatIndex ? (chatIndex + 1) : 1;
-    const messageKey = key + '-' + indexValue;
+    const messageKey = `${key}-${indexValue}`;
     const tempGroupMessage = {
       [messageKey]: {
         ...restMsg,
@@ -76,14 +75,14 @@ const generateStateWithNewMessage = (msg, state, msgType = MESSAGE_TYPES.HISTORY
         content: [
           { id: msg.id, text: msg.message, time: msg.timestamp },
         ],
-      }
+      },
     };
-  
+
     return [tempGroupMessage, msg.sender, indexValue];
   };
 
   let stateMessages = state[msg.chatId];
-  
+
   if (!stateMessages) {
     if (msg.chatId === getGroupChatId()) {
       state[msg.chatId] = {
@@ -91,7 +90,7 @@ const generateStateWithNewMessage = (msg, state, msgType = MESSAGE_TYPES.HISTORY
         chatIndexes: {},
         preJoinMessages: {},
         posJoinMessages: {},
-        synced:true,
+        synced: true,
         unreadTimeWindows: new Set(),
         unreadCount: 0,
       };
@@ -99,7 +98,7 @@ const generateStateWithNewMessage = (msg, state, msgType = MESSAGE_TYPES.HISTORY
       state[msg.chatId] = {
         count: 0,
         lastSender: '',
-        synced:true,
+        synced: true,
         chatIndexes: {},
         messageGroups: {},
         unreadTimeWindows: new Set(),
@@ -110,22 +109,22 @@ const generateStateWithNewMessage = (msg, state, msgType = MESSAGE_TYPES.HISTORY
 
     stateMessages = state[msg.chatId];
   }
-  
+
   const forPublicChat = msg.timestamp < getLoginTime() ? stateMessages.preJoinMessages : stateMessages.posJoinMessages;
   const forPrivateChat = stateMessages.messageGroups;
   const messageGroups = msg.chatId === getGroupChatId() ? forPublicChat : forPrivateChat;
   const timewindowIndex = stateMessages.chatIndexes[keyName];
-  const groupMessage = messageGroups[keyName + '-' + timewindowIndex];
-  
+  const groupMessage = messageGroups[`${keyName}-${timewindowIndex}`];
+
   if (!groupMessage || (groupMessage && groupMessage.sender !== stateMessages.lastSender) || msg.id.startsWith(SYSTEM_CHAT_TYPE)) {
     const [tempGroupMessage, sender, newIndex] = msgBuilder(msg, stateMessages);
     stateMessages.lastSender = sender;
     stateMessages.chatIndexes[keyName] = newIndex;
-    stateMessages.lastTimewindow = keyName + '-' + newIndex;
+    stateMessages.lastTimewindow = `${keyName}-${newIndex}`;
     ChatLogger.trace('ChatContext::formatMsg::msgBuilder::tempGroupMessage', tempGroupMessage);
-    
+
     const messageGroupsKeys = Object.keys(tempGroupMessage);
-    messageGroupsKeys.forEach(key => {
+    messageGroupsKeys.forEach((key) => {
       messageGroups[key] = tempGroupMessage[key];
       const message = tempGroupMessage[key];
       message.messageType = msgType;
@@ -134,31 +133,29 @@ const generateStateWithNewMessage = (msg, state, msgType = MESSAGE_TYPES.HISTORY
         stateMessages.unreadTimeWindows.add(key);
       }
     });
-  } else {
-    if (groupMessage) {
-      if (groupMessage.sender === stateMessages.lastSender) {
-        const previousMessage = msg.timestamp <= getLoginTime();
-        const timeWindowKey = keyName + '-' + stateMessages.chatIndexes[keyName];
-        messageGroups[timeWindowKey] = {
-          ...groupMessage,
-          lastTimestamp: msg.timestamp,
-          read: previousMessage ? true : false,
-          content: [
-            ...groupMessage.content,
-            { id: msg.id, text: msg.message, time: msg.timestamp }
-          ],
-        };
-        if (!previousMessage && groupMessage.sender !== Auth.userID) {
-          stateMessages.unreadTimeWindows.add(timeWindowKey);
-        }
+  } else if (groupMessage) {
+    if (groupMessage.sender === stateMessages.lastSender) {
+      const previousMessage = msg.timestamp <= getLoginTime();
+      const timeWindowKey = `${keyName}-${stateMessages.chatIndexes[keyName]}`;
+      messageGroups[timeWindowKey] = {
+        ...groupMessage,
+        lastTimestamp: msg.timestamp,
+        read: !!previousMessage,
+        content: [
+          ...groupMessage.content,
+          { id: msg.id, text: msg.message, time: msg.timestamp },
+        ],
+      };
+      if (!previousMessage && groupMessage.sender !== Auth.userID) {
+        stateMessages.unreadTimeWindows.add(timeWindowKey);
       }
     }
   }
 
   return state;
-}
+};
 
-const reducer = (state, action) => {  
+const reducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.TEST: {
       ChatLogger.debug(ACTIONS.TEST);
@@ -169,29 +166,29 @@ const reducer = (state, action) => {
     }
     case ACTIONS.ADDED: {
       ChatLogger.debug(ACTIONS.ADDED);
-      
+
       const batchMsgs = action.value;
       const closedChatsToOpen = new Set();
       const currentClosedChats = Storage.getItem(CLOSED_CHAT_LIST_KEY) || [];
       const loginTime = getLoginTime();
-      const newState = batchMsgs.reduce((acc, i)=> {
+      const newState = batchMsgs.reduce((acc, i) => {
         const message = i;
-        const chatId = message.chatId;
+        const { chatId } = message;
         if (
-            chatId !== PUBLIC_GROUP_CHAT_KEY 
+          chatId !== PUBLIC_GROUP_CHAT_KEY
             && message.timestamp > loginTime
-            && currentClosedChats.includes(chatId) ){
-          closedChatsToOpen.add(chatId)
+            && currentClosedChats.includes(chatId)) {
+          closedChatsToOpen.add(chatId);
         }
         return generateStateWithNewMessage(message, acc, action.messageType);
       }, state);
 
       if (closedChatsToOpen.size) {
-        const closedChats = currentClosedChats.filter(chatId => !closedChatsToOpen.has(chatId));
+        const closedChats = currentClosedChats.filter((chatId) => !closedChatsToOpen.has(chatId));
         Storage.setItem(CLOSED_CHAT_LIST_KEY, closedChats);
       }
       // const newState = generateStateWithNewMessage(action.value, state);
-      return {...newState};
+      return { ...newState };
     }
     case ACTIONS.CHANGED: {
       return {
@@ -201,7 +198,7 @@ const reducer = (state, action) => {
     }
     case ACTIONS.REMOVED: {
       ChatLogger.debug(ACTIONS.REMOVED);
-      if (state[PUBLIC_GROUP_CHAT_KEY]){
+      if (state[PUBLIC_GROUP_CHAT_KEY]) {
         state[PUBLIC_GROUP_CHAT_KEY] = {
           count: 0,
           lastSender: '',
@@ -224,15 +221,15 @@ const reducer = (state, action) => {
       const selectedChatId = chatId === PUBLIC_CHAT_KEY ? PUBLIC_GROUP_CHAT_KEY : chatId;
       const chat = state[selectedChatId];
       if (!chat) return state;
-      ['posJoinMessages','preJoinMessages','messageGroups'].forEach( messageGroupName => {
+      ['posJoinMessages', 'preJoinMessages', 'messageGroups'].forEach((messageGroupName) => {
         const messageGroup = chat[messageGroupName];
-        if (messageGroup){
+        if (messageGroup) {
           const timeWindowsids = Object.keys(messageGroup);
-          timeWindowsids.forEach( timeWindowId => {
+          timeWindowsids.forEach((timeWindowId) => {
             const timeWindow = messageGroup[timeWindowId];
-            if(timeWindow) {
+            if (timeWindow) {
               if (!timeWindow.read) {
-                if (timeWindow.lastTimestamp <= timestamp){
+                if (timeWindow.lastTimestamp <= timestamp) {
                   newState[selectedChatId].unreadTimeWindows.delete(timeWindowId);
 
                   newState[selectedChatId][messageGroupName][timeWindowId] = {
@@ -240,7 +237,6 @@ const reducer = (state, action) => {
                     read: true,
                   };
 
-                  
                   newState[selectedChatId] = {
                     ...newState[selectedChatId],
                   };
@@ -263,7 +259,7 @@ const reducer = (state, action) => {
       const { chatId } = action;
       const newState = { ...state };
 
-      if (!newState[chatId]){
+      if (!newState[chatId]) {
         newState[chatId] = {
           count: 0,
           lastSender: '',
@@ -279,7 +275,7 @@ const reducer = (state, action) => {
       ChatLogger.debug(ACTIONS.SYNC_STATUS);
       const newState = { ...state };
       newState[action.value.chatId].syncedPercent = action.value.percentage;
-      newState[action.value.chatId].syncing = action.value.percentage < 100 ? true : false;
+      newState[action.value.chatId].syncing = action.value.percentage < 100;
 
       return newState;
     }
@@ -288,29 +284,28 @@ const reducer = (state, action) => {
       const newState = { ...state };
       const chatIds = Object.keys(newState);
       chatIds.forEach((chatId) => {
-        newState[chatId] = chatId === PUBLIC_GROUP_CHAT_KEY ? 
-        {
-          count: 0,
-          lastSender: '',
-          chatIndexes: {},
-          preJoinMessages: {},
-          posJoinMessages: {},
-          syncing: false,
-          syncedPercent: 0,
-          unreadTimeWindows: new Set(),
-          unreadCount: 0,
-        }
-        :  
-        {
-          count: 0,
-          lastSender: '',
-          chatIndexes: {},
-          messageGroups: {},
-          syncing: false,
-          syncedPercent: 0,
-          unreadTimeWindows: new Set(),
-          unreadCount: 0,
-        };
+        newState[chatId] = chatId === PUBLIC_GROUP_CHAT_KEY
+          ? {
+            count: 0,
+            lastSender: '',
+            chatIndexes: {},
+            preJoinMessages: {},
+            posJoinMessages: {},
+            syncing: false,
+            syncedPercent: 0,
+            unreadTimeWindows: new Set(),
+            unreadCount: 0,
+          }
+          : {
+            count: 0,
+            lastSender: '',
+            chatIndexes: {},
+            messageGroups: {},
+            syncing: false,
+            syncedPercent: 0,
+            unreadTimeWindows: new Set(),
+            unreadCount: 0,
+          };
       });
       return newState;
     }
@@ -322,11 +317,11 @@ const reducer = (state, action) => {
       const chatIds = Object.keys(newState);
       chatIds.forEach((chatId) => {
         const chat = newState[chatId];
-        ['posJoinMessages','messageGroups'].forEach((group)=> {
+        ['posJoinMessages', 'messageGroups'].forEach((group) => {
           const messages = chat[group];
           if (messages) {
             const timeWindowIds = Object.keys(messages);
-            timeWindowIds.forEach((timeWindowId)=> {
+            timeWindowIds.forEach((timeWindowId) => {
               const timeWindow = messages[timeWindowId];
               if (timeWindow.messageType === MESSAGE_TYPES.STREAM) {
                 chat.unreadTimeWindows.delete(timeWindowId);
@@ -335,7 +330,7 @@ const reducer = (state, action) => {
               }
             });
           }
-        })
+        });
       });
 
       return newState;
@@ -361,16 +356,15 @@ export const ChatContextProvider = (props) => {
       {props.children}
     </ChatContext.Provider>
   );
-}
+};
 
-
-export const ContextConsumer = Component => props => (
+export const ContextConsumer = (Component) => (props) => (
   <ChatContext.Consumer>
-    {contexts => <Component {...props} {...contexts} />}
+    {(contexts) => <Component {...props} {...contexts} />}
   </ChatContext.Consumer>
 );
 
 export default {
   ContextConsumer,
   ChatContextProvider,
-}
+};

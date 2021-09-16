@@ -15,8 +15,8 @@ const LockViewersContainer = (props) => {
   const currentUser = users[Auth.meetingID][Auth.userID];
   const amIModerator = currentUser.role === ROLE_MODERATOR;
 
-  return amIModerator && <LockViewersComponent {...props} />
-}
+  return amIModerator && <LockViewersComponent {...props} />;
+};
 
 export default withModalMounter(withTracker(({ mountModal }) => ({
   closeModal: () => mountModal(null),

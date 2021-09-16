@@ -6,7 +6,6 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { styles } from './styles.scss';
 import Button from '/imports/ui/components/button/component';
 
-
 // src: https://medium.com/@650egor/simple-drag-and-drop-file-upload-in-react-2cb409d88929
 
 const intlMessages = defineMessages({
@@ -36,18 +35,18 @@ class DragAndDrop extends Component {
   componentDidMount() {
     this.dragCounter = 0;
     const div = this.dropRef.current;
-    div.addEventListener('dragenter', e => this.handleDragIn(e));
-    div.addEventListener('dragleave', e => this.handleDragOut(e));
-    div.addEventListener('dragover', e => DragAndDrop.handleDrag(e));
-    div.addEventListener('drop', e => this.handleDrop(e));
+    div.addEventListener('dragenter', (e) => this.handleDragIn(e));
+    div.addEventListener('dragleave', (e) => this.handleDragOut(e));
+    div.addEventListener('dragover', (e) => DragAndDrop.handleDrag(e));
+    div.addEventListener('drop', (e) => this.handleDrop(e));
   }
 
   componentWillUnmount() {
     const div = this.dropRef.current;
-    div.removeEventListener('dragenter', e => this.handleDragIn(e));
-    div.removeEventListener('dragleave', e => this.handleDragOut(e));
-    div.removeEventListener('dragover', e => DragAndDrop.handleDrag(e));
-    div.removeEventListener('drop', e => this.handleDrop(e));
+    div.removeEventListener('dragenter', (e) => this.handleDragIn(e));
+    div.removeEventListener('dragleave', (e) => this.handleDragOut(e));
+    div.removeEventListener('dragover', (e) => DragAndDrop.handleDrag(e));
+    div.removeEventListener('drop', (e) => this.handleDrop(e));
   }
 
   setPollValues() {
@@ -71,15 +70,13 @@ class DragAndDrop extends Component {
   setPollValueText(pollText) {
     const { MAX_INPUT_CHARS } = this.props;
     const arr = pollText.split('\n');
-    const text = arr.map(line => (line.length > MAX_INPUT_CHARS ? line.substring(0, MAX_INPUT_CHARS) : line)).join('\n');
+    const text = arr.map((line) => (line.length > MAX_INPUT_CHARS ? line.substring(0, MAX_INPUT_CHARS) : line)).join('\n');
     this.setState({ pollValueText: text });
   }
-
 
   handleTextInput(e) {
     this.setPollValueText(e.target.value);
   }
-
 
   handleDragIn(e) {
     DragAndDrop.handleDrag(e);
@@ -105,7 +102,6 @@ class DragAndDrop extends Component {
     }
   }
 
-
   render() {
     const { intl, children } = this.props;
     const { pollValueText, drag } = this.state;
@@ -117,7 +113,7 @@ class DragAndDrop extends Component {
         <textarea
           value={pollValueText}
           className={drag ? styles.dndActive : styles.dndInActive}
-          onChange={e => this.handleTextInput(e)}
+          onChange={(e) => this.handleTextInput(e)}
         />
         <Button
           onClick={() => this.setPollValues()}

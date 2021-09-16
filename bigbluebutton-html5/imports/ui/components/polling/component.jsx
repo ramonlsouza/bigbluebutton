@@ -108,7 +108,9 @@ class Polling extends Component {
 
     if (!poll) return null;
 
-    const { stackOptions, answers, question, pollType } = poll;
+    const {
+      stackOptions, answers, question, pollType,
+    } = poll;
     const defaultPoll = isDefaultPoll(pollType);
 
     const pollAnswerStyles = {

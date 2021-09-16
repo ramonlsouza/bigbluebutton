@@ -31,7 +31,7 @@ export default function addPresentationPod(meetingId, pod, presentations = undef
 
     // if it's a Sync message - continue adding the attached presentations
     if (presentations) {
-      presentations.forEach(presentation => addPresentation(meetingId, podId, presentation));
+      presentations.forEach((presentation) => addPresentation(meetingId, podId, presentation));
     }
 
     if (insertedId) {

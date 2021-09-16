@@ -1,6 +1,6 @@
 const stopMediaStreamTracks = (stream) => {
   if (stream && typeof stream.getTracks === 'function') {
-    stream.getTracks().forEach(track => {
+    stream.getTracks().forEach((track) => {
       if (typeof track.stop === 'function' && track.readyState !== 'ended') {
         track.stop();
         // Manually emit the event as a safeguard; Firefox doesn't fire it when it
@@ -10,7 +10,7 @@ const stopMediaStreamTracks = (stream) => {
       }
     });
   }
-}
+};
 
 const getVideoTracks = (stream) => {
   let videoTracks = [];
@@ -19,12 +19,12 @@ const getVideoTracks = (stream) => {
     if (typeof stream.getVideoTracks === 'function') {
       videoTracks = stream.getVideoTracks();
     } else if (typeof stream.getTracks === 'function') {
-      videoTracks = stream.getTracks().filter(track => track.kind === 'video');
+      videoTracks = stream.getTracks().filter((track) => track.kind === 'video');
     }
   }
 
   return videoTracks;
-}
+};
 
 const extractVideoDeviceId = (stream) => {
   // An empty string is the browser's default...
@@ -37,7 +37,7 @@ const extractVideoDeviceId = (stream) => {
   }
 
   return deviceId;
-}
+};
 
 export default {
   stopMediaStreamTracks,

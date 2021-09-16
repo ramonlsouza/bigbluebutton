@@ -47,7 +47,7 @@ export function initCursorStreamListener() {
   const startStreamHandlersPromise = new Promise((resolve) => {
     const checkStreamHandlersInterval = setInterval(() => {
       const streamHandlersSize = Object.values(Meteor.StreamerCentral.instances[`cursor-${Auth.meetingID}`].handlers)
-        .filter(el => el != undefined)
+        .filter((el) => el != undefined)
         .length;
 
       if (!streamHandlersSize) {
@@ -62,7 +62,7 @@ export function initCursorStreamListener() {
     cursorStreamListener.on('message', ({ cursors }) => {
       Object.keys(cursors).forEach((cursorId) => {
         const cursor = cursors[cursorId];
-        const userId = cursor.userId;
+        const { userId } = cursor;
         delete cursor.userId;
         if (Auth.userID === userId) return;
         updateCursor(userId, cursor);

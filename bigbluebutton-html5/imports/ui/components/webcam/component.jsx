@@ -166,7 +166,7 @@ const WebcamComponent = ({
       || cameraDock.position === CAMERADOCK_POSITION.CONTENT_RIGHT,
   });
 
-  let draggableOffset = {
+  const draggableOffset = {
     left: isDragging && (isCameraTopOrBottom || isCameraSidebar)
       ? ((cameraDock.width - cameraSize.width) / 2)
       : 0,
@@ -176,7 +176,7 @@ const WebcamComponent = ({
   };
 
   if (isRTL) {
-    draggableOffset.left = draggableOffset.left * -1;
+    draggableOffset.left *= -1;
   }
 
   return (

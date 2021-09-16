@@ -92,7 +92,7 @@ class WhiteboardToolbar extends Component {
       };
     }
 
-    if (!annotations.some(el => el.value === annotationSelected.value) && annotations.length > 0) {
+    if (!annotations.some((el) => el.value === annotationSelected.value) && annotations.length > 0) {
       annotationSelected = annotations[annotations.length - 1];
     }
 
@@ -200,7 +200,7 @@ class WhiteboardToolbar extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { annotations } = this.props;
     const { annotationSelected } = prevState;
-    const hadInAnnotations = annotations.some(el => el.value === annotationSelected.value);
+    const hadInAnnotations = annotations.some((el) => el.value === annotationSelected.value);
 
     // if color or thickness were changed
     // we might need to trigger svg animation for Color and Thickness icons
@@ -787,8 +787,7 @@ class WhiteboardToolbar extends Component {
           disabled={!isMeteorConnected}
           label={multiUser
             ? intl.formatMessage(intlMessages.toolbarMultiUserOff)
-            : intl.formatMessage(intlMessages.toolbarMultiUserOn)
-          }
+            : intl.formatMessage(intlMessages.toolbarMultiUserOn)}
           icon={multiUser ? 'multi_whiteboard' : 'whiteboard'}
           onItemClick={this.handleSwitchWhiteboardMode}
           className={styles.toolbarButton}
@@ -807,8 +806,7 @@ class WhiteboardToolbar extends Component {
         disabled={!isMeteorConnected}
         label={palmRejection
           ? intl.formatMessage(intlMessages.toolbarPalmRejectionOff)
-          : intl.formatMessage(intlMessages.toolbarPalmRejectionOn)
-        }
+          : intl.formatMessage(intlMessages.toolbarPalmRejectionOn)}
         icon={palmRejection ? 'palm_rejection' : 'no_palm_rejection'}
         onItemClick={this.handleSwitchPalmRejectionMode}
         className={styles.toolbarButton}

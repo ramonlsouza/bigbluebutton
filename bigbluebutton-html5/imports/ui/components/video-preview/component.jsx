@@ -4,7 +4,7 @@ import {
   defineMessages, injectIntl, FormattedMessage,
 } from 'react-intl';
 import Button from '/imports/ui/components/button/component';
-import VirtualBgSelector from '/imports/ui/components/video-preview/virtual-background/component'
+import VirtualBgSelector from '/imports/ui/components/video-preview/virtual-background/component';
 import logger from '/imports/startup/client/logger';
 import Modal from '/imports/ui/components/modal/simple/component';
 import browserInfo from '/imports/utils/browserInfo';
@@ -21,7 +21,7 @@ import {
   setSessionVirtualBackgroundInfo,
   isVirtualBackgroundEnabled,
   getSessionVirtualBackgroundInfo,
-} from '/imports/ui/services/virtual-background/service'
+} from '/imports/ui/services/virtual-background/service';
 
 const VIEW_STATES = {
   finding: 'finding',
@@ -210,11 +210,11 @@ class VideoPreview extends Component {
     };
   }
 
-  set currentVideoStream (bbbVideoStream) {
+  set currentVideoStream(bbbVideoStream) {
     this._currentVideoStream = bbbVideoStream;
   }
 
-  get currentVideoStream () {
+  get currentVideoStream() {
     return this._currentVideoStream;
   }
 
@@ -236,7 +236,7 @@ class VideoPreview extends Component {
         let {
           webcams,
           areLabelled,
-          areIdentified
+          areIdentified,
         } = PreviewService.digestVideoDevices(devices, webcamDeviceId);
 
         logger.debug({
@@ -316,10 +316,9 @@ class VideoPreview extends Component {
   handleVirtualBgSelected(type, name) {
     if (type !== EFFECT_TYPES.NONE_TYPE) {
       return this.startVirtualBackground(this.currentVideoStream, type, name);
-    } else {
-      this.stopVirtualBackground(this.currentVideoStream);
-      return Promise.resolve(true);
     }
+    this.stopVirtualBackground(this.currentVideoStream);
+    return Promise.resolve(true);
   }
 
   stopVirtualBackground(bbbVideoStream) {
@@ -337,7 +336,7 @@ class VideoPreview extends Component {
     return bbbVideoStream.startVirtualBackground(type, name).then(() => {
       this.displayPreview();
       return true;
-    }).catch(error => {
+    }).catch((error) => {
       this.handleVirtualBgError(error, type, name);
       return false;
     }).finally(() => {
@@ -360,7 +359,7 @@ class VideoPreview extends Component {
     const { webcamDeviceId } = this.state;
     // Only streams that will be shared should be stored in the service.  // If the store call returns false, we're duplicating stuff. So clean this one
     // up because it's an impostor.
-    if(!PreviewService.storeStream(webcamDeviceId, this.currentVideoStream)) {
+    if (!PreviewService.storeStream(webcamDeviceId, this.currentVideoStream)) {
       this.currentVideoStream.stop();
     }
 
@@ -452,7 +451,7 @@ class VideoPreview extends Component {
   handleVirtualBgError(error, type, name) {
     const { intl } = this.props;
     logger.error({
-      logCode: `video_preview_virtualbg_error`,
+      logCode: 'video_preview_virtualbg_error',
       extraInfo: {
         errorName: error.name,
         errorMessage: error.message,
@@ -464,14 +463,14 @@ class VideoPreview extends Component {
     notify(intl.formatMessage(intlMessages.virtualBgGenericError), 'error', 'video');
   }
 
-  updateDeviceId (deviceId) {
+  updateDeviceId(deviceId) {
     let actualDeviceId = deviceId;
 
     if (!actualDeviceId && this.currentVideoStream) {
       actualDeviceId = MediaStreamUtils.extractVideoDeviceId(this.currentVideoStream.mediaStream);
     }
 
-    this.setState({ webcamDeviceId: actualDeviceId, });
+    this.setState({ webcamDeviceId: actualDeviceId });
     PreviewService.changeWebcam(actualDeviceId);
   }
 
@@ -525,7 +524,7 @@ class VideoPreview extends Component {
   skipVideoPreview() {
     this.getInitialCameraStream().then(() => {
       this.handleStartSharing();
-    }).catch(error => {
+    }).catch((error) => {
       this.cleanupStreamAndVideo();
       notify(this.handleGUMError(error), 'error', 'video');
     });
@@ -548,7 +547,7 @@ class VideoPreview extends Component {
 
   getFallbackLabel(webcam, index) {
     const { intl } = this.props;
-    return `${intl.formatMessage(intlMessages.cameraLabel)} ${index}`
+    return `${intl.formatMessage(intlMessages.cameraLabel)} ${index}`;
   }
 
   renderDeviceSelectors() {
@@ -589,8 +588,7 @@ class VideoPreview extends Component {
             <span>
               {intl.formatMessage(intlMessages.webcamNotFoundLabel)}
             </span>
-          )
-        }
+          )}
         { shared
           ? (
             <span className={styles.label}>
@@ -627,11 +625,9 @@ class VideoPreview extends Component {
                   <span>
                     {intl.formatMessage(intlMessages.profileNotFoundLabel)}
                   </span>
-                )
-              }
+                )}
             </>
-          )
-        }
+          )}
         {isVirtualBackgroundEnabled() && this.renderVirtualBgSelector()}
       </div>
     );
@@ -641,7 +637,7 @@ class VideoPreview extends Component {
     const { isStartSharingDisabled } = this.state;
     const initialVirtualBgState = this.currentVideoStream ? {
       type: this.currentVideoStream.virtualBgType,
-      name: this.currentVideoStream.virtualBgName
+      name: this.currentVideoStream.virtualBgName,
     } : getSessionVirtualBackgroundInfo();
 
     return (
@@ -766,8 +762,7 @@ class VideoPreview extends Component {
                 />
               </div>
             )
-            : null
-          }
+            : null}
           <div className={styles.actions}>
             <Button
               label={intl.formatMessage(intlMessages.cancelLabel)}
@@ -821,8 +816,7 @@ class VideoPreview extends Component {
       >
         {deviceInfo.hasMediaDevices
           ? this.renderModalContent()
-          : this.supportWarning()
-        }
+          : this.supportWarning()}
       </Modal>
     );
   }

@@ -180,7 +180,6 @@ class Auth {
       return Promise.resolve();
     }
 
-
     return new Promise((resolve) => {
       if (allowRedirectToLogoutURL()) {
         resolve(this._logoutURL);

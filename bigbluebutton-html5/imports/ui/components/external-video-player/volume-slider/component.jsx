@@ -80,7 +80,7 @@ class VolumeSlider extends Component {
           max={1}
           step={0.02}
           value={muted ? 0 : volume}
-          onChange={(e)=> this.handleOnChange(e.target.valueAsNumber)}
+          onChange={(e) => this.handleOnChange(e.target.valueAsNumber)}
         />
       </div>
     );

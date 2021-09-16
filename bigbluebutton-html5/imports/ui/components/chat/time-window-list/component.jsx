@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import _ from 'lodash';
 import Button from '/imports/ui/components/button/component';
-import { List, AutoSizer,CellMeasurer, CellMeasurerCache } from 'react-virtualized';
+import {
+  List, AutoSizer, CellMeasurer, CellMeasurerCache,
+} from 'react-virtualized';
 import { styles } from './styles';
 import ChatLogger from '/imports/ui/components/chat/chat-logger/ChatLogger';
 import TimeWindowChatItem from './time-window-chat-item/container';
@@ -72,7 +74,7 @@ class TimeWindowList extends PureComponent {
 
     this.lastWidth = 0;
 
-    document.fonts.onloadingdone = () => this.setState({fontsLoaded: true});
+    document.fonts.onloadingdone = () => this.setState({ fontsLoaded: true });
   }
 
   componentDidMount() {
@@ -105,19 +107,19 @@ class TimeWindowList extends PureComponent {
 
     const { userScrolledBack } = this.state;
 
-    if((count > 0 && !userScrolledBack) || userSentMessage || !scrollProps) {
+    if ((count > 0 && !userScrolledBack) || userSentMessage || !scrollProps) {
       const lastItemIndex = timeWindowsValues.length - 1;
 
       this.setState({
         scrollPosition: lastItemIndex,
-      }, ()=> this.handleScrollUpdate(lastItemIndex));
+      }, () => this.handleScrollUpdate(lastItemIndex));
     }
 
     const {
       timeWindowsValues: prevTimeWindowsValues,
       chatId: prevChatId,
       syncing: prevSyncing,
-      syncedPercent: prevSyncedPercent
+      syncedPercent: prevSyncedPercent,
     } = prevProps;
 
     if (prevChatId !== chatId) {
@@ -268,7 +270,7 @@ class TimeWindowList extends PureComponent {
       scrollPosition,
       userScrolledBack,
     } = this.state;
-    ChatLogger.debug('TimeWindowList::render', {...this.props},  {...this.state}, new Date());
+    ChatLogger.debug('TimeWindowList::render', { ...this.props }, { ...this.state }, new Date());
 
     const shouldAutoScroll = !!(
       scrollPosition
@@ -289,14 +291,14 @@ class TimeWindowList extends PureComponent {
               this.setState({
                 userScrolledBack: true,
               });
-              this.userScrolledBack = true
+              this.userScrolledBack = true;
             }
           }}
           className={styles.messageListWrapper}
           key="chat-list"
           data-test="chatMessages"
           aria-live="polite"
-          ref={node => this.messageListWrapper = node}
+          ref={(node) => this.messageListWrapper = node}
         >
           <AutoSizer>
             {({ height, width }) => {

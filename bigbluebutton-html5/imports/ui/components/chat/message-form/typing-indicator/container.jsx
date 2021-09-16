@@ -11,7 +11,7 @@ const USER_CONFIG = Meteor.settings.public.user;
 const PUBLIC_CHAT_KEY = CHAT_CONFIG.public_id;
 const TYPING_INDICATOR_ENABLED = CHAT_CONFIG.typingIndicator.enabled;
 
-const TypingIndicatorContainer = props => <TypingIndicator {...props} />;
+const TypingIndicatorContainer = (props) => <TypingIndicator {...props} />;
 
 export default withTracker(({ idChatOpen }) => {
   const meeting = Meetings.findOne({ meetingId: Auth.meetingID }, {

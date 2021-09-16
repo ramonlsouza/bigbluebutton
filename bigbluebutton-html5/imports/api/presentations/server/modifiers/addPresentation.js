@@ -58,12 +58,13 @@ export default function addPresentation(meetingId, podId, presentation) {
   };
 
   const modifier = {
-    $set: Object.assign({
+    $set: {
       meetingId,
       podId,
       'conversion.done': true,
       'conversion.error': false,
-    }, flat(presentation, { safe: true })),
+      ...flat(presentation, { safe: true }),
+    },
   };
 
   try {

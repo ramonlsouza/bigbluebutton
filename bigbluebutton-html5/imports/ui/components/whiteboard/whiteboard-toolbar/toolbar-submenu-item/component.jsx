@@ -75,7 +75,6 @@ export default class ToolbarSubmenuItem extends Component {
   }
 }
 
-
 ToolbarSubmenuItem.propTypes = {
   label: PropTypes.string.isRequired,
   icon: PropTypes.string,

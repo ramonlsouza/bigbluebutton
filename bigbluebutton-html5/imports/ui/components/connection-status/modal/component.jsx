@@ -315,7 +315,7 @@ class ConnectionStatusComponent extends PureComponent {
             <div className={styles.name}>
               <div
                 className={cx(styles.text, textStyle)}
-                data-test={conn.offline ? "offlineUser" : null}
+                data-test={conn.offline ? 'offlineUser' : null}
               >
                 {conn.name}
                 {conn.offline ? ` (${intl.formatMessage(intlMessages.offline)})` : null}
@@ -542,8 +542,7 @@ class ConnectionStatusComponent extends PureComponent {
                 <a href={this.help} target="_blank" rel="noopener noreferrer">
                   {`(${intl.formatMessage(intlMessages.more)})`}
                 </a>
-              )
-            }
+              )}
           </div>
           {this.renderNetworkData()}
           {this.renderCopyDataButton()}

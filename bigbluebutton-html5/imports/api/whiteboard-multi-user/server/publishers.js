@@ -18,7 +18,6 @@ function whiteboardMultiUser() {
   return WhiteboardMultiUser.find({ meetingId });
 }
 
-
 function publish(...args) {
   const boundMultiUser = whiteboardMultiUser.bind(this);
   return boundMultiUser(...args);

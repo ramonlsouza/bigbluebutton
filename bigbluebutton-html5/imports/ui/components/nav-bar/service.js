@@ -27,5 +27,5 @@ const connectRecordingObserver = () => {
 
 export default {
   connectRecordingObserver: () => connectRecordingObserver(),
-  processOutsideToggleRecording: arg => processOutsideToggleRecording(arg),
+  processOutsideToggleRecording: (arg) => processOutsideToggleRecording(arg),
 };

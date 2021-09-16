@@ -13,11 +13,11 @@ const getBreakouts = () => Breakouts.find({ parentMeetingId: Auth.meetingID })
   .fetch()
   .sort((a, b) => a.sequence - b.sequence);
 
-const currentBreakoutUsers = user => !Breakouts.findOne({
+const currentBreakoutUsers = (user) => !Breakouts.findOne({
   'joinedUsers.userId': new RegExp(`^${user.userId}`),
 });
 
-const filterBreakoutUsers = filter => users => users.filter(filter);
+const filterBreakoutUsers = (filter) => (users) => users.filter(filter);
 
 const getUsersNotAssigned = filterBreakoutUsers(currentBreakoutUsers);
 
@@ -45,8 +45,7 @@ const amIModerator = () => {
   return currentUser.role === ROLE_MODERATOR;
 };
 
-const isMe = intId => intId === Auth.userID;
-
+const isMe = (intId) => intId === Auth.userID;
 
 export default {
   amIPresenter,

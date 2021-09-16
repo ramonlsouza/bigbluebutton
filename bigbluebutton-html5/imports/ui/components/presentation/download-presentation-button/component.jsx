@@ -27,11 +27,10 @@ const DownloadPresentationButton = ({
   handleDownloadPresentation,
   dark,
 }) => {
-
   const wrapperClassName = cx({
     [styles.wrapper]: true,
     [styles.dark]: dark,
-    [styles.light]: !dark
+    [styles.light]: !dark,
   });
 
   return (

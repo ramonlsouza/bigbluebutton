@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import _ from 'lodash';
-import { 
+import {
   layoutDispatch,
   layoutSelect,
   layoutSelectInput,
-  layoutSelectOutput
+  layoutSelectOutput,
 } from '/imports/ui/components/layout/context';
 import DEFAULT_VALUES from '/imports/ui/components/layout/defaultValues';
 import { INITIAL_INPUT_STATE } from '/imports/ui/components/layout/initState';
@@ -147,15 +147,13 @@ const VideoFocusLayout = () => {
     throttledCalculatesLayout();
   };
 
-  const calculatesNavbarBounds = (mediaAreaBounds) => {
-    return {
-      width: mediaAreaBounds.width,
-      height: DEFAULT_VALUES.navBarHeight,
-      top: DEFAULT_VALUES.navBarTop + bannerAreaHeight(),
-      left: !isRTL ? mediaAreaBounds.left : 0,
-      zIndex: 1,
-    };
-  };
+  const calculatesNavbarBounds = (mediaAreaBounds) => ({
+    width: mediaAreaBounds.width,
+    height: DEFAULT_VALUES.navBarHeight,
+    top: DEFAULT_VALUES.navBarTop + bannerAreaHeight(),
+    left: !isRTL ? mediaAreaBounds.left : 0,
+    zIndex: 1,
+  });
 
   const calculatesActionbarHeight = () => {
     const BASE_FONT_SIZE = 14; // 90% font size

@@ -14,11 +14,11 @@ function currentPoll(secretPoll) {
   });
 
   if (
-    !tokenValidation ||
-    tokenValidation.validationStatus !== ValidationStates.VALIDATED
+    !tokenValidation
+    || tokenValidation.validationStatus !== ValidationStates.VALIDATED
   ) {
     Logger.warn(
-      `Publishing Polls was requested by unauth connection ${this.connection.id}`
+      `Publishing Polls was requested by unauth connection ${this.connection.id}`,
     );
     return Polls.find({ meetingId: '' });
   }
@@ -65,11 +65,11 @@ function polls() {
   });
 
   if (
-    !tokenValidation ||
-    tokenValidation.validationStatus !== ValidationStates.VALIDATED
+    !tokenValidation
+    || tokenValidation.validationStatus !== ValidationStates.VALIDATED
   ) {
     Logger.warn(
-      `Publishing Polls was requested by unauth connection ${this.connection.id}`
+      `Publishing Polls was requested by unauth connection ${this.connection.id}`,
     );
     return Polls.find({ meetingId: '' });
   }

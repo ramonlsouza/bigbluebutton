@@ -76,8 +76,7 @@ class TalkingIndicator extends PureComponent {
           label={callerName}
           tooltipLabel={!muted && amIModerator
             ? `${intl.formatMessage(intlMessages.muteLabel)} ${callerName}`
-            : null
-          }
+            : null}
           data-test={talking ? 'isTalking' : 'wasTalking'}
           aria-label={ariaLabel}
           aria-describedby={talking ? 'description' : null}
@@ -93,8 +92,7 @@ class TalkingIndicator extends PureComponent {
             <div id="description" className={styles.hidden}>
               {`${intl.formatMessage(intlMessages.ariaMuteDesc)}`}
             </div>
-          ) : null
-          }
+          ) : null}
         </Button>
       );
     });

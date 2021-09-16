@@ -1,15 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { defineMessages, injectIntl } from "react-intl";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { defineMessages, injectIntl } from 'react-intl';
 
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Divider } from "@material-ui/core";
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Divider } from '@material-ui/core';
 
-import Icon from "/imports/ui/components/icon/component";
-import Button from "/imports/ui/components/button/component";
+import Icon from '/imports/ui/components/icon/component';
+import Button from '/imports/ui/components/button/component';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 const intlMessages = defineMessages({
   close: {
@@ -18,7 +18,7 @@ const intlMessages = defineMessages({
   },
 });
 
-//Used to switch to mobile view
+// Used to switch to mobile view
 const MAX_WIDTH = 640;
 
 class BBBMenu extends React.Component {
@@ -37,7 +37,7 @@ class BBBMenu extends React.Component {
 
   handleClick(event) {
     this.setState({ anchorEl: event.currentTarget });
-  };
+  }
 
   handleClose(event) {
     const { onCloseCallback } = this.props;
@@ -52,13 +52,15 @@ class BBBMenu extends React.Component {
         }, 0);
       }
     }
-  };
+  }
 
   makeMenuItems() {
     const { actions, selectedEmoji } = this.props;
 
-    return actions?.map(a => {
-      const { dataTest, label, onClick, key, disabled } = a;
+    return actions?.map((a) => {
+      const {
+        dataTest, label, onClick, key, disabled,
+      } = a;
       const itemClasses = [styles.menuitem, a?.className];
 
       if (key?.toLowerCase()?.includes(selectedEmoji?.toLowerCase())) itemClasses.push(styles.emojiSelected);
@@ -69,30 +71,35 @@ class BBBMenu extends React.Component {
           key={label}
           data-test={dataTest || key}
           className={itemClasses.join(' ')}
-          disableRipple={true}
-          disableGutters={true}
+          disableRipple
+          disableGutters
           disabled={disabled}
-          style={{ paddingLeft: '4px',paddingRight: '4px',paddingTop: '8px', paddingBottom: '8px', marginLeft: '4px', marginRight: '4px' }}
+          style={{
+            paddingLeft: '4px', paddingRight: '4px', paddingTop: '8px', paddingBottom: '8px', marginLeft: '4px', marginRight: '4px',
+          }}
           onClick={(event) => {
             onClick();
             const close = !key.includes('setstatus') && !key.includes('back');
             // prevent menu close for sub menu actions
             if (close) this.handleClose(event);
-          }}>
+          }}
+        >
           <div style={{ display: 'flex', flexFlow: 'row', width: '100%' }}>
             {a.icon ? <Icon iconName={a.icon} key="icon" /> : null}
             <div className={styles.option}>{label}</div>
             {a.iconRight ? <Icon iconName={a.iconRight} key="iconRight" className={styles.iRight} /> : null}
           </div>
         </MenuItem>,
-        a.divider && <Divider disabled />
+        a.divider && <Divider disabled />,
       ];
     });
   }
 
   render() {
     const { anchorEl } = this.state;
-    const { trigger, intl, wide, classes } = this.props;
+    const {
+      trigger, intl, wide, classes,
+    } = this.props;
     const actionsItems = this.makeMenuItems();
     const menuClasses = classes || [];
     menuClasses.push(styles.menu);
@@ -120,7 +127,8 @@ class BBBMenu extends React.Component {
           style={{ zIndex: 9999 }}
         >
           {actionsItems}
-          {anchorEl && window.innerWidth < MAX_WIDTH &&
+          {anchorEl && window.innerWidth < MAX_WIDTH
+            && (
             <Button
               className={styles.closeBtn}
               label={intl.formatMessage(intlMessages.close)}
@@ -128,7 +136,7 @@ class BBBMenu extends React.Component {
               color="default"
               onClick={this.handleClose}
             />
-          }
+            )}
         </Menu>
       </>
     );
@@ -139,13 +147,13 @@ export default injectIntl(BBBMenu);
 
 BBBMenu.defaultProps = {
   opts: {
-    id: "default-dropdown-menu",
+    id: 'default-dropdown-menu',
     autoFocus: false,
     keepMounted: true,
     transitionDuration: 0,
     elevation: 3,
     getContentAnchorEl: null,
-    fullwidth: "true",
+    fullwidth: 'true',
     anchorOrigin: { vertical: 'top', horizontal: 'right' },
     transformorigin: { vertical: 'top', horizontal: 'right' },
   },

@@ -196,14 +196,12 @@ const CustomLayout = () => {
     throttledCalculatesLayout();
   };
 
-  const calculatesNavbarBounds = (mediaAreaBounds) => {
-    return {
-      width: mediaAreaBounds.width,
-      height: DEFAULT_VALUES.navBarHeight,
-      top: DEFAULT_VALUES.navBarTop + bannerAreaHeight(),
-      left: !isRTL ? mediaAreaBounds.left : 0,
-    };
-  }
+  const calculatesNavbarBounds = (mediaAreaBounds) => ({
+    width: mediaAreaBounds.width,
+    height: DEFAULT_VALUES.navBarHeight,
+    top: DEFAULT_VALUES.navBarTop + bannerAreaHeight(),
+    left: !isRTL ? mediaAreaBounds.left : 0,
+  });
 
   const calculatesActionbarHeight = () => {
     const BASE_FONT_SIZE = 14; // 90% font size
@@ -687,7 +685,7 @@ const CustomLayout = () => {
     }
 
     return mediaBounds;
-  }
+  };
 
   const calculatesLayout = () => {
     const { position: cameraPosition } = cameraDockInput;

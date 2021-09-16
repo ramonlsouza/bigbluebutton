@@ -4,7 +4,6 @@ import browserInfo from '/imports/utils/browserInfo';
 import deviceInfo from '/imports/utils/deviceInfo';
 import './styles.css';
 
-
 // currently supported locales.
 // import ar from 'react-intl/locale-data/ar';
 // import bg from 'react-intl/locale-data/bg';
@@ -111,7 +110,7 @@ export default class Legacy extends Component {
                 })
                 .then((regionDefaultMessages) => {
                   messages = Object.assign(messages, regionDefaultMessages);
-                  this.setState({ messages});
+                  this.setState({ messages });
                 });
             }
 
@@ -125,7 +124,7 @@ export default class Legacy extends Component {
                 })
                 .then((localeMessages) => {
                   messages = Object.assign(messages, localeMessages);
-                  this.setState({ messages});
+                  this.setState({ messages });
                 })
                 .catch(() => {
                   normalizedLocale = (regionDefaultLocale) || DEFAULT_LANGUAGE;
@@ -192,8 +191,7 @@ export default class Legacy extends Component {
                 <a href="https://getfirefox.com">Firefox</a>
                 <span> for full support.</span>
               </span>
-            )
-            }
+            )}
           </p>
         );
       case FETCHING:

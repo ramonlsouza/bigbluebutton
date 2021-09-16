@@ -35,7 +35,7 @@ class UnreadMessagesTracker {
   getUnreadMessages(chatID, messages) {
     const isPublicChat = chatID === PUBLIC_GROUP_CHAT_ID;
 
-    let unreadMessages = [];
+    const unreadMessages = [];
 
     if (messages[chatID]) {
       const contextChat = messages[chatID];

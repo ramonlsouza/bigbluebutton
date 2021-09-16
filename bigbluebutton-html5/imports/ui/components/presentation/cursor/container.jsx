@@ -4,9 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import CursorService from './service';
 import Cursor from './component';
 
-
 class CursorContainer extends Component {
-
   render() {
     const { cursorX, cursorY } = this.props;
 
@@ -23,7 +21,6 @@ class CursorContainer extends Component {
     return null;
   }
 }
-
 
 export default withTracker((params) => {
   const { cursorId } = params;
@@ -47,7 +44,6 @@ export default withTracker((params) => {
     userName: '',
   };
 })(CursorContainer);
-
 
 CursorContainer.propTypes = {
   // Defines the 'x' coordinate for the cursor, in percentages of the slide's width

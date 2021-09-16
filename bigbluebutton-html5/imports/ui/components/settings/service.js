@@ -21,7 +21,7 @@ const showGuestNotification = () => {
 };
 
 const updateSettings = (obj, msg) => {
-  Object.keys(obj).forEach(k => (Settings[k] = obj[k]));
+  Object.keys(obj).forEach((k) => (Settings[k] = obj[k]));
   Settings.save();
 
   if (msg) {
@@ -36,7 +36,7 @@ const updateSettings = (obj, msg) => {
   }
 };
 
-const getAvailableLocales = () => fetch('./locale-list').then(locales => locales.json());
+const getAvailableLocales = () => fetch('./locale-list').then((locales) => locales.json());
 
 export {
   getUserRoles,

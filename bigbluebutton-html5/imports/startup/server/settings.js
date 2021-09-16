@@ -7,7 +7,6 @@ import _ from 'lodash';
 const DEFAULT_SETTINGS_FILE_PATH = process.env.BBB_HTML5_SETTINGS || 'assets/app/config/settings.yml';
 const LOCAL_SETTINGS_FILE_PATH = process.env.BBB_HTML5_LOCAL_SETTINGS || '/etc/bigbluebutton/bbb-html5.yml';
 
-
 try {
   if (fs.existsSync(DEFAULT_SETTINGS_FILE_PATH)) {
     const SETTINGS = YAML.parse(fs.readFileSync(DEFAULT_SETTINGS_FILE_PATH, 'utf-8'));

@@ -10,7 +10,7 @@ import playAndRetry from '/imports/utils/mediaElementPlayRetry';
 import iosWebviewAudioPolyfills from '/imports/utils/ios-webview-audio-polyfills';
 import { monitorAudioConnection } from '/imports/utils/stats';
 import AudioErrors from './error-codes';
-import {Meteor} from "meteor/meteor";
+import { Meteor } from 'meteor/meteor';
 import browserInfo from '/imports/utils/browserInfo';
 
 const STATS = Meteor.settings.public.stats;
@@ -469,7 +469,7 @@ class AudioManager {
         this.setBreakoutAudioTransferStatus({
           breakoutMeetingId: '',
           status: BREAKOUT_AUDIO_TRANSFER_STATES.DISCONNECTED,
-        })
+        });
         const errorKey = this.messages.error[error] || this.messages.error.GENERIC_ERROR;
         const errorMsg = this.intl.formatMessage(errorKey, { 0: bridgeError });
         this.error = !!error;
@@ -491,7 +491,7 @@ class AudioManager {
         this.setBreakoutAudioTransferStatus({
           breakoutMeetingId: '',
           status: BREAKOUT_AUDIO_TRANSFER_STATES.DISCONNECTED,
-        })
+        });
         logger.info({ logCode: 'audio_reconnecting' }, 'Attempting to reconnect audio');
         this.notify(this.intl.formatMessage(this.messages.info.RECONNECTING_AUDIO), true);
         this.playHangUpSound();
@@ -499,7 +499,7 @@ class AudioManager {
         this.setBreakoutAudioTransferStatus({
           breakoutMeetingId: '',
           status: BREAKOUT_AUDIO_TRANSFER_STATES.DISCONNECTED,
-        })
+        });
         this.isReconnecting = false;
         this.autoplayBlocked = true;
         this.onAudioJoin();
@@ -720,7 +720,7 @@ class AudioManager {
       return;
     }
 
-    peer.getSenders().forEach(sender => {
+    peer.getSenders().forEach((sender) => {
       const { track } = sender;
       if (track && track.kind === 'audio') {
         track.enabled = shouldEnable;
@@ -744,7 +744,6 @@ class AudioManager {
     const audioAlert = new Audio(url);
 
     audioAlert.addEventListener('ended', () => { audioAlert.src = null; });
-
 
     const { outputDeviceId } = this.bridge;
 

@@ -57,8 +57,8 @@ class PendingUsersAlert extends Component {
     } = this.props;
     const { notifiedIds } = this.state;
     const notifiedPendingUsers = pendingUsers
-      .filter(user => user.loginTime < joinTime)
-      .map(user => user.intId);
+      .filter((user) => user.loginTime < joinTime)
+      .map((user) => user.intId);
     this.setState({ notifiedIds: [...notifiedIds, ...notifiedPendingUsers] });
   }
 
@@ -71,7 +71,7 @@ class PendingUsersAlert extends Component {
     const { notifiedIds } = this.state;
 
     pendingUsers
-      .filter(user => !notifiedIds.includes(user.intId))
+      .filter((user) => !notifiedIds.includes(user.intId))
       .forEach((user) => {
         if (managementPanelIsOpen || !currentUserIsModerator) {
           return this.storeId(user.intId);

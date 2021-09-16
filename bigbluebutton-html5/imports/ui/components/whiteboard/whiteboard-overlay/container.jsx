@@ -25,7 +25,6 @@ export default withTracker(() => ({
   updateCursor: WhiteboardOverlayService.updateCursor,
 }))(WhiteboardOverlayContainer);
 
-
 WhiteboardOverlayContainer.propTypes = {
   drawSettings: PropTypes.oneOfType([
     PropTypes.shape({

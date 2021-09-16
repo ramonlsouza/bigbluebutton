@@ -78,7 +78,6 @@ const startCounter = (sec, set, get, interval) => {
   return setInterval(() => set(get() - 1), 1000);
 };
 
-
 export default injectNotify(injectIntl(withTracker(({
   breakoutRoom,
   intl,

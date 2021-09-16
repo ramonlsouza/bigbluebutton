@@ -73,7 +73,7 @@ class ModalSimple extends Component {
           }, 0);
         }
       }
-    }
+    };
     return (
       <ModalBase
         isOpen={modalisOpen}

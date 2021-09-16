@@ -120,7 +120,7 @@ class IntlStartup extends Component {
 
           Promise.all([fetchFallbackMessages, fetchRegionMessages, fetchSpecificMessages])
             .then((values) => {
-              let mergedMessages = Object.assign({}, values[0]);
+              let mergedMessages = { ...values[0] };
 
               if (!values[1] && !values[2]) {
                 normalizedLocale = DEFAULT_LANGUAGE;
@@ -165,8 +165,7 @@ class IntlStartup extends Component {
           <IntlProvider locale={normalizedLocale} messages={messages}>
             {children}
           </IntlProvider>
-          )
-        }
+          )}
       </>
     );
   }

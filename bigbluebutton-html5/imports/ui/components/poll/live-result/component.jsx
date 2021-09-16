@@ -56,7 +56,7 @@ class LiveResult extends PureComponent {
     if (!currentPoll) return null;
 
     const {
-      answers, responses, users, numRespondents, pollType
+      answers, responses, users, numRespondents, pollType,
     } = currentPoll;
 
     const defaultPoll = isDefaultPoll(pollType);
@@ -64,15 +64,15 @@ class LiveResult extends PureComponent {
     const currentPollQuestion = (currentPoll.question) ? currentPoll.question : '';
 
     let userAnswers = responses
-      ? [...users, ...responses.map(u => u.userId)]
+      ? [...users, ...responses.map((u) => u.userId)]
       : [...users];
 
-    userAnswers = userAnswers.map(id => usernames[id])
+    userAnswers = userAnswers.map((id) => usernames[id])
       .map((user) => {
         let answer = '';
 
         if (responses) {
-          const response = responses.find(r => r.userId === user.userId);
+          const response = responses.find((r) => r.userId === user.userId);
           if (response) answer = answers[response.answerId].key;
         }
 
@@ -221,8 +221,7 @@ class LiveResult extends PureComponent {
               data-test="restartPoll"
               className={styles.btn}
             />
-          )
-        }
+          )}
         <div className={styles.separator} />
         { currentPoll && !currentPoll.secretPoll
           ? (
@@ -237,7 +236,7 @@ class LiveResult extends PureComponent {
             </table>
           ) : (
             currentPoll ? (<div>{intl.formatMessage(intlMessages.secretPollLabel)}</div>) : null
-        )}
+          )}
       </div>
     );
   }

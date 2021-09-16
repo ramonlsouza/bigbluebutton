@@ -136,7 +136,7 @@ export default function addMeeting(meeting) {
 
   let { welcomeMsg } = newMeeting.welcomeProp;
 
-  const sanitizeTextInChat = original => SanitizeHTML(original, {
+  const sanitizeTextInChat = (original) => SanitizeHTML(original, {
     allowedTags: ['a', 'b', 'br', 'i', 'img', 'li', 'small', 'span', 'strong', 'u', 'ul'],
     allowedAttributes: {
       a: ['href', 'name', 'target'],
@@ -170,16 +170,17 @@ export default function addMeeting(meeting) {
   newMeeting.welcomeProp.modOnlyMessage = sanitizeTextInChat(newMeeting.welcomeProp.modOnlyMessage);
 
   const modifier = {
-    $set: Object.assign({
+    $set: {
       meetingId,
       meetingEnded,
       layout: LAYOUT_TYPE[meeting.usersProp.meetingLayout] || 'smart',
       publishedPoll: false,
       guestLobbyMessage: '',
       randomlySelectedUser: [],
-    }, flat(newMeeting, {
-      safe: true,
-    })),
+      ...flat(newMeeting, {
+        safe: true,
+      }),
+    },
   };
 
   if (!process.env.BBB_HTML5_ROLE || process.env.BBB_HTML5_ROLE === 'frontend') {

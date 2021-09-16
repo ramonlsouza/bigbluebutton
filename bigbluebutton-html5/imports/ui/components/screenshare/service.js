@@ -8,7 +8,7 @@ import Meetings from '/imports/api/meetings';
 import Auth from '/imports/ui/services/auth';
 import UserListService from '/imports/ui/components/user-list/service';
 import AudioService from '/imports/ui/components/audio/service';
-import { Meteor } from "meteor/meteor";
+import { Meteor } from 'meteor/meteor';
 import MediaStreamUtils from '/imports/utils/media-stream-utils';
 
 const SCREENSHARE_MEDIA_ELEMENT_NAME = 'screenshareVideo';
@@ -21,7 +21,7 @@ const FILTER_SCREENSHARE_STATS = [
   'inbound-rtp',
 ];
 
-let _isSharingScreen = false;
+const _isSharingScreen = false;
 const _sharingScreenDep = {
   value: false,
   tracker: new Tracker.Dependency(),
@@ -47,7 +47,7 @@ const isGloballyBroadcasting = () => {
     { fields: { 'screenshare.stream': 1 } });
 
   return (!screenshareEntry ? false : !!screenshareEntry.screenshare.stream);
-}
+};
 
 // when the meeting information has been updated check to see if it was
 // screensharing. If it has changed either trigger a call to receive video
@@ -65,7 +65,6 @@ const isVideoBroadcasting = () => {
   return sharing || screenIsShared;
 };
 
-
 const screenshareHasAudio = () => {
   const screenshareEntry = Screenshare.findOne({ meetingId: Auth.meetingID },
     { fields: { 'screenshare.hasAudio': 1 } });
@@ -75,7 +74,7 @@ const screenshareHasAudio = () => {
   }
 
   return !!screenshareEntry.screenshare.hasAudio;
-}
+};
 
 const screenshareHasEnded = () => {
   if (isSharingScreen()) {
@@ -85,9 +84,7 @@ const screenshareHasEnded = () => {
   KurentoBridge.stop();
 };
 
-const getMediaElement = () => {
-  return document.getElementById(SCREENSHARE_MEDIA_ELEMENT_NAME);
-}
+const getMediaElement = () => document.getElementById(SCREENSHARE_MEDIA_ELEMENT_NAME);
 
 const attachLocalPreviewStream = (mediaElement) => {
   const stream = KurentoBridge.gdmStream;
@@ -95,7 +92,7 @@ const attachLocalPreviewStream = (mediaElement) => {
     // Always muted, presenter preview.
     BridgeService.screenshareLoadAndPlayMediaStream(stream, mediaElement, true);
   }
-}
+};
 
 const screenshareHasStarted = () => {
   // Presenter's screen preview is local, so skip
@@ -114,7 +111,7 @@ const shareScreen = async (onFail) => {
 
   try {
     const stream = await BridgeService.getScreenStream();
-    if(!UserListService.isUserPresenter(Auth.userID)) return MediaStreamUtils.stopMediaStreamTracks(stream);
+    if (!UserListService.isUserPresenter(Auth.userID)) return MediaStreamUtils.stopMediaStreamTracks(stream);
     await KurentoBridge.share(stream, onFail);
     setSharingScreen(true);
   } catch (error) {
@@ -131,7 +128,7 @@ const viewScreenshare = () => {
         errorName: error.name,
         errorMessage: error.message,
       },
-    }, `Screenshare viewer failure`);
+    }, 'Screenshare viewer failure');
   });
 };
 

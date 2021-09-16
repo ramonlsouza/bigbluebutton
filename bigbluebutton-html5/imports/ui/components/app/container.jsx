@@ -14,11 +14,11 @@ import deviceInfo from '/imports/utils/deviceInfo';
 import UserInfos from '/imports/api/users-infos';
 import Settings from '/imports/ui/services/settings';
 import MediaService from '/imports/ui/components/media/service';
-import { 
-  layoutSelect, 
-  layoutSelectInput, 
-  layoutSelectOutput, 
-  layoutDispatch 
+import {
+  layoutSelect,
+  layoutSelectInput,
+  layoutSelectOutput,
+  layoutDispatch,
 } from '../layout/context';
 
 import {

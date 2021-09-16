@@ -107,7 +107,7 @@ const addConnectionStatus = (level, type, value) => {
   const status = level !== -1 ? STATS.level[level] : 'normal';
 
   makeCall('addConnectionStatus', status, type, value);
-}
+};
 
 const fetchRoundTripTime = () => {
   const t0 = Date.now();
@@ -221,7 +221,7 @@ const getConnectionStatus = () => {
       loggedOut,
     } = user;
 
-    const status = connectionStatus.find(status => status.userId === userId);
+    const status = connectionStatus.find((status) => status.userId === userId);
 
     if (status) {
       result.push({
@@ -237,7 +237,8 @@ const getConnectionStatus = () => {
     }
 
     return result;
-  }, []).sort(sortLevel).sort(sortOffline);
+  }, []).sort(sortLevel)
+    .sort(sortOffline);
 };
 
 const isEnabled = () => STATS.enabled;
@@ -303,7 +304,6 @@ const notification = (level, intl) => {
     return null;
   }
   Session.set('connectionStatusNotified', true);
-
 
   if (intl) notify(intl.formatMessage(intlMessages.notification), level, 'warning');
 };

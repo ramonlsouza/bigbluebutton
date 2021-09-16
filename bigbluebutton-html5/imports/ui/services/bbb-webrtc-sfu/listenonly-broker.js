@@ -25,7 +25,7 @@ class ListenOnlyBroker extends BaseBroker {
     Object.assign(this, options);
   }
 
-  joinListenOnly () {
+  joinListenOnly() {
     return new Promise((resolve, reject) => {
       const options = {
         mediaConstraints: {
@@ -51,7 +51,7 @@ class ListenOnlyBroker extends BaseBroker {
               sfuComponent: this.sfuComponent,
               started: this.started,
             },
-          }, `Listen only peer creation failed`);
+          }, 'Listen only peer creation failed');
           this.onerror(normalizedError);
           return reject(normalizedError);
         }
@@ -61,7 +61,7 @@ class ListenOnlyBroker extends BaseBroker {
         if (this.offering) {
           this.webRtcPeer.generateOffer(this.onOfferGenerated.bind(this));
         } else {
-          this.sendStartReq()
+          this.sendStartReq();
         }
       });
 
@@ -70,12 +70,12 @@ class ListenOnlyBroker extends BaseBroker {
     });
   }
 
-  listen () {
+  listen() {
     return this.openWSConnection()
       .then(this.joinListenOnly.bind(this));
   }
 
-  onWSMessage (message) {
+  onWSMessage(message) {
     const parsedMessage = JSON.parse(message.data);
 
     switch (parsedMessage.id) {
@@ -98,12 +98,12 @@ class ListenOnlyBroker extends BaseBroker {
       default:
         logger.debug({
           logCode: `${this.logCodePrefix}_invalid_req`,
-          extraInfo: { messageId: parsedMessage.id || 'Unknown', sfuComponent: this.sfuComponent }
-        }, `Discarded invalid SFU message`);
+          extraInfo: { messageId: parsedMessage.id || 'Unknown', sfuComponent: this.sfuComponent },
+        }, 'Discarded invalid SFU message');
     }
   }
 
-  handleSFUError (sfuResponse) {
+  handleSFUError(sfuResponse) {
     const { code, reason, role } = sfuResponse;
     const error = BaseBroker.assembleError(code, reason);
 
@@ -116,11 +116,11 @@ class ListenOnlyBroker extends BaseBroker {
         sfuComponent: this.sfuComponent,
         started: this.started,
       },
-    }, `Listen only failed in SFU`);
+    }, 'Listen only failed in SFU');
     this.onerror(error);
   }
 
-  sendLocalDescription (localDescription) {
+  sendLocalDescription(localDescription) {
     const message = {
       id: SUBSCRIBER_ANSWER,
       type: this.sfuComponent,
@@ -132,7 +132,7 @@ class ListenOnlyBroker extends BaseBroker {
     this.sendMessage(message);
   }
 
-  onRemoteDescriptionReceived (sfuResponse) {
+  onRemoteDescriptionReceived(sfuResponse) {
     if (this.offering) {
       return this.processAnswer(sfuResponse);
     }
@@ -140,7 +140,7 @@ class ListenOnlyBroker extends BaseBroker {
     return this.processOffer(sfuResponse);
   }
 
-  sendStartReq (offer) {
+  sendStartReq(offer) {
     const message = {
       id: 'start',
       type: this.sfuComponent,
@@ -157,20 +157,20 @@ class ListenOnlyBroker extends BaseBroker {
     logger.debug({
       logCode: `${this.logCodePrefix}_offer_generated`,
       extraInfo: { sfuComponent: this.sfuComponent, role: this.role },
-    }, `SFU audio offer generated`);
+    }, 'SFU audio offer generated');
 
     this.sendMessage(message);
   }
 
-  onOfferGenerated (error, sdpOffer) {
+  onOfferGenerated(error, sdpOffer) {
     if (error) {
       logger.error({
         logCode: `${this.logCodePrefix}_offer_failure`,
         extraInfo: {
           errorMessage: error.name || error.message || 'Unknown error',
-          sfuComponent: this.sfuComponent
+          sfuComponent: this.sfuComponent,
         },
-      }, `Listen only offer generation failed`);
+      }, 'Listen only offer generation failed');
       // 1305: "PEER_NEGOTIATION_FAILED",
       const normalizedError = BaseBroker.assembleError(1305);
       return this.onerror(error);
@@ -179,7 +179,7 @@ class ListenOnlyBroker extends BaseBroker {
     this.sendStartReq(sdpOffer);
   }
 
-  onIceCandidate (candidate, role) {
+  onIceCandidate(candidate, role) {
     const message = {
       id: ON_ICE_CANDIDATE_MSG,
       role,

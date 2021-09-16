@@ -8,7 +8,7 @@ const interop = new Interop.Interop();
 // Some heuristics to determine if the input SDP is Unified Plan
 const isUnifiedPlan = (sdp) => {
   const parsedSDP = transform.parse(sdp);
-  if (parsedSDP.media.length <= 3 && parsedSDP.media.every(m => ['video', 'audio', 'data'].indexOf(m.mid) !== -1)) {
+  if (parsedSDP.media.length <= 3 && parsedSDP.media.every((m) => ['video', 'audio', 'data'].indexOf(m.mid) !== -1)) {
     logger.info({ logCode: 'sdp_utils_not_unified_plan' }, 'SDP does not look like Unified Plan');
     return false;
   }
@@ -21,7 +21,7 @@ const isUnifiedPlan = (sdp) => {
 // Some heuristics to determine if the input SDP is Plan B
 const isPlanB = (sdp) => {
   const parsedSDP = transform.parse(sdp);
-  if (parsedSDP.media.length > 3 || !parsedSDP.media.every(m => ['video', 'audio', 'data'].indexOf(m.mid) !== -1)) {
+  if (parsedSDP.media.length > 3 || !parsedSDP.media.every((m) => ['video', 'audio', 'data'].indexOf(m.mid) !== -1)) {
     logger.info({ logCode: 'sdp_utils_not_plan_b' }, 'SDP does not look like Plan B');
     return false;
   }
@@ -30,7 +30,6 @@ const isPlanB = (sdp) => {
 
   return true;
 };
-
 
 // Specific method for translating FS SDPs from Plan B to Unified Plan (vice-versa)
 const toPlanB = (unifiedPlanSDP) => {
@@ -290,9 +289,9 @@ const logSelectedCandidate = async (peer, isIpv6) => {
     let localCandidate;
 
     const values = Array.from(report.values());
-    const candidatePair = values.find(item => item.type === 'candidate-pair' && (item.selected || item.state === 'succeeded'));
+    const candidatePair = values.find((item) => item.type === 'candidate-pair' && (item.selected || item.state === 'succeeded'));
     if (candidatePair) {
-      localCandidate = values.find(item => item.id === candidatePair.localCandidateId);
+      localCandidate = values.find((item) => item.id === candidatePair.localCandidateId);
     }
 
     const ipType = isIpv6 ? 'v6' : 'v4';

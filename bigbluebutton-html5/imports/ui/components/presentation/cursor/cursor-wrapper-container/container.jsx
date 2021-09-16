@@ -31,7 +31,7 @@ const CursorWrapperContainer = ({ presenterCursorId, multiUserCursorIds, ...rest
       )
       : null }
 
-    {multiUserCursorIds.map(cursorId => (
+    {multiUserCursorIds.map((cursorId) => (
       <CursorContainer
         key={cursorId._id}
         cursorId={cursorId._id}
@@ -55,7 +55,6 @@ export default withTracker((params) => {
     isMultiUser,
   };
 })(CursorWrapperContainer);
-
 
 CursorWrapperContainer.propTypes = {
   // Defines the object which contains the id of the presenter's cursor

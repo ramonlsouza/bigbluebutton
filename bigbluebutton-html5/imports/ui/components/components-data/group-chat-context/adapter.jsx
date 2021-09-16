@@ -13,7 +13,7 @@ const Adapter = () => {
     const diffAndDispatch = () => {
       setTimeout(() => {
         const groupChatCursor = GroupChat.find({}, { reactive: false }).fetch();
-        const notDispatched = groupChatCursor.filter(objMsg => !alreadyDispatched.has(objMsg._id));
+        const notDispatched = groupChatCursor.filter((objMsg) => !alreadyDispatched.has(objMsg._id));
         notDispatchedCount.count = notDispatched.length;
 
         notDispatched.forEach((groupChat) => {

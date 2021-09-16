@@ -165,7 +165,7 @@ class RecordingIndicator extends PureComponent {
     const recordMeetingButton = (
       <div
         aria-label={recordTitle}
-        aria-describedby={"recording-description"}
+        aria-describedby="recording-description"
         className={recording ? styles.recordingControlON : styles.recordingControlOFF}
         role="button"
         tabIndex={0}
@@ -175,7 +175,7 @@ class RecordingIndicator extends PureComponent {
       >
         {recordingIndicatorIcon}
         <div className={styles.presentationTitle}>
-          <span id={"recording-description"} className={styles.visuallyHidden}>
+          <span id="recording-description" className={styles.visuallyHidden}>
             {`${title} ${recording ? humanizeSeconds(time) : ''}`}
           </span>
           {recording
@@ -193,7 +193,7 @@ class RecordingIndicator extends PureComponent {
     const recordingButton = recording ? recordMeetingButtonWithTooltip : recordMeetingButton;
 
     return (
-      <Fragment>
+      <>
         {record
           ? <span className={styles.presentationTitleSeparator} aria-hidden>|</span>
           : null}
@@ -222,7 +222,7 @@ class RecordingIndicator extends PureComponent {
             </Tooltip>
           )}
         </div>
-      </Fragment>
+      </>
     );
   }
 }
