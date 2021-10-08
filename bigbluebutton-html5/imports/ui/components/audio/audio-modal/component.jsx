@@ -14,6 +14,7 @@ import EchoTest from '../echo-test/component';
 import Help from '../help/component';
 import AudioDial from '../audio-dial/component';
 import AudioAutoplayPrompt from '../autoplay/component';
+import { Title } from './styled-components';
 
 const propTypes = {
   intl: PropTypes.shape({
@@ -593,11 +594,11 @@ class AudioModal extends Component {
                   {
                     isIOSChrome ? null
                       : (
-                        <h2 className={styles.title}>
+                        <Title>
                           {content
                             ? intl.formatMessage(this.contents[content].title)
                             : intl.formatMessage(intlMessages.audioChoiceLabel)}
-                        </h2>
+                        </Title>
                       )
                   }
                 </header>
