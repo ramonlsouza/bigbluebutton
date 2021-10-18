@@ -9,7 +9,7 @@ import { notify } from '/imports/ui/services/notification';
 import cx from 'classnames';
 import Modal from '/imports/ui/components/modal/simple/component';
 import { withModalMounter } from '../../modal/service';
-import { styles } from '../styles';
+import styles from '../styles';
 import ScreenshareBridgeService from '/imports/api/screenshare/client/bridge/service';
 import {
   shareScreen,

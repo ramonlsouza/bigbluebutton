@@ -6,7 +6,7 @@ import deviceInfo from '/imports/utils/deviceInfo';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import TypingIndicatorContainer from './typing-indicator/container';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 import Button from '../../button/component';
 
 const propTypes = {

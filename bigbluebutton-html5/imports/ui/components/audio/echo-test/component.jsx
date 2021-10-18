@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Session } from 'meteor/session';
 import Button from '/imports/ui/components/button/component';
 import { defineMessages, injectIntl } from 'react-intl';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   confirmLabel: {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import Button from '/imports/ui/components/button/component';
-import { styles } from '../styles';
+import styles from '../styles';
 
 const propTypes = {
   confirm: PropTypes.func.isRequired,

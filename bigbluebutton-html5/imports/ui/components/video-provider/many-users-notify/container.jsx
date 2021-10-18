@@ -3,7 +3,7 @@ import Meetings from '/imports/api/meetings/';
 import Auth from '/imports/ui/services/auth';
 import Users from '/imports/api/users/';
 import VideoStreams from '/imports/api/video-streams';
-import LockViewersService from '/imports/ui/components/lock-viewers/service';
+import { updateWebcamsOnlyForModerator } from '/imports/ui/components/lock-viewers/service';
 import ManyUsersComponent from './component';
 
 const USER_CONFIG = Meteor.settings.public.user;
@@ -32,6 +32,6 @@ export default withTracker(() => {
     webcamOnlyForModerator: meeting.usersProp.webcamsOnlyForModerator,
     limitOfViewersInWebcam: Meteor.settings.public.app.viewersInWebcam,
     limitOfViewersInWebcamIsEnable: Meteor.settings.public.app.enableLimitOfViewersInWebcam,
-    toggleWebcamsOnlyForModerator: LockViewersService.toggleWebcamsOnlyForModerator,
+    toggleWebcamsOnlyForModerator: updateWebcamsOnlyForModerator,
   };
 })(ManyUsersComponent);

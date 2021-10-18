@@ -3,7 +3,7 @@ import cx from 'classnames';
 import Toggle from '/imports/ui/components/switch/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import BaseMenu from '../base/component';
-import { styles } from '../styles';
+import styles from '../styles';
 
 const intlMessages = defineMessages({
   dataSavingLabel: {

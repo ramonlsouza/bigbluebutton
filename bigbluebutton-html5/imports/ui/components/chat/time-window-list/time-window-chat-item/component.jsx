@@ -8,7 +8,7 @@ import ChatLogger from '/imports/ui/components/chat/chat-logger/ChatLogger';
 import MessageChatItem from './message-chat-item/component';
 import PollService from '/imports/ui/components/poll/service';
 import Icon from '/imports/ui/components/icon/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const CHAT_CLEAR_MESSAGE = CHAT_CONFIG.system_messages_keys.chat_clear;

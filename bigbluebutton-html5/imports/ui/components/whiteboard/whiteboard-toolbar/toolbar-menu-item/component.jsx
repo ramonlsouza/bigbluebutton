@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '/imports/ui/components/button/component';
 import _ from 'lodash';
 import cx from 'classnames';
-import { styles } from '../styles';
+import styles from '../styles';
 
 export default class ToolbarMenuItem extends Component {
   constructor() {

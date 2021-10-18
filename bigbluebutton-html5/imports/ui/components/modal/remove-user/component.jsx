@@ -3,7 +3,7 @@ import { defineMessages } from 'react-intl';
 import { withModalMounter } from '/imports/ui/components/modal/service';
 import Modal from '/imports/ui/components/modal/simple/component';
 import Button from '/imports/ui/components/button/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const messages = defineMessages({
   yesLabel: {

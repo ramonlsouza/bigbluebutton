@@ -6,7 +6,7 @@ import _ from 'lodash';
 import AudioService from '/imports/ui/components/audio/service';
 import ChatPushAlert from './push-alert/component';
 import Service from '../service';
-import { styles } from '../styles';
+import styles from '../styles';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_CLEAR = CHAT_CONFIG.chat_clear;

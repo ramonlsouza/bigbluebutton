@@ -2,7 +2,7 @@ import React from 'react';
 import Toggle from 'react-toggle';
 import cx from 'classnames';
 import { defineMessages, injectIntl } from 'react-intl';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   on: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import _ from 'lodash';
-import { styles } from '../styles';
+import styles from '../styles';
 
 export default class DropdownListTitle extends Component {
   constructor(props) {

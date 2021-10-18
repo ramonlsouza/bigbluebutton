@@ -4,7 +4,7 @@ import cx from 'classnames';
 import Button from '/imports/ui/components/button/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import ModalBase, { withModalState } from '../base/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   modalClose: {

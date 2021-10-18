@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, defineMessages } from 'react-intl';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   audioDialDescription: {

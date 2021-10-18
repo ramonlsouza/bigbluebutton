@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { defineMessages, injectIntl } from 'react-intl';
 import Button from '/imports/ui/components/button/component';
 import caseInsensitiveReducer from '/imports/utils/caseInsensitiveReducer';
-import { styles } from './styles';
+import styles from './styles';
 import Service from './service';
 
 const intlMessages = defineMessages({

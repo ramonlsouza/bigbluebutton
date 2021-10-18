@@ -2,7 +2,7 @@ import React from 'react';
 import cx from 'classnames';
 import Button from '/imports/ui/components/button/component';
 import _ from 'lodash';
-import { styles } from './styles';
+import styles from './styles';
 
 const DEBOUNCE_TIMEOUT = 5000;
 const DEBOUNCE_OPTIONS = {

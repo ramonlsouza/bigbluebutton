@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import cx from 'classnames';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 
 export default (props) => {
   const { autoSwapLayout, hidePresentation } = props;

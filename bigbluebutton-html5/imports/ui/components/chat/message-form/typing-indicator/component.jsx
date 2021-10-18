@@ -4,7 +4,7 @@ import {
 } from 'react-intl';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { styles } from '../styles.scss';
+import styles from '../styles.scss';
 
 const propTypes = {
   intl: PropTypes.object.isRequired,

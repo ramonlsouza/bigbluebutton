@@ -5,7 +5,7 @@ import Tooltip from '/imports/ui/components/tooltip/component';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import cx from 'classnames';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   notificationRecordingStart: {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withModalMounter } from '/imports/ui/components/modal/service';
 
 import { defineMessages, injectIntl } from 'react-intl';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 import Button from '/imports/ui/components/button/component';
 
 

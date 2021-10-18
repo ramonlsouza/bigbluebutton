@@ -1,6 +1,11 @@
 import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import WhiteboardService from '/imports/ui/components/whiteboard/service';
+import {
+  addGlobalAccess,
+  removeGlobalAccess,
+  isMultiUserActive,
+  getMultiUserSize,
+} from '/imports/ui/components/whiteboard/service';
 import WhiteboardToolbarService from './service';
 import WhiteboardToolbar from './component';
 
@@ -15,8 +20,8 @@ export default withTracker((params) => {
     actions: {
       undoAnnotation: WhiteboardToolbarService.undoAnnotation,
       clearWhiteboard: WhiteboardToolbarService.clearWhiteboard,
-      addWhiteboardGlobalAccess: WhiteboardService.addGlobalAccess,
-      removeWhiteboardGlobalAccess: WhiteboardService.removeGlobalAccess,
+      addWhiteboardGlobalAccess: addGlobalAccess,
+      removeWhiteboardGlobalAccess: removeGlobalAccess,
       changeWhiteboardMode: WhiteboardToolbarService.changeWhiteboardMode,
       getCurrentPalmRejectionMode: WhiteboardToolbarService.getCurrentPalmRejectionMode,
       setInitialPalmRejectionMode: WhiteboardToolbarService.setInitialPalmRejectionMode,
@@ -30,11 +35,11 @@ export default withTracker((params) => {
       setTextShapeObject: WhiteboardToolbarService.setTextShapeObject,
     },
     textShapeActiveId: WhiteboardToolbarService.getTextShapeActiveId(),
-    multiUser: WhiteboardService.isMultiUserActive(whiteboardId),
+    multiUser: isMultiUserActive(whiteboardId),
     isPresenter: WhiteboardToolbarService.isPresenter(),
     annotations: WhiteboardToolbarService.filterAnnotationList(),
     isMeteorConnected: Meteor.status().connected,
-    multiUserSize: WhiteboardService.getMultiUserSize(whiteboardId),
+    multiUserSize: getMultiUserSize(whiteboardId),
   };
 
   return data;

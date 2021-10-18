@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Modal from '/imports/ui/components/modal/simple/component';
 import Button from '/imports/ui/components/button/component';
 import LocalesDropdown from '/imports/ui/components/locales-dropdown/component';
-import { styles } from './styles';
+import styles from './styles';
 import { PANELS, ACTIONS } from '../../layout/enums';
 
 const intlMessages = defineMessages({

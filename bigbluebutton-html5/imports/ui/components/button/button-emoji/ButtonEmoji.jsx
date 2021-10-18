@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { styles } from '../styles';
+import styles from '../styles';
 import Icon from '../../icon/component';
 import TooltipContainer from '/imports/ui/components/tooltip/container';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import Icon from '/imports/ui/components/icon/component';
-import { styles } from '/imports/ui/components/user-list/user-list-content/styles';
+import styles from '/imports/ui/components/user-list/user-list-content/styles';
 import { ACTIONS, PANELS } from '../../../layout/enums';
 
 const intlMessages = defineMessages({

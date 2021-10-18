@@ -3,7 +3,7 @@ import _ from 'lodash';
 import injectNotify from '/imports/ui/components/toast/inject-notify/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import Settings from '/imports/ui/services/settings';
-import { styles } from './styles';
+import styles from './styles';
 
 const CDN = Meteor.settings.public.app.cdn;
 const BASENAME = Meteor.settings.public.app.basename;

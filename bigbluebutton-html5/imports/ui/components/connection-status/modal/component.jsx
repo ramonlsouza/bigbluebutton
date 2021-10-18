@@ -7,7 +7,7 @@ import Icon from '/imports/ui/components/connection-status/icon/component';
 import Switch from '/imports/ui/components/switch/component';
 import Service from '../service';
 import Modal from '/imports/ui/components/modal/simple/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const NETWORK_MONITORING_INTERVAL_MS = 2000; 
 const MIN_TIMEOUT = 3000;

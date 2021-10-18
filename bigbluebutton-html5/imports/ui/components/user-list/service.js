@@ -12,7 +12,7 @@ import KEY_CODES from '/imports/utils/keyCodes';
 import AudioService from '/imports/ui/components/audio/service';
 import VideoService from '/imports/ui/components/video-provider/service';
 import logger from '/imports/startup/client/logger';
-import WhiteboardService from '/imports/ui/components/whiteboard/service';
+import { getCurrentWhiteboardId, getMultiUser } from '/imports/ui/components/whiteboard/service';
 import { Session } from 'meteor/session';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
@@ -156,10 +156,10 @@ const userFindSorting = {
 };
 
 const addWhiteboardAccess = (users) => {
-  const whiteboardId = WhiteboardService.getCurrentWhiteboardId();
+  const whiteboardId = getCurrentWhiteboardId();
 
   if (whiteboardId) {
-    const multiUserWhiteboard = WhiteboardService.getMultiUser(whiteboardId);
+    const multiUserWhiteboard = getMultiUser(whiteboardId);
     return users.map((user) => {
       const whiteboardAccess = multiUserWhiteboard.includes(user.userId);
 

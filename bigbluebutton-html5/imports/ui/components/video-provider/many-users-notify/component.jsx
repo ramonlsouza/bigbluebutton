@@ -3,7 +3,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { notify } from '/imports/ui/services/notification';
 import Button from '/imports/ui/components/button/component';
 import { toast } from 'react-toastify';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   suggestLockTitle: {

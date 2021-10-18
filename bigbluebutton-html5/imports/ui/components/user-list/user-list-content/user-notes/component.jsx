@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { defineMessages } from 'react-intl';
 import Icon from '/imports/ui/components/icon/component';
 import NoteService from '/imports/ui/components/note/service';
-import { styles } from '/imports/ui/components/user-list/user-list-content/styles';
+import styles from '/imports/ui/components/user-list/user-list-content/styles';
 import { PANELS } from '../../../layout/enums';
 
 const propTypes = {

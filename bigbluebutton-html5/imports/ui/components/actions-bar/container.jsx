@@ -10,7 +10,7 @@ import { UsersContext } from '../components-data/users-context/context';
 import ActionsBar from './component';
 import Service from './service';
 import UserListService from '/imports/ui/components/user-list/service';
-import ExternalVideoService from '/imports/ui/components/external-video-player/service';
+import { stopWatching } from '/imports/ui/components/external-video-player/service';
 import CaptionsService from '/imports/ui/components/captions/service';
 import LayoutContext from '../layout/context';
 import { isVideoBroadcasting } from '/imports/ui/components/screenshare/service';
@@ -50,7 +50,7 @@ const RAISE_HAND_BUTTON_ENABLED = Meteor.settings.public.app.raiseHandActionButt
 export default withTracker(() => ({
   amIPresenter: Service.amIPresenter(),
   amIModerator: Service.amIModerator(),
-  stopExternalVideoShare: ExternalVideoService.stopWatching,
+  stopExternalVideoShare: stopWatching,
   enableVideo: getFromUserSettings('bbb_enable_video', Meteor.settings.public.kurento.enableVideo),
   isLayoutSwapped: getSwapLayout(),
   toggleSwapLayout: MediaService.toggleSwapLayout,

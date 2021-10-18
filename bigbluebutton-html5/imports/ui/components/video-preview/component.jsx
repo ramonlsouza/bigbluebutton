@@ -11,7 +11,7 @@ import browserInfo from '/imports/utils/browserInfo';
 import cx from 'classnames';
 import PreviewService from './service';
 import VideoService from '../video-provider/service';
-import { styles } from './styles';
+import styles from './styles';
 import deviceInfo from '/imports/utils/deviceInfo';
 import MediaStreamUtils from '/imports/utils/media-stream-utils';
 import { notify } from '/imports/ui/services/notification';

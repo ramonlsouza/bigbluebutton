@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import Button from '/imports/ui/components/button/component';
 import cx from 'classnames';
-import { styles } from '../styles.scss';
+import styles from '../styles.scss';
 import HoldButton from './holdButton/component';
 
 const DELAY_MILLISECONDS = 200;

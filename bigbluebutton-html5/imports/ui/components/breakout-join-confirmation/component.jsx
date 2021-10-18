@@ -8,7 +8,7 @@ import AudioService from '../audio/service';
 import VideoService from '../video-provider/service';
 import { screenshareHasEnded } from '/imports/ui/components/screenshare/service';
 import UserListService from '/imports/ui/components/user-list/service';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   title: {

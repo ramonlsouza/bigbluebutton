@@ -94,7 +94,7 @@
   font-size: 1.3rem;
   white-space: normal;
 
-  @include mq(var(--small-only)) {
+  @include mq($small-only) {
     font-size: 1rem;
     padding: 0 1rem;
   }

@@ -4,7 +4,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import PropTypes from 'prop-types';
 import logger from '/imports/startup/client/logger';
 import Button from '/imports/ui/components/button/component';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 
 const propTypes = {
   placeholder: PropTypes.string,

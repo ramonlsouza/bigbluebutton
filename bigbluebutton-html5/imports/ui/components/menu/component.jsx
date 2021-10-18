@@ -11,7 +11,7 @@ import Button from "/imports/ui/components/button/component";
 
 import { ENTER, SPACE } from "/imports/utils/keyCodes";
 
-import { styles } from "./styles";
+import styles from "./styles";
 
 const intlMessages = defineMessages({
   close: {

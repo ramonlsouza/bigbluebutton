@@ -8,7 +8,7 @@ import cx from 'classnames';
 import Button from '/imports/ui/components/button/component';
 import Toggle from '/imports/ui/components/switch/component';
 import LiveResult from './live-result/component';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 import { PANELS, ACTIONS } from '../layout/enums';
 import DragAndDrop from './dragAndDrop/component';
 import { alertScreenReader } from '/imports/utils/dom-utils';

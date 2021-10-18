@@ -6,7 +6,7 @@ import Modal from '/imports/ui/components/modal/simple/component';
 
 import Service from './service';
 
-import { styles } from './styles';
+import styles from './styles';
 
 const propTypes = {
   intl: PropTypes.object.isRequired,

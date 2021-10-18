@@ -4,7 +4,7 @@ import cx from 'classnames';
 import { defineMessages, injectIntl } from 'react-intl';
 import _ from 'lodash';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
-import { styles } from './styles';
+import styles from './styles';
 import ChatAvatar from './chat-avatar/component';
 import ChatIcon from './chat-icon/component';
 import ChatUnreadCounter from './chat-unread-messages/component';

@@ -6,7 +6,7 @@ import _ from 'lodash';
 import Auth from '/imports/ui/services/auth';
 import Meetings, { MeetingTimeRemaining } from '/imports/api/meetings';
 import BreakoutRemainingTime from '/imports/ui/components/breakout-room/breakout-remaining-time/container';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 import LayoutContext from '../layout/context';
 import { ACTIONS } from '../layout/enums';
 

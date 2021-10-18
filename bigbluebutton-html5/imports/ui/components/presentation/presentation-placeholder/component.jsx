@@ -1,6 +1,6 @@
 import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 
 const intlMessages = defineMessages({
   presentationPlacholderText: {

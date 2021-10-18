@@ -5,7 +5,7 @@ import Toggle from '/imports/ui/components/switch/component';
 import LocalesDropdown from '/imports/ui/components/locales-dropdown/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import BaseMenu from '../base/component';
-import { styles } from '../styles';
+import styles from '../styles';
 import VideoService from '/imports/ui/components/video-provider/service';
 import { ACTIONS, LAYOUT_TYPE } from '/imports/ui/components/layout/enums';
 

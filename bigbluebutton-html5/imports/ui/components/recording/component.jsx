@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import Button from '/imports/ui/components/button/component';
 import Modal from '/imports/ui/components/modal/simple/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   startTitle: {

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import Button from '/imports/ui/components/button/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const propTypes = {
   autoplayBlockedDesc: PropTypes.string.isRequired,

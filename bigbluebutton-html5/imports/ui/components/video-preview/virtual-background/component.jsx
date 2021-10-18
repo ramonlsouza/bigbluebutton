@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { findDOMNode } from 'react-dom';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
-import { styles } from './styles';
+import styles from './styles';
 import Button from '/imports/ui/components/button/component';
 import {
   EFFECT_TYPES,

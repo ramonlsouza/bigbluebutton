@@ -4,7 +4,7 @@ import cx from 'classnames';
 import { findDOMNode } from 'react-dom';
 import KEY_CODES from '/imports/utils/keyCodes';
 import Icon from '../icon/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const propTypes = {
   disabled: PropTypes.bool,

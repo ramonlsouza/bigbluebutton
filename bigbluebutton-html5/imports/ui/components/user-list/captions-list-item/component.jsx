@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from '/imports/ui/components/icon/component';
 import { Session } from 'meteor/session';
 import { defineMessages, injectIntl } from 'react-intl';
-import { styles } from '/imports/ui/components/user-list/user-list-content/styles';
+import styles from '/imports/ui/components/user-list/user-list-content/styles';
 import { PANELS, ACTIONS } from '../../layout/enums';
 
 const propTypes = {

@@ -11,10 +11,10 @@ import lockContextContainer from '/imports/ui/components/lock-viewers/context/co
 import { withModalMounter } from '/imports/ui/components/modal/service';
 import RemoveUserModal from '/imports/ui/components/modal/remove-user/component';
 import BBBMenu from '/imports/ui/components/menu/component';
-import { styles } from './styles';
+import styles from './styles';
 import UserName from '../user-name/component';
 import { PANELS, ACTIONS } from '../../../../../layout/enums';
-import WhiteboardService from '/imports/ui/components/whiteboard/service';
+import { changeWhiteboardAccess} from '/imports/ui/components/whiteboard/service';
 
 const messages = defineMessages({
   presenter: {
@@ -392,7 +392,7 @@ class UserDropdown extends PureComponent {
         key: 'changeWhiteboardAccess',
         label,
         onClick: () => {
-          WhiteboardService.changeWhiteboardAccess(user.userId, !user.whiteboardAccess);
+          changeWhiteboardAccess(user.userId, !user.whiteboardAccess);
           this.handleClose();
         },
         icon: 'pen_tool',

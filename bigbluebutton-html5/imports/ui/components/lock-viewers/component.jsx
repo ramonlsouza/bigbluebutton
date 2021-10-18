@@ -6,7 +6,7 @@ import Toggle from '/imports/ui/components/switch/component';
 import Modal from '/imports/ui/components/modal/simple/component';
 import NoteService from '/imports/ui/components/note/service';
 import Button from '/imports/ui/components/button/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const CHAT_ENABLED = Meteor.settings.public.chat.enabled;
 

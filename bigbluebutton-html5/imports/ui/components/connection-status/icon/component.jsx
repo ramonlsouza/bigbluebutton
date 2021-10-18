@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import cx from 'classnames';
-import { styles } from './styles';
+import styles from './styles';
 
 const STATS = {
   critical: {

@@ -10,7 +10,7 @@ import BreakoutRoom from '/imports/ui/components/actions-bar/create-breakout-roo
 import CaptionsService from '/imports/ui/components/captions/service';
 import CaptionsWriterMenu from '/imports/ui/components/captions/writer-menu/container';
 import BBBMenu from '/imports/ui/components/menu/component';
-import { styles } from './styles';
+import styles from './styles';
 import { getUserNamesLink } from '/imports/ui/components/user-list/service';
 import Settings from '/imports/ui/services/settings';
 

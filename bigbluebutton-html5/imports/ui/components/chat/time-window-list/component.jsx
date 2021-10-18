@@ -5,7 +5,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import _ from 'lodash';
 import Button from '/imports/ui/components/button/component';
 import { List, AutoSizer,CellMeasurer, CellMeasurerCache } from 'react-virtualized';
-import { styles } from './styles';
+import styles from './styles';
 import ChatLogger from '/imports/ui/components/chat/chat-logger/ChatLogger';
 import TimeWindowChatItem from './time-window-chat-item/container';
 

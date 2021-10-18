@@ -5,7 +5,7 @@ import Button from '/imports/ui/components/button/component';
 import { GithubPicker } from 'react-color';
 import { defineMessages, injectIntl } from 'react-intl';
 import { withModalMounter } from '/imports/ui/components/modal/service';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 
 const DEFAULT_VALUE = 'select';
 const DEFAULT_KEY = -1;

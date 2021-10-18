@@ -2,7 +2,7 @@ import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import Button from '/imports/ui/components/button/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   title: {

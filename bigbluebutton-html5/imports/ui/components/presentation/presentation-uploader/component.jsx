@@ -14,7 +14,7 @@ import { notify } from '/imports/ui/services/notification';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
 import { registerTitleView, unregisterTitleView } from '/imports/utils/dom-utils';
-import { styles } from './styles';
+import styles from './styles';
 
 const { isMobile } = deviceInfo;
 

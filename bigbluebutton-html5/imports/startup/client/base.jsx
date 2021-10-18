@@ -13,7 +13,7 @@ import { Session } from 'meteor/session';
 import { FormattedMessage } from 'react-intl';
 import { Meteor } from 'meteor/meteor';
 import Meetings, { RecordMeetings } from '../../api/meetings';
-import AppService from '/imports/ui/components/app/service';
+import { meetingIsBreakout as appMeetingIsBreakout } from '/imports/ui/components/app/service';
 import Breakouts from '/imports/api/breakouts';
 import AudioService from '/imports/ui/components/audio/service';
 import { notify } from '/imports/ui/services/notification';
@@ -23,6 +23,7 @@ import { LayoutContextFunc } from '../../ui/components/layout/context';
 import VideoService from '/imports/ui/components/video-provider/service';
 import DebugWindow from '/imports/ui/components/debug-window/component';
 import { ACTIONS, PANELS } from '../../ui/components/layout/enums';
+import { hot } from 'react-hot-loader';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const CHAT_ENABLED = CHAT_CONFIG.enabled;
@@ -504,7 +505,7 @@ const BaseContainer = withTracker(() => {
     meetingExist: !!meeting,
     meetingHasEnded: !!meeting && meeting.meetingEnded,
     meetingEndedReason,
-    meetingIsBreakout: AppService.meetingIsBreakout(),
+    meetingIsBreakout: appMeetingIsBreakout(),
     subscriptionsReady: Session.get('subscriptionsReady'),
     loggedIn,
     codeError,
@@ -512,4 +513,4 @@ const BaseContainer = withTracker(() => {
   };
 })(LayoutContextFunc.withContext(Base));
 
-export default BaseContainer;
+export default hot(module)(BaseContainer);

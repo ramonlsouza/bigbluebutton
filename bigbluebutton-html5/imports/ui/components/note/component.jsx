@@ -4,7 +4,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import injectWbResizeEvent from '/imports/ui/components/presentation/resize-wrapper/component';
 import Button from '/imports/ui/components/button/component';
 import NoteService from '/imports/ui/components/note/service';
-import { styles } from './styles';
+import styles from './styles';
 import { PANELS, ACTIONS } from '../layout/enums';
 
 const intlMessages = defineMessages({

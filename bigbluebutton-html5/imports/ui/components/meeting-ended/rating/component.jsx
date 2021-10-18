@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { defineMessages, injectIntl } from 'react-intl';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   legendTitle: {

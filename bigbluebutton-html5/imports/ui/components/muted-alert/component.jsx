@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import hark from 'hark';
 import Icon from '/imports/ui/components/icon/component';
 import cx from 'classnames';
-import { styles } from './styles';
+import styles from './styles';
 import { defineMessages, injectIntl } from 'react-intl';
 import { notify } from '/imports/ui/services/notification';
 import TooltipContainer from '/imports/ui/components/tooltip/container';

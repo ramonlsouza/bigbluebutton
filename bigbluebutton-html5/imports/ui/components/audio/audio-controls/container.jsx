@@ -17,7 +17,7 @@ import {
 } from '../audio-modal/service';
 
 import Service from '../service';
-import AppService from '/imports/ui/components/app/service';
+import { meetingIsBreakout as appMeetingIsBreakout } from '/imports/ui/components/app/service';
 
 const ROLE_VIEWER = Meteor.settings.public.user.role_viewer;
 const APP_CONFIG = Meteor.settings.public.app;
@@ -52,7 +52,7 @@ const processToggleMuteFromOutside = (e) => {
 };
 
 const handleLeaveAudio = () => {
-  const meetingIsBreakout = AppService.meetingIsBreakout();
+  const meetingIsBreakout = appMeetingIsBreakout();
 
   if (!meetingIsBreakout) {
     setUserSelectedMicrophone(false);

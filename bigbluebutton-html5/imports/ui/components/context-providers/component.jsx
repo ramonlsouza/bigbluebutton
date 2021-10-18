@@ -1,5 +1,4 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 import { ChatContextProvider } from '/imports/ui/components/components-data/chat-context/context';
 import { UsersContextProvider } from '/imports/ui/components/components-data/users-context/context';
 import { GroupChatContextProvider } from '/imports/ui/components/components-data/group-chat-context/context';
@@ -16,4 +15,4 @@ const ContextProvidersComponent = (props) => providersList.reduce((acc, Componen
   </Component>
 ), props.children);
 
-export default hot(module)(ContextProvidersComponent);
+export default ContextProvidersComponent;

@@ -9,7 +9,7 @@ import Meetings from '/imports/api/meetings';
 import Auth from '/imports/ui/services/auth';
 import lockContextContainer from '/imports/ui/components/lock-viewers/context/container';
 import AudioError from '/imports/ui/services/audio-manager/error-codes';
-import AppService from '/imports/ui/components/app/service';
+import { meetingIsBreakout as appMeetingIsBreakout } from '/imports/ui/components/app/service';
 import {
   joinMicrophone,
   closeModal,
@@ -47,7 +47,7 @@ export default lockContextContainer(withModalMounter(withTracker(({ userLocks })
     }
   }
 
-  const meetingIsBreakout = AppService.meetingIsBreakout();
+  const meetingIsBreakout = appMeetingIsBreakout();
 
   const joinFullAudioImmediately = (
     autoJoin

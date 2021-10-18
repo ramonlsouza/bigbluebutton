@@ -1,7 +1,7 @@
 import PresentationPods from '/imports/api/presentation-pods';
 import Auth from '/imports/ui/services/auth';
 import Cursor from '/imports/ui/components/cursor/service';
-import WhiteboardService from '/imports/ui/components/whiteboard/service';
+import { isMultiUserActive } from '/imports/ui/components/whiteboard/service';
 
 const getPresenterCursorId = (whiteboardId, userId) =>
   Cursor.findOne(
@@ -24,7 +24,7 @@ const getCurrentCursorIds = (podId, whiteboardId) => {
   }
 
   // checking whether multiUser mode is on or off
-  const isMultiUser = WhiteboardService.isMultiUserActive(whiteboardId);
+  const isMultiUser = isMultiUserActive(whiteboardId);
 
   // it's a multi-user mode - fetching all the cursors except the presenter's
   if (isMultiUser) {

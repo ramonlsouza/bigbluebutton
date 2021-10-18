@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import NotificationsBar from '/imports/ui/components/notifications-bar/component';
-import { styles } from './styles';
+import styles from './styles';
 import { ACTIONS } from '../layout/enums';
 
 const BannerBar = ({

@@ -2,7 +2,7 @@ import React from 'react';
 import { ToastContainer as Toastify } from 'react-toastify';
 
 import Icon from '../icon/component';
-import { styles } from './styles';
+import styles from './styles';
 
 class ToastContainer extends React.Component {
   // we never want this component to update since will break Toastify

@@ -6,7 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import { defineMessages, injectIntl } from 'react-intl';
 import { isUrlValid } from '../service';
 
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   start: {

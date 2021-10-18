@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import AudioManager from '/imports/ui/services/audio-manager';
 import logger from '/imports/startup/client/logger';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   500: {

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Modal from '/imports/ui/components/modal/simple/component';
 import Button from '/imports/ui/components/button/component';
 import AudioService from '/imports/ui/components/audio/service';
-import { styles } from './styles';
+import styles from './styles';
 
 const SELECT_RANDOM_USER_COUNTDOWN = Meteor.settings.public.selectRandomUser.countdown;
 

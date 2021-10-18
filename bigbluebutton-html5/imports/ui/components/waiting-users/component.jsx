@@ -5,7 +5,7 @@ import injectWbResizeEvent from '/imports/ui/components/presentation/resize-wrap
 import UserAvatar from '/imports/ui/components/user-avatar/component';
 import TextInput from '/imports/ui/components/text-input/component';
 import Button from '/imports/ui/components/button/component';
-import { styles } from './styles';
+import styles from './styles';
 import { PANELS, ACTIONS } from '../layout/enums';
 
 const intlMessages = defineMessages({

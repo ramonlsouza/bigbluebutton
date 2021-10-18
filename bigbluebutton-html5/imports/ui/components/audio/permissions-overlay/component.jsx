@@ -2,7 +2,7 @@ import React from 'react';
 import { injectIntl, defineMessages } from 'react-intl';
 import Modal from '/imports/ui/components/modal/simple/component';
 import PropTypes from 'prop-types';
-import { styles } from './styles';
+import styles from './styles';
 
 const propTypes = {
   intl: PropTypes.object.isRequired,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import TooltipContainer from '/imports/ui/components/tooltip/container';
-import { styles } from './styles';
+import styles from './styles';
 import Icon from '../icon/component';
 import BaseButton from './base/component';
 import ButtonEmoji from './button-emoji/ButtonEmoji';

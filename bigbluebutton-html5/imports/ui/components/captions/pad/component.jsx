@@ -7,7 +7,7 @@ import logger from '/imports/startup/client/logger';
 import PadService from './service';
 import CaptionsService from '/imports/ui/components/captions/service';
 import { notify } from '/imports/ui/services/notification';
-import { styles } from './styles';
+import styles from './styles';
 import { PANELS, ACTIONS } from '../../layout/enums';
 import _ from 'lodash';
 

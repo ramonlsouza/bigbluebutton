@@ -5,7 +5,7 @@ import Button from '/imports/ui/components/button/component';
 import ConnectionStatusModalContainer from '/imports/ui/components/connection-status/modal/container';
 import ConnectionStatusService from '/imports/ui/components/connection-status/service';
 import Icon from '/imports/ui/components/connection-status/icon/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   label: {

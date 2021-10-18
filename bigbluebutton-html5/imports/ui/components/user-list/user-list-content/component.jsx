@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { styles } from './styles';
+import styles from './styles';
 import UserParticipantsContainer from './user-participants/container';
 import UserMessages from './user-messages/container';
 import UserNotesContainer from './user-notes/container';

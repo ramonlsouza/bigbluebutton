@@ -5,7 +5,7 @@ import Button from '/imports/ui/components/button/component';
 import { Session } from 'meteor/session';
 import logger from '/imports/startup/client/logger';
 import cx from 'classnames';
-import { styles } from './styles';
+import styles from './styles';
 import Service from './service';
 import BreakoutRoomContainer from './breakout-remaining-time/container';
 import VideoService from '/imports/ui/components/video-provider/service';

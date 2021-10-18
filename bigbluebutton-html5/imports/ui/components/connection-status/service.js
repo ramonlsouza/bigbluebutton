@@ -10,7 +10,7 @@ import { notify } from '/imports/ui/services/notification';
 import { makeCall } from '/imports/ui/services/api';
 import AudioService from '/imports/ui/components/audio/service';
 import VideoService from '/imports/ui/components/video-provider/service';
-import ScreenshareService from '/imports/ui/components/screenshare/service';
+import { getStats as getScreenshareStats } from '/imports/ui/components/screenshare/service';
 
 const STATS = Meteor.settings.public.stats;
 const NOTIFICATION = STATS.notification;
@@ -404,7 +404,7 @@ const getAudioData = async () => {
 const getVideoData = async () => {
   const camerasData = await VideoService.getStats() || {};
 
-  const screenshareData = await ScreenshareService.getStats() || {};
+  const screenshareData = await getScreenshareStats() || {};
 
   return {
     ...camerasData,

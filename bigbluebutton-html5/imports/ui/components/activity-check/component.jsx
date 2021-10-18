@@ -7,7 +7,7 @@ import Modal from '/imports/ui/components/modal/simple/component';
 import { makeCall } from '/imports/ui/services/api';
 
 import { Meteor } from 'meteor/meteor';
-import { styles } from './styles';
+import styles from './styles';
 
 const propTypes = {
   intl: PropTypes.shape({

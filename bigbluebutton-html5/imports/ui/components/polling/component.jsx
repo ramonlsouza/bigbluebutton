@@ -5,7 +5,7 @@ import injectWbResizeEvent from '/imports/ui/components/presentation/resize-wrap
 import { defineMessages, injectIntl } from 'react-intl';
 import cx from 'classnames';
 import { Meteor } from 'meteor/meteor';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 import AudioService from '/imports/ui/components/audio/service';
 
 const MAX_INPUT_CHARS = Meteor.settings.public.poll.maxTypedAnswerLength;

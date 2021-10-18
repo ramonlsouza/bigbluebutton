@@ -22,7 +22,7 @@ import ArcPlayer from '/imports/ui/components/external-video-player/custom-playe
 import PeerTubePlayer from '/imports/ui/components/external-video-player/custom-players/peertube';
 import { ACTIONS } from '/imports/ui/components/layout/enums';
 
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   autoPlayWarning: {

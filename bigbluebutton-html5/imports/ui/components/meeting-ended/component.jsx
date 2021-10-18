@@ -9,7 +9,7 @@ import allowRedirectToLogoutURL from './service';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import logoutRouteHandler from '/imports/utils/logoutRouteHandler';
 import Rating from './rating/component';
-import { styles } from './styles';
+import styles from './styles';
 import logger from '/imports/startup/client/logger';
 import Users from '/imports/api/users';
 import Meetings from '/imports/api/meetings';

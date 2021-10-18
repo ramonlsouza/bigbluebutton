@@ -8,7 +8,7 @@ import getFromUserSettings from '/imports/ui/services/users-settings';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import InputStreamLiveSelectorContainer from './input-stream-live-selector/container';
 import MutedAlert from '/imports/ui/components/muted-alert/component';
-import { styles } from './styles';
+import styles from './styles';
 
 const intlMessages = defineMessages({
   joinAudio: {

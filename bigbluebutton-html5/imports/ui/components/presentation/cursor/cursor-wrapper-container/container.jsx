@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import CursorWrapperService from './service';
 import CursorContainer from '../container';
-import WhiteboardService from '/imports/ui/components/whiteboard/service';
+import { isMultiUserActive } from '/imports/ui/components/whiteboard/service';
 
 const CursorWrapperContainer = ({ presenterCursorId, multiUserCursorIds, ...rest }) => (
   <g>
@@ -47,7 +47,7 @@ export default withTracker((params) => {
   const cursorIds = CursorWrapperService.getCurrentCursorIds(podId, whiteboardId);
   const { presenterCursorId, multiUserCursorIds } = cursorIds;
 
-  const isMultiUser = WhiteboardService.isMultiUserActive(whiteboardId);
+  const isMultiUser = isMultiUserActive(whiteboardId);
 
   return {
     presenterCursorId,

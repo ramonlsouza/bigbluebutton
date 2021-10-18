@@ -6,7 +6,7 @@ import Button from '/imports/ui/components/button/component';
 import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import { Meteor } from 'meteor/meteor';
 import ChatLogger from '/imports/ui/components/chat/chat-logger/ChatLogger';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 import MessageFormContainer from './message-form/container';
 import TimeWindowList from './time-window-list/container';
 import ChatDropdownContainer from './chat-dropdown/container';

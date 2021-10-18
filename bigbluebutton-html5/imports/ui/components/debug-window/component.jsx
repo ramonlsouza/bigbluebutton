@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import Resizable from 're-resizable';
 import { defineMessages, injectIntl } from 'react-intl';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 import Icon from '/imports/ui/components/icon/component';
 import Button from '/imports/ui/components/button/component';
 import ChatLogger from '/imports/ui/components/chat/chat-logger/ChatLogger';

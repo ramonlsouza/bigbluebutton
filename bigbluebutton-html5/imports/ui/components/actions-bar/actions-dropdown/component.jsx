@@ -9,7 +9,7 @@ import ExternalVideoModal from '/imports/ui/components/external-video-player/mod
 import RandomUserSelectContainer from '/imports/ui/components/modal/random-user/container';
 import BBBMenu from '/imports/ui/components/menu/component';
 import cx from 'classnames';
-import { styles } from '../styles';
+import styles from '../styles';
 import { PANELS, ACTIONS } from '../../layout/enums';
 
 const propTypes = {

@@ -5,7 +5,7 @@ import browserInfo from '/imports/utils/browserInfo';
 import deviceInfo from '/imports/utils/deviceInfo';
 import Modal from '/imports/ui/components/modal/simple/component';
 import _ from 'lodash';
-import { styles } from './styles';
+import styles from './styles';
 import withShortcutHelper from './service';
 
 const intlMessages = defineMessages({

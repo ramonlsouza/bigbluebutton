@@ -11,7 +11,7 @@ import CursorWrapperContainer from './cursor/cursor-wrapper-container/container'
 import AnnotationGroupContainer from '../whiteboard/annotation-group/container';
 import PresentationOverlayContainer from './presentation-overlay/container';
 import Slide from './slide/component';
-import { styles } from './styles.scss';
+import styles from './styles.scss';
 import toastStyles from '/imports/ui/components/toast/styles';
 import DownloadPresentationButton from './download-presentation-button/component';
 import FullscreenService from '../fullscreen-button/service';

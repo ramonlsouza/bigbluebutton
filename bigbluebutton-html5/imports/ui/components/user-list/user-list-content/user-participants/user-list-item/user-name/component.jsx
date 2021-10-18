@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { defineMessages } from 'react-intl';
 import Icon from '/imports/ui/components/icon/component';
 import _ from 'lodash';
-import { styles } from './styles';
+import styles from './styles';
 
 const messages = defineMessages({
   presenter: {

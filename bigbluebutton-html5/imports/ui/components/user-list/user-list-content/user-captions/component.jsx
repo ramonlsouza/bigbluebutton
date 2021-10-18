@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import CaptionsListItem from '/imports/ui/components/user-list/captions-list-item/component';
 import { defineMessages } from 'react-intl';
-import { styles } from '/imports/ui/components/user-list/user-list-content/styles';
+import styles from '/imports/ui/components/user-list/user-list-content/styles';
 
 const listTransition = {
   enter: styles.enter,

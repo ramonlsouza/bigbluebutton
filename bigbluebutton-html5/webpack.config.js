@@ -43,25 +43,38 @@ const clientConfig = {
       template: './client/main.html',
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.ContextReplacementPlugin(/any-promise/),
   ],
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx','.scss'],
   },
   output: {
-    path: `${__dirname}/dist`,
-    filename: 'bundle.js',
+    path: '/public/resources',
+    publicPath: '/html5client/resources',
+    filename: 'client.build.js',
   },
   externals: [
     meteorExternals(),
   ],
 };
+
 const serverConfig = {
   entry: [
     './server/main.js',
   ],
   target: 'node',
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ContextReplacementPlugin(/any-promise/),
+  ],
+  output: {
+    path: '/public/resources',
+    publicPath: '/html5client/resources',
+    filename: 'server.build.js',
+  },
   externals: [
     meteorExternals(),
   ],
 };
+
 module.exports = [clientConfig, serverConfig];

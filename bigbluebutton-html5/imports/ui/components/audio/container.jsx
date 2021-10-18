@@ -6,7 +6,10 @@ import { withModalMounter } from '/imports/ui/components/modal/service';
 import { injectIntl, defineMessages } from 'react-intl';
 import _ from 'lodash';
 import Breakouts from '/imports/api/breakouts';
-import AppService from '/imports/ui/components/app/service';
+import {
+  meetingIsBreakout as appMeetingIsBreakout,
+  getBreakoutRooms as appGetBreakoutRooms,
+} from '/imports/ui/components/app/service';
 import { notify } from '/imports/ui/services/notification';
 import getFromUserSettings from '/imports/ui/services/users-settings';
 import VideoPreviewContainer from '/imports/ui/components/video-preview/container';
@@ -170,8 +173,8 @@ export default lockContextContainer(withModalMounter(injectIntl(withTracker(({ m
 
   const userSelectedMicrophone = didUserSelectedMicrophone();
   const userSelectedListenOnly = didUserSelectedListenOnly();
-  const meetingIsBreakout = AppService.meetingIsBreakout();
-  const hasBreakoutRooms = AppService.getBreakoutRooms().length > 0;
+  const meetingIsBreakout = appMeetingIsBreakout();
+  const hasBreakoutRooms = appGetBreakoutRooms().length > 0;
   const openAudioModal = () => new Promise((resolve) => {
     mountModal(<AudioModalContainer resolve={resolve} />);
   });
