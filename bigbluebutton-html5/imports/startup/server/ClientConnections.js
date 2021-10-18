@@ -171,10 +171,12 @@ class ClientConnections {
 
 }
 
+let ClientConnectionsSingleton;
+
 if (!process.env.BBB_HTML5_ROLE || process.env.BBB_HTML5_ROLE === 'frontend') {
   Logger.info("ClientConnectionsSingleton was created")
 
-  const ClientConnectionsSingleton = new ClientConnections();
-
-  export default ClientConnectionsSingleton;
+  ClientConnectionsSingleton = new ClientConnections();
 }
+
+export default ClientConnectionsSingleton;
