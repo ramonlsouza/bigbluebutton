@@ -9,6 +9,7 @@ import ScreenshareButtonContainer from '/imports/ui/components/actions-bar/scree
 import AudioControlsContainer from '../audio/audio-controls/container';
 import JoinVideoOptionsContainer from '../video-provider/video-button/container';
 import PresentationOptionsContainer from './presentation-options/component';
+import { ActionsBarWrapper } from './styled-components';
 
 class ActionsBar extends PureComponent {
   render() {
@@ -39,8 +40,7 @@ class ActionsBar extends PureComponent {
     } = this.props;
 
     return (
-      <div
-        className={styles.actionsbar}
+      <ActionsBarWrapper
         style={
           {
             height: actionsBarStyle.innerHeight,
@@ -118,7 +118,7 @@ class ActionsBar extends PureComponent {
             )
             : null}
         </div>
-      </div>
+      </ActionsBarWrapper>
     );
   }
 }
