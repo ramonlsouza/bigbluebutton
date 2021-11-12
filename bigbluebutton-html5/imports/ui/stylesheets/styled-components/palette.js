@@ -14,9 +14,9 @@ const colorBlueLighter = '#92BCEA';
 
 const colorTransparent = '#ff000000';
 
-const colorPrimary = '#0F70D7';
-const colorDanger = '#DF2721';
-const colorSuccess = '#008081';
+const colorPrimary = 'var(--color-primary, #0F70D7)';
+const colorDanger = 'var(--color-danger, #DF2721)';
+const colorSuccess = 'var(--color-success, #008081)';
 
 const colorBackground = colorGrayDark;
 const userListBg = colorOffWhite;
