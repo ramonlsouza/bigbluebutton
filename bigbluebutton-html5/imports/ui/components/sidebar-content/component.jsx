@@ -8,6 +8,7 @@ import PollContainer from '/imports/ui/components/poll/container';
 import CaptionsContainer from '/imports/ui/components/captions/pad/container';
 import BreakoutRoomContainer from '/imports/ui/components/breakout-room/container';
 import WaitingUsersPanel from '/imports/ui/components/waiting-users/container';
+import TranslationsContainer from "../translations/container";
 import { styles } from '/imports/ui/components/app/styles';
 
 const propTypes = {
@@ -132,6 +133,7 @@ const SidebarContent = (props) => {
         )}
       {sidebarContentPanel === PANELS.BREAKOUT && <BreakoutRoomContainer />}
       {sidebarContentPanel === PANELS.WAITING_USERS && <WaitingUsersPanel />}
+      {sidebarContentPanel === PANELS.TRANSLATIONS && <TranslationsContainer />}
     </Resizable>
   );
 };

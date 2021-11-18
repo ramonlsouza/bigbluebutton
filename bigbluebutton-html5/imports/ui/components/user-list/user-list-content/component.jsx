@@ -8,6 +8,8 @@ import UserCaptionsContainer from './user-captions/container';
 import WaitingUsers from './waiting-users/component';
 import UserPolls from './user-polls/component';
 import BreakoutRoomItem from './breakout-room/component';
+import TranslationsContainer from "./translations/container"
+import TranslationSettings from "./translation-settings/component";
 
 const propTypes = {
   compact: PropTypes.bool,
@@ -49,6 +51,10 @@ class UserContent extends PureComponent {
       sidebarContentPanel,
       layoutContextDispatch,
       startedChats,
+      amIModerator,
+      meetingIsBreakout,
+      hasLanguages,
+      isTranslationEnabled
     } = this.props;
 
     return (
@@ -92,7 +98,28 @@ class UserContent extends PureComponent {
                 layoutContextDispatch,
               }}
             />
-          ) : null}
+          ) : null
+        }
+
+        {isTranslationEnabled && hasLanguages ? (
+          <TranslationSettings
+            {...{
+              intl,
+            }}
+          />
+        ) : null
+        }
+
+        {isTranslationEnabled && amIModerator && !meetingIsBreakout
+            ? (
+                <TranslationsContainer
+                    {...{
+                      intl,
+                    }}
+                />
+            ) : null
+        }
+
         <UserPolls
           isPresenter={currentUser.presenter}
           {...{

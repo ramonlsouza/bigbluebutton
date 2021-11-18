@@ -27,7 +27,7 @@
       }
     }
   }
-  
+
   > :last-child {
     margin-left: var(--sm-padding-x);
     margin-right: 0;
@@ -55,7 +55,7 @@
 
 .glow {
   border-radius: 50%;
-  
+
   :global(.animationsEnabled) & {
     animation: pulse 1s infinite ease-in;
   }
@@ -108,5 +108,23 @@
       width: 0px !important;
       bottom: 1px;
     }
+  }
+}
+
+.btnmuted{
+  span{
+    border-color: white !important;
+  }
+}
+
+.translatorBtn{
+  span{
+    background-color: mediumpurple;
+  }
+}
+
+.translatorBtn:not(.btnmuted):focus{
+  span{
+    background-color: mediumpurple !important;
   }
 }
