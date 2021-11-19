@@ -33,6 +33,7 @@ import GroupChatAdapter from '/imports/ui/components/components-data/group-chat-
 import { liveDataEventBrokerInitializer } from '/imports/ui/services/LiveDataEventBroker/LiveDataEventBroker';
 
 import collectionMirrorInitializer from './collection-mirror-initializer';
+import AudioManager from '/imports/ui/services/audio-manager'
 
 import('/imports/api/audio/client/bridge/bridge-whitelist').catch(() => {
   // bridge loading
@@ -60,6 +61,18 @@ Meteor.startup(() => {
         stackTrace: stack,
       },
     }, message);
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if(AudioManager.initialized && event.key == 'm') {
+      AudioManager.muteTranslator("keybord-mute");
+    }
+  });
+
+  window.addEventListener('keyup', (event) => {
+    if(AudioManager.initialized && event.key == 'm') {
+      AudioManager.unmuteTranslator("keybord-mute");
+    }
   });
 
   // TODO make this a Promise
