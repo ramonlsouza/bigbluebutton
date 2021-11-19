@@ -227,8 +227,7 @@ class AudioControls extends PureComponent {
     const amIAsTranslatorMuted = isTranslatorMuted();
 
     const translatorToggleMuteBtn = (
-      <Button
-          className={cx(styles.muteToggle, [amIAsTranslatorMuted ? styles.btnmuted: "", styles.translatorBtn ].join(" "))}
+      <Styled.TranslatorToggleButton
           onClick={this.handleMuteTranslator}
           hideLabel
           label={intl.formatMessage(intlMessages.translatorMicrophoneLabel)}
@@ -238,7 +237,8 @@ class AudioControls extends PureComponent {
           icon={amIAsTranslatorMuted ? 'mute' : AudioManager.$translatorSpeakingChanged.value ? "mute_filled": 'unmute'}
           size="lg"
           circle
-      />
+          animations={animations}
+       />
     );
 
     const MUTE_ALERT_CONFIG = Meteor.settings.public.app.mutedAlert;

@@ -8,7 +8,7 @@ import UserCaptionsContainer from './user-captions/container';
 import WaitingUsers from './waiting-users/component';
 import UserPolls from './user-polls/component';
 import BreakoutRoomItem from './breakout-room/component';
-import Translations from "./translations/component"
+import TranslationsContainer from "./translations/container"
 import TranslationSettings from "./translation-settings/component";
 
 const propTypes = {
@@ -114,7 +114,7 @@ class UserContent extends PureComponent {
 
         {isTranslationEnabled && amIModerator && !meetingIsBreakout
             ? (
-                <Translations
+                <TranslationsContainer
                     {...{
                       intl,
                     }}

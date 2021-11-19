@@ -10,6 +10,7 @@ import PresentationOptionsContainer from './presentation-options/component';
 import Storage from '/imports/ui/services/storage/session';
 import AudioManager from '/imports/ui/services/audio-manager';
 import { defineMessages, injectIntl } from 'react-intl';
+import Button from '/imports/ui/components/button/component';
 
 import Meetings from '/imports/api/meetings';
 import LanguageOverlay from '/imports/ui/components/LanguageOverlay/component'
