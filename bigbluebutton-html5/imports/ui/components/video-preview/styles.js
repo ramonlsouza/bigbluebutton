@@ -16,7 +16,7 @@ import {
   lineHeightComputed,
   headingsFontWeight,
 } from '/imports/ui/stylesheets/styled-components/typography';
-import { smallOnly } from '/imports/ui/stylesheets/styled-components/breakpoints';
+import { smallOnly, landscape } from '/imports/ui/stylesheets/styled-components/breakpoints';
 import Modal from '/imports/ui/components/modal/simple/component';
 
 const Warning = styled.div`
@@ -53,6 +53,11 @@ const Col = styled.div`
 
 const VideoCol = styled(Col)`
   align-items: center;
+
+  @media ${landscape} {
+    width: 33.3%;
+  }
+
 `;
 
 const Label = styled.label`
@@ -88,21 +93,17 @@ const Select = styled.select`
 
 const Content = styled.div`
   display: flex;
-  min-height: 14rem;
-  max-height: 50vh;
   justify-content: center;
   align-items: center;
   overflow: auto;
   color: ${colorText};
   font-weight: normal;
   padding: ${lineHeightComputed} 0;
+  flex-grow: 1;
 
   @media ${smallOnly} {
     flex-direction: column;
-    height: unset;
     margin: 0;
-    min-height: 12rem;
-    max-height: unset;
   }
 `;
 
@@ -169,6 +170,26 @@ const ExtraActions = styled.div`
 
 const VideoPreviewModal = styled(Modal)`
   padding: 1rem;
+  min-height: 25rem;
+  max-height: 60vh;
+
+  & > [class^="content"] {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  @media ${smallOnly} {
+    height: unset;
+    min-height: 22.5rem;
+    max-height: unset;
+  }
+
+  ${({ modalPhone }) => modalPhone && `
+    min-height: 100%;
+    min-width: 100%;
+    border-radius: 0;
+  `}
 `;
 
 const ellipsis = keyframes`

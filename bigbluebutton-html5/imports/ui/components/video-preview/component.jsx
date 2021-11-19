@@ -731,7 +731,7 @@ class VideoPreview extends Component {
     const { isIe } = browserInfo;
 
     return (
-      <div>
+      <>
         {isIe ? (
           <Styled.BrowserWarning>
             <FormattedMessage
@@ -744,10 +744,11 @@ class VideoPreview extends Component {
             />
           </Styled.BrowserWarning>
         ) : null}
-        <Styled.Title>
-          {intl.formatMessage(intlMessages.webcamSettingsTitle)}
-        </Styled.Title>
-
+        <div>
+          <Styled.Title>
+            {intl.formatMessage(intlMessages.webcamSettingsTitle)}
+          </Styled.Title>
+        </div>
         {this.renderContent()}
 
         <Styled.Footer>
@@ -779,7 +780,7 @@ class VideoPreview extends Component {
             />
           </Styled.Actions>
         </Styled.Footer>
-      </div>
+      </>
     );
   }
 
@@ -807,6 +808,7 @@ class VideoPreview extends Component {
 
     return (
       <Styled.VideoPreviewModal
+        modalPhone={deviceInfo.isPhone}
         onRequestClose={this.handleProceed}
         hideBorder
         contentLabel={intl.formatMessage(intlMessages.webcamSettingsTitle)}

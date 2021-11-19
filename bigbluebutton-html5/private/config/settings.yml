@@ -185,9 +185,9 @@ public:
     connectionTimeout: 60000
     showHelpButton: true
     effectiveConnection:
-      - critical
-      - danger
-      - warning
+    - critical
+    - danger
+    - warning
   externalVideoPlayer:
     enabled: true
   kurento:
@@ -494,6 +494,8 @@ public:
           path: 'bridge/sip'
         - name: kurento
           path: 'bridge/kurento'
+        - name: fullaudio
+          path: 'bridge/FullAudioBridge'
     stunTurnServersFetchAddress: '/bigbluebutton/api/stuns'
     cacheStunTurnServers: true
     fallbackStunServer: ''
@@ -512,7 +514,7 @@ public:
     #so far. Increasing this value might help avoiding 1004 error when
     #user activates microphone.
     iceGatheringTimeout: 5000
-    sipjsHackViaWs: false
+    sipjsHackViaWs: true
     # Mute/umute toggle throttle time
     toggleMuteThrottleTime: 300
     #Websocket keepAlive interval (seconds). You may set this to prevent
@@ -527,6 +529,15 @@ public:
     traceSip: false
     # SDP semantics: plan-b|unified-plan
     sdpSemantics: 'unified-plan'
+    translation:
+      enabled: true
+      floorVolume: 0.2
+      translator:
+        speakDetection:
+          enabled: true
+          timeout: 60000
+          delay: 5000
+          threshold: -70
   stats:
     enabled: true
     interval: 10000
@@ -777,3 +788,11 @@ private:
       version: 10
     - browser: YandexBrowser
       version: 19
+  # Direct Prometheus instrumentation.
+  # EXPERIMENTAL, so disabled by default.
+  prometheus:
+    enabled: false
+    # Metrics endpoint path
+    path: '/metrics'
+    # Whether default metrics for Node.js processes should be exported
+    collectDefaultMetrics: false

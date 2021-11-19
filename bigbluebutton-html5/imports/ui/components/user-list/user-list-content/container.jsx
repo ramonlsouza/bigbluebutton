@@ -8,6 +8,8 @@ import GuestUsers from '/imports/ui/local-collections/guest-users-collection/gue
 import { layoutSelectInput, layoutDispatch } from '../../layout/context';
 import { UsersContext } from '/imports/ui/components/components-data/users-context/context';
 import WaitingUsersService from '/imports/ui/components/waiting-users/service';
+import ActionsBarService from "../../actions-bar/service";
+import AudioManager from "../../../services/audio-manager";
 
 const CLOSED_CHAT_LIST_KEY = 'closedChatList';
 const STARTED_CHAT_LIST_KEY = 'startedChatList';
@@ -52,4 +54,6 @@ export default withTracker(() => ({
     denied: false,
   }).fetch(),
   isWaitingRoomEnabled: WaitingUsersService.isWaitingRoomEnabled(),
+  hasLanguages: ActionsBarService.hasLanguages(),
+  isTranslationEnabled: AudioManager.isTranslationEnabled(),
 }))(UserContentContainer);

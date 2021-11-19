@@ -165,8 +165,10 @@ class NavBar extends Component {
       >
         <Styled.Top>
           <Styled.Left>
-            {!isExpanded ? null
-              : <Styled.ArrowLeft iconName="left_arrow" />}
+            {isExpanded && document.dir === 'ltr'
+              && <Styled.ArrowLeft iconName="left_arrow" />}
+            {!isExpanded && document.dir === 'rtl'
+              && <Styled.ArrowLeft iconName="left_arrow" />}
             <Styled.NavbarToggleButton
               onClick={this.handleToggleUserList}
               ghost
@@ -181,8 +183,10 @@ class NavBar extends Component {
               accessKey={TOGGLE_USERLIST_AK}
               hasNotification={hasNotification}
             />
-            {isExpanded ? null
-              : <Styled.ArrowRight iconName="right_arrow" />}
+            {!isExpanded && document.dir === 'ltr'
+              && <Styled.ArrowRight iconName="right_arrow" />}
+            {isExpanded && document.dir === 'rtl'
+              && <Styled.ArrowRight iconName="right_arrow" />}
           </Styled.Left>
           <Styled.Center>
             <Styled.PresentationTitle>{presentationTitle}</Styled.PresentationTitle>

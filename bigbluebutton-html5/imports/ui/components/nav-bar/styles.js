@@ -34,6 +34,7 @@ const Left = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const ArrowLeft = styled(Icon)`
@@ -41,12 +42,7 @@ const ArrowLeft = styled(Icon)`
   font-size: 40%;
   color: ${colorWhite};
 
-  width: ${lgPaddingY};
-  left: 1.1rem;
-  [dir="rtl"] & {
-    right: 2.5rem;
-    left: 0;
-  }
+  left: .25rem;
 `;
 
 const ArrowRight = styled(Icon)`
@@ -54,12 +50,7 @@ const ArrowRight = styled(Icon)`
   font-size: 40%;
   color: ${colorWhite};
 
-  width: ${mdPaddingX};
-  left: 2.5rem;
-  [dir="rtl"] & {
-    right: .5rem;
-    left: 0;
-  }
+  right: .0125rem;
 `;
 
 const Center = styled.div`
