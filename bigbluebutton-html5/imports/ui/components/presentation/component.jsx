@@ -18,6 +18,7 @@ import PresentationCloseButton from './presentation-close-button/component';
 import DownloadPresentationButton from './download-presentation-button/component';
 import FullscreenService from '../fullscreen-button/service';
 import FullscreenButtonContainer from '../fullscreen-button/container';
+import ScreenshotButtonContainer from '../screenshot-button/component';
 import Icon from '/imports/ui/components/icon/component';
 import PollingContainer from '/imports/ui/components/polling/container';
 import { ACTIONS, LAYOUT_TYPE } from '../layout/enums';
@@ -596,61 +597,64 @@ class Presentation extends PureComponent {
         {this.renderPresentationClose()}
         {this.renderPresentationDownload()}
         {this.renderPresentationFullscreen()}
-        <svg
-          key={currentSlide.id}
-          data-test="whiteboard"
-          width={svgDimensions.width < 0 ? 0 : svgDimensions.width}
-          height={svgDimensions.height < 0 ? 0 : svgDimensions.height}
-          ref={(ref) => { if (ref != null) { this.svggroup = ref; } }}
-          viewBox={svgViewBox}
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          className={styles.svgStyles}
-        >
-          <defs>
-            <clipPath id="viewBox">
-              <rect x={viewBoxPosition.x} y={viewBoxPosition.y} width="100%" height="100%" fill="none" />
-            </clipPath>
-          </defs>
-          <g clipPath="url(#viewBox)">
-            <Slide
-              imageUri={imageUri}
-              svgWidth={width}
-              svgHeight={height}
-            />
-            <AnnotationGroupContainer
-              {...{
-                width,
-                height,
-              }}
-              published
-              whiteboardId={currentSlide.id}
-            />
-            <AnnotationGroupContainer
-              {...{
-                width,
-                height,
-              }}
-              published={false}
-              whiteboardId={currentSlide.id}
-            />
-            <CursorWrapperContainer
-              podId={podId}
-              whiteboardId={currentSlide.id}
-              widthRatio={widthRatio}
-              physicalWidthRatio={svgDimensions.width / width}
-              slideWidth={width}
-              slideHeight={height}
-            />
-          </g>
-          {this.renderOverlays(
-            currentSlide,
-            svgDimensions,
-            viewBoxPosition,
-            viewBoxDimensions,
-            physicalDimensions,
-          )}
-        </svg>
+        {this.renderPresentationScreenshot()}
+        <div id="screenshotContainer">
+          <svg
+            key={currentSlide.id}
+            data-test="whiteboard"
+            width={svgDimensions.width < 0 ? 0 : svgDimensions.width}
+            height={svgDimensions.height < 0 ? 0 : svgDimensions.height}
+            ref={(ref) => { if (ref != null) { this.svggroup = ref; } }}
+            viewBox={svgViewBox}
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            className={styles.svgStyles}
+          >
+            <defs>
+              <clipPath id="viewBox">
+                <rect x={viewBoxPosition.x} y={viewBoxPosition.y} width="100%" height="100%" fill="none" />
+              </clipPath>
+            </defs>
+            <g clipPath="url(#viewBox)">
+              <Slide
+                imageUri={imageUri}
+                svgWidth={width}
+                svgHeight={height}
+              />
+              <AnnotationGroupContainer
+                {...{
+                  width,
+                  height,
+                }}
+                published
+                whiteboardId={currentSlide.id}
+              />
+              <AnnotationGroupContainer
+                {...{
+                  width,
+                  height,
+                }}
+                published={false}
+                whiteboardId={currentSlide.id}
+              />
+              <CursorWrapperContainer
+                podId={podId}
+                whiteboardId={currentSlide.id}
+                widthRatio={widthRatio}
+                physicalWidthRatio={svgDimensions.width / width}
+                slideWidth={width}
+                slideHeight={height}
+              />
+            </g>
+            {this.renderOverlays(
+              currentSlide,
+              svgDimensions,
+              viewBoxPosition,
+              viewBoxDimensions,
+              physicalDimensions,
+            )}
+          </svg>
+        </div>
       </div>
     );
   }
@@ -723,6 +727,14 @@ class Presentation extends PureComponent {
       <DownloadPresentationButton
         handleDownloadPresentation={handleDownloadPresentation}
         dark
+      />
+    );
+  }
+
+  renderPresentationScreenshot() {
+    return (
+      <ScreenshotButtonContainer
+        className={styles.presentationFullscreen}
       />
     );
   }
