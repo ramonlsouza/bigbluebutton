@@ -24,13 +24,22 @@ const UserParticipantsContainer = (props) => {
   if (!contextUsers) return null;
 
   const currentUser = contextUsers[Auth.meetingID][Auth.userID];
+
+  const currentUserId = currentUser ? currentUser.userId : null;
+  const isUserLocked = currentUser ? currentUser.locked : true;
+  const isPresenter = currentUser ? currentUser.presenter : false;
+  const currentUserRole = currentUser ? currentUser.role : 'viewer';
+
   const usersArray = Object.values(contextUsers[Auth.meetingID]);
   const users = formatUsers(usersArray, videoUsers, whiteboardUsers);
 
   return (
     <UserParticipants {
     ...{
-      currentUser,
+      currentUserId,
+      isUserLocked,
+      isPresenter,
+      currentUserRole,
       users,
       setEmojiStatus,
       clearAllEmojiStatus,

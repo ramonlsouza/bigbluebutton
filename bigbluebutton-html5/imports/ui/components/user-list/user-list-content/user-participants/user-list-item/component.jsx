@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, defineMessages } from 'react-intl';
 import _ from 'lodash';
@@ -172,7 +172,7 @@ const CHAT_ENABLED = Meteor.settings.public.chat.enabled;
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 const LABEL = Meteor.settings.public.user.label;
 
-class UserListItem extends PureComponent {
+class UserListItem extends Component {
   /**
    * Return true if the content fit on the screen, false otherwise.
    *
@@ -214,6 +214,12 @@ class UserListItem extends PureComponent {
 
   handleClose() {
     this.setState({ selected: null });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const isPropsEqual = _.isEqual(this.props, nextProps);
+    const isStateEqual = _.isEqual(this.state, nextState);
+    return !isPropsEqual || !isStateEqual;
   }
 
   onActionsShow() {
@@ -259,7 +265,10 @@ class UserListItem extends PureComponent {
   getUsersActions() {
     const {
       intl,
-      currentUser,
+      currentUserId,
+      isUserLocked,
+      isPresenter: amIPresenter,
+      currentUserRole,
       user,
       voiceUser,
       getAvailableActions,
@@ -287,8 +296,7 @@ class UserListItem extends PureComponent {
     const { clientType, isSharingWebcam, pin: userIsPinned } = user;
     const isDialInUser = clientType === 'dial-in-user';
 
-    const amIPresenter = currentUser.presenter;
-    const amIModerator = currentUser.role === ROLE_MODERATOR;
+    const amIModerator = currentUserRole === ROLE_MODERATOR;
     const actionPermissions = getAvailableActions(
       amIModerator, meetingIsBreakout, user, voiceUser, usersProp, amIPresenter,
     );
@@ -310,11 +318,11 @@ class UserListItem extends PureComponent {
 
     const { disablePrivateChat } = lockSettingsProps;
 
-    const enablePrivateChat = currentUser.role === ROLE_MODERATOR
+    const enablePrivateChat = currentUserRole === ROLE_MODERATOR
       ? allowedToChatPrivately
       : allowedToChatPrivately
-      && (!(currentUser.locked && disablePrivateChat)
-        || hasPrivateChatBetweenUsers(currentUser.userId, user.userId)
+      && (!(isUserLocked && disablePrivateChat)
+        || hasPrivateChatBetweenUsers(currentUserId, user.userId)
         || user.role === ROLE_MODERATOR) && isMeteorConnected;
 
     const { allowUserLookup } = Meteor.settings.public.app;
@@ -362,7 +370,7 @@ class UserListItem extends PureComponent {
         label: intl.formatMessage(messages.StartPrivateChat),
         onClick: () => {
           this.handleClose();
-          getGroupChatPrivate(currentUser.userId, user);
+          getGroupChatPrivate(currentUserId, user);
           layoutContextDispatch({
             type: ACTIONS.SET_SIDEBAR_CONTENT_IS_OPEN,
             value: true,

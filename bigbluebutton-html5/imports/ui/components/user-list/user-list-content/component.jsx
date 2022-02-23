@@ -10,7 +10,8 @@ import UserPollsContainer from './user-polls/container';
 import BreakoutRoomContainer from './breakout-room/container';
 
 const propTypes = {
-  currentUser: PropTypes.shape({}).isRequired,
+  isPresenter: PropTypes.bool.isRequired,
+  userRole: PropTypes.string.isRequired,
 };
 
 const CHAT_ENABLED = Meteor.settings.public.chat.enabled;
@@ -19,7 +20,8 @@ const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 class UserContent extends PureComponent {
   render() {
     const {
-      currentUser,
+      isPresenter,
+      userRole,
       pendingUsers,
       isWaitingRoomEnabled,
       isGuestLobbyMessageEnabled,
@@ -32,13 +34,13 @@ class UserContent extends PureComponent {
     return (
       <Styled.Content data-test="userListContent">
         {CHAT_ENABLED ? <UserMessagesContainer /> : null}
-        {currentUser.role === ROLE_MODERATOR ? <UserCaptionsContainer /> : null}
+        {userRole === ROLE_MODERATOR ? <UserCaptionsContainer /> : null}
         <UserNotesContainer />
-        {showWaitingRoom && currentUser.role === ROLE_MODERATOR
+        {showWaitingRoom && userRole === ROLE_MODERATOR
           ? (
             <WaitingUsersContainer {...{ pendingUsers }} />
           ) : null}
-        <UserPollsContainer isPresenter={currentUser.presenter} />
+        <UserPollsContainer isPresenter={isPresenter} />
         <BreakoutRoomContainer />
         <UserParticipantsContainer compact={compact}/>
       </Styled.Content>

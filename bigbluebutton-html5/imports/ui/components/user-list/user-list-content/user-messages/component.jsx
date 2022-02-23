@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import { defineMessages } from 'react-intl';
@@ -6,6 +6,7 @@ import Styled from './styles';
 import { findDOMNode } from 'react-dom';
 import ChatListItemContainer from '../../chat-list-item/container';
 import { injectIntl } from 'react-intl';
+import _ from 'lodash';
 
 const propTypes = {
   activeChats: PropTypes.arrayOf(String).isRequired,
@@ -27,7 +28,7 @@ const intlMessages = defineMessages({
   },
 });
 
-class UserMessages extends PureComponent {
+class UserMessages extends Component {
   constructor() {
     super();
 
@@ -49,6 +50,12 @@ class UserMessages extends PureComponent {
         this.rove,
       );
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const isPropsEqual = _.isEqual(this.props, nextProps);
+    const isStateEqual = _.isEqual(this.state, nextState);
+    return !isPropsEqual || !isStateEqual;
   }
 
   componentDidUpdate(prevProps, prevState) {

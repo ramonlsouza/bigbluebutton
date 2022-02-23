@@ -18,7 +18,7 @@ const propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired,
   }).isRequired,
-  currentUser: PropTypes.shape({}).isRequired,
+  currentUserRole: PropTypes.string.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   setEmojiStatus: PropTypes.func.isRequired,
   clearAllEmojiStatus: PropTypes.func.isRequired,
@@ -122,8 +122,12 @@ class UserParticipants extends Component {
       setEmojiStatus,
       users,
       requestUserInformation,
-      currentUser,
+      currentUserId,
+      isUserLocked,
+      isPresenter,
+      currentUserRole,
       meetingIsBreakout,
+      isReady,
     } = this.props;
     const { scrollArea } = this.state;
     const user = users[index];
@@ -147,10 +151,14 @@ class UserParticipants extends Component {
               compact,
               setEmojiStatus,
               requestUserInformation,
-              currentUser,
+              currentUserId,
+              isUserLocked,
+              isPresenter,
+              currentUserRole,
               meetingIsBreakout,
               scrollArea,
               isRTL,
+              isReady,
             }}
             user={user}
             getScrollContainerRef={this.getScrollContainerRef}
@@ -185,7 +193,7 @@ class UserParticipants extends Component {
       users,
       compact,
       clearAllEmojiStatus,
-      currentUser,
+      currentUserRole,
       meetingIsBreakout,
     } = this.props;
     const { isOpen, scrollArea } = this.state;
@@ -202,7 +210,7 @@ class UserParticipants extends Component {
                   {users.length}
                   )
                 </Styled.SmallTitle>
-                {currentUser.role === ROLE_MODERATOR
+                {currentUserRole === ROLE_MODERATOR
                   ? (
                     <UserOptionsContainer {...{
                       users,
