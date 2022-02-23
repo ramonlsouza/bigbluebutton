@@ -8,7 +8,7 @@ import getFromUserSettings from '/imports/ui/services/users-settings';
 import userListService from '/imports/ui/components/user-list/service';
 import { ChatContext } from '/imports/ui/components/components-data/chat-context/context';
 import { GroupChatContext } from '/imports/ui/components/components-data/group-chat-context/context';
-import { UsersContext } from '/imports/ui/components/components-data/users-context/context';
+import useContextUsers from '/imports/ui/components/components-data/users-context/service';
 import NotesService from '/imports/ui/components/notes/service';
 import NavBar from './component';
 import { layoutSelectInput, layoutSelectOutput, layoutDispatch } from '../layout/context';
@@ -29,12 +29,13 @@ const checkUnreadMessages = ({
 
 const NavBarContainer = ({ children, ...props }) => {
   const usingChatContext = useContext(ChatContext);
-  const usingUsersContext = useContext(UsersContext);
   const usingGroupChatContext = useContext(GroupChatContext);
   const { chats: groupChatsMessages } = usingChatContext;
-  const { users } = usingUsersContext;
+  const { users: contextUsers } = useContextUsers('navbar');
+
   const { groupChat: groupChats } = usingGroupChatContext;
-  const activeChats = userListService.getActiveChats({ groupChatsMessages, groupChats, users:users[Auth.meetingID] });
+  const users = contextUsers ? contextUsers[Auth.meetingID] : null;
+  const activeChats = userListService.getActiveChats({ groupChatsMessages, groupChats, users });
   const { ...rest } = props;
 
   const sidebarContent = layoutSelectInput((i) => i.sidebarContent);
@@ -47,13 +48,13 @@ const NavBarContainer = ({ children, ...props }) => {
 
   const hasUnreadNotes = NotesService.hasUnreadNotes(sidebarContentPanel);
   const hasUnreadMessages = checkUnreadMessages(
-    { groupChatsMessages, groupChats, users: users[Auth.meetingID] },
+    { groupChatsMessages, groupChats, users },
   );
 
   const isExpanded = !!sidebarContentPanel || !!sidebarNavPanel;
 
-  const currentUser = users[Auth.meetingID][Auth.userID];
-  const amIModerator = currentUser.role === ROLE_MODERATOR;
+  const currentUser = users ? users[Auth.userID] : null;
+  const amIModerator = currentUser?.role === ROLE_MODERATOR;
 
   const hideNavBar = getFromUserSettings('bbb_hide_nav_bar', false);
 
@@ -84,7 +85,8 @@ const NavBarContainer = ({ children, ...props }) => {
 export default withTracker(() => {
   const CLIENT_TITLE = getFromUserSettings('bbb_client_title', PUBLIC_CONFIG.app.clientTitle);
 
-  let meetingTitle, breakoutNum, breakoutName, meetingName;
+  let meetingTitle; let breakoutNum; let breakoutName; let
+    meetingName;
   const meetingId = Auth.meetingID;
   const meetingObject = Meetings.findOne({
     meetingId,
@@ -92,7 +94,7 @@ export default withTracker(() => {
 
   if (meetingObject != null) {
     meetingTitle = meetingObject.meetingProp.name;
-    let titleString = `${CLIENT_TITLE} - ${meetingTitle}`;
+    const titleString = `${CLIENT_TITLE} - ${meetingTitle}`;
     document.title = titleString;
 
     if (meetingObject.breakoutProps) {

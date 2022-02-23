@@ -19,7 +19,7 @@ const UserParticipantsContainer = (props) => {
   } = UserListService;
 
   const { videoUsers, whiteboardUsers } = props;
-  const { users: contextUsers, isReady } = useContextUsers();
+  const { users: contextUsers, isReady } = useContextUsers('userlist');
 
   if (!contextUsers) return null;
 
