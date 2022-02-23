@@ -37,6 +37,9 @@ class ActionsBar extends PureComponent {
       isOldMinimizeButtonEnabled,
     } = this.props;
 
+    const userId = currentUser ? currentUser.userId : null;
+    const userEmoji = currentUser ? currentUser.emoji : '';
+
     return (
       <Styled.ActionsBar
         style={
@@ -98,23 +101,23 @@ class ActionsBar extends PureComponent {
                 icon="hand"
                 label={intl.formatMessage({
                   id: `app.actionsBar.emojiMenu.${
-                    currentUser.emoji === 'raiseHand'
+                    userEmoji === 'raiseHand'
                       ? 'lowerHandLabel'
                       : 'raiseHandLabel'
                   }`,
                 })}
                 accessKey={shortcuts.raisehand}
-                color={currentUser.emoji === 'raiseHand' ? 'primary' : 'default'}
-                data-test={currentUser.emoji === 'raiseHand' ? 'lowerHandLabel' : 'raiseHandLabel'}
-                ghost={currentUser.emoji !== 'raiseHand'}
-                emoji={currentUser.emoji}
+                color={userEmoji === 'raiseHand' ? 'primary' : 'default'}
+                data-test={userEmoji === 'raiseHand' ? 'lowerHandLabel' : 'raiseHandLabel'}
+                ghost={userEmoji !== 'raiseHand'}
+                emoji={userEmoji}
                 hideLabel
                 circle
                 size="lg"
                 onClick={() => {
                   setEmojiStatus(
-                    currentUser.userId,
-                    currentUser.emoji === 'raiseHand' ? 'none' : 'raiseHand',
+                    userId,
+                    userEmoji === 'raiseHand' ? 'none' : 'raiseHand',
                   );
                 }}
               />

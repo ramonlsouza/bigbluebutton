@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { injectIntl } from 'react-intl';
@@ -6,7 +6,7 @@ import getFromUserSettings from '/imports/ui/services/users-settings';
 import Auth from '/imports/ui/services/auth';
 import PresentationService from '/imports/ui/components/presentation/service';
 import Presentations from '/imports/api/presentations';
-import { UsersContext } from '../components-data/users-context/context';
+import useContextUsers from '/imports/ui/components/components-data/users-context/service';
 import ActionsBar from './component';
 import Service from './service';
 import UserListService from '/imports/ui/components/user-list/service';
@@ -24,12 +24,11 @@ const ActionsBarContainer = (props) => {
   const actionsBarStyle = layoutSelectOutput((i) => i.actionBar);
   const layoutContextDispatch = layoutDispatch();
 
-  const usingUsersContext = useContext(UsersContext);
-  const { users } = usingUsersContext;
+  const { users, isReady } = useContextUsers('actions-bar');
 
-  const currentUser = { userId: Auth.userID, emoji: users[Auth.meetingID][Auth.userID].emoji };
+  const currentUser = users ? { userId: Auth.userID, emoji: users[Auth.meetingID][Auth.userID].emoji } : null;
 
-  const amIPresenter = users[Auth.meetingID][Auth.userID].presenter;
+  const amIPresenter = users ? users[Auth.meetingID][Auth.userID].presenter : false;
 
   return (
     <ActionsBar {
@@ -39,6 +38,7 @@ const ActionsBarContainer = (props) => {
         layoutContextDispatch,
         actionsBarStyle,
         amIPresenter,
+        isReady,
       }
     }
     />
