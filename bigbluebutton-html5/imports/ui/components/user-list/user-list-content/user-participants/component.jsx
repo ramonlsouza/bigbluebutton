@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { defineMessages } from 'react-intl';
 import PropTypes from 'prop-types';
 import Styled from './styles';
-import _ from 'lodash';
 import { findDOMNode } from 'react-dom';
 import {
   AutoSizer,
@@ -82,10 +81,8 @@ class UserParticipants extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const isPropsEqual = _.isEqual(this.props, nextProps);
-    const isStateEqual = _.isEqual(this.state, nextState);
-    return !isPropsEqual || !isStateEqual;
+  shouldComponentUpdate(nextProps) {
+    return nextProps.isReady;
   }
 
   selectEl(el) {
