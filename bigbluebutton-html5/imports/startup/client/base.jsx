@@ -12,7 +12,6 @@ import Users from '/imports/api/users';
 import { Session } from 'meteor/session';
 import { FormattedMessage } from 'react-intl';
 import { Meteor } from 'meteor/meteor';
-import { RecordMeetings } from '../../api/meetings';
 import Meetings from '/imports/api/meetings';
 import AppService from '/imports/ui/components/app/service';
 import AudioService from '/imports/ui/components/audio/service';
@@ -445,34 +444,6 @@ export default withTracker(() => {
   const meetingEndedReason = meeting?.meetingEndedReason;
 
   let userSubscriptionHandler;
-
-  RecordMeetings.find({ meetingId }, { fields: { recording: 1 } }).observe({
-    changed: (newDocument, oldDocument) => {
-      if (newDocument) {
-        if (!oldDocument.recording && newDocument.recording) {
-          notify(
-            <FormattedMessage
-              id="app.notification.recordingStart"
-              description="Notification for when the recording starts"
-            />,
-            'success',
-            'record',
-          );
-        }
-
-        if (oldDocument.recording && !newDocument.recording) {
-          notify(
-            <FormattedMessage
-              id="app.notification.recordingPaused"
-              description="Notification for when the recording stops"
-            />,
-            'error',
-            'record',
-          );
-        }
-      }
-    },
-  });
 
   const codeError = Session.get('codeError');
   const { streams: usersVideo } = VideoService.getVideoStreams();
