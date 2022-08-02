@@ -14,6 +14,7 @@ import Chat from '/imports/ui/components/chat/component';
 import ChatService from './service';
 import { layoutSelect, layoutDispatch } from '../layout/context';
 import { escapeHtml } from '/imports/utils/string-utils';
+import { UserSentMessageCollection } from './service';
 
 const CHAT_CONFIG = Meteor.settings.public.chat;
 const PUBLIC_CHAT_KEY = CHAT_CONFIG.public_id;
@@ -253,6 +254,7 @@ export default lockContextContainer(injectIntl(withTracker(({ intl, userLocks })
   const isChatLockedPublic = userLocks.userPublicChat;
   const isChatLockedPrivate = userLocks.userPrivateChat;
 
+  const userSentMessage = UserSentMessageCollection.findOne({ userId: Auth.userID, sent: true });
   const { connected: isMeteorConnected } = Meteor.status();
 
   return {
@@ -260,6 +262,7 @@ export default lockContextContainer(injectIntl(withTracker(({ intl, userLocks })
     isChatLockedPublic,
     isChatLockedPrivate,
     isMeteorConnected,
+    userSentMessage,
     meetingIsBreakout: meetingIsBreakout(),
     loginTime: getLoginTime(),
     actions: {

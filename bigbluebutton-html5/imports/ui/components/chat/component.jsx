@@ -53,9 +53,9 @@ const Chat = (props) => {
     syncing,
     syncedPercent,
     lastTimeWindowValuesBuild,
+    userSentMessage,
   } = props;
 
-  const userSentMessage = UserSentMessageCollection.findOne({ userId: Auth.userID, sent: true });
   const { isChrome } = browserInfo;
 
   const HIDE_CHAT_AK = shortcuts.hideprivatechat;

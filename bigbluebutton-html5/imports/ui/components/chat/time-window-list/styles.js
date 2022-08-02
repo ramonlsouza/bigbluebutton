@@ -5,7 +5,7 @@ import {
   mdPaddingY,
 } from '/imports/ui/stylesheets/styled-components/general';
 import { ButtonElipsis } from '/imports/ui/stylesheets/styled-components/placeholders';
-import { VirtualizedScrollboxVertical } from '/imports/ui/stylesheets/styled-components/scrollable';
+import { VirtuosoScrollboxVertical } from '/imports/ui/stylesheets/styled-components/scrollable';
 
 const UnreadButton = styled(ButtonElipsis)`
   flex-shrink: 0;
@@ -37,13 +37,14 @@ const MessageListWrapper = styled.div`
   }
 `;
 
-const MessageList = styled(VirtualizedScrollboxVertical)`
+const MessageList = styled(VirtuosoScrollboxVertical)`
   flex-flow: column;
   flex-grow: 1;
   flex-shrink: 1;
   margin: 0 auto 0 0;
   right: 0 ${mdPaddingX} 0 0;
   padding-top: 0;
+  height: 100%;
   width: 100%;
   outline-style: none;
 
