@@ -12,6 +12,7 @@ import Styled from './styles';
 import Icon from '/imports/ui/components/common/icon/component.jsx';
 import { isImportSharedNotesFromBreakoutRoomsEnabled, isImportPresentationWithAnnotationsFromBreakoutRoomsEnabled } from '/imports/ui/services/features';
 import { addNewAlert } from '/imports/ui/components/screenreader-alert/service';
+import Resizable from 're-resizable';
 
 const ROLE_MODERATOR = Meteor.settings.public.user.role_moderator;
 
@@ -221,6 +222,10 @@ class BreakoutRoom extends PureComponent {
     this.renderErrorMessages = this.renderErrorMessages.bind(this);
     this.onUpdateBreakouts = this.onUpdateBreakouts.bind(this);
 
+    this.setBoxHeight = this.setBoxHeight.bind(this);
+    this.setIsResizing = this.setIsResizing.bind(this);
+    this.onResizeHandle = this.onResizeHandle.bind(this);
+
     this.state = {
       numberOfRooms: MIN_BREAKOUT_ROOMS,
       selectedId: '',
@@ -240,6 +245,8 @@ class BreakoutRoom extends PureComponent {
       captureSlides: false,
       durationIsValid: true,
       breakoutJoinedUsers: null,
+      boxHeight: 300,
+      isResizing: false,
     };
 
     this.btnLevelId = _.uniqueId('btn-set-level-');
@@ -596,6 +603,18 @@ class BreakoutRoom extends PureComponent {
     this.setState({ captureSlides: e.target.checked });
   }
 
+  setBoxHeight(newHeight) {
+    this.setState({ boxHeight: newHeight });
+  }
+
+  setIsResizing(isResizing) {
+    this.setState({ isResizing });
+  }
+
+  setResizeStart(value) {
+    this.setState({ resizeStart: value });
+  }
+
   getUserByRoom(room) {
     const { users } = this.state;
     return users.filter((user) => user.room === room);
@@ -622,6 +641,12 @@ class BreakoutRoom extends PureComponent {
     const { meetingName } = this.props;
 
     return `${meetingName} (${this.getRoomName(position)})`;
+  }
+
+  onResizeHandle(deltaHeight){
+    const { resizeStart } = this.state;
+    const newHeight = resizeStart + deltaHeight;
+    this.setBoxHeight(newHeight);
   }
 
   resetUserWhenRoomsChange(rooms) {
@@ -791,6 +816,7 @@ class BreakoutRoom extends PureComponent {
       leastOneUserIsValid,
       numberOfRooms,
       roomNamesChanged,
+      boxHeight,
     } = this.state;
 
     const rooms = (numberOfRooms > MAX_BREAKOUT_ROOMS
@@ -830,9 +856,30 @@ class BreakoutRoom extends PureComponent {
               }
             />
           </Styled.FreeJoinLabel>
-          <Styled.BreakoutBox id="breakoutBox-0" onDrop={drop(0)} onDragOver={allowDrop} tabIndex={0}>
-            {this.renderUserItemByRoom(0)}
-          </Styled.BreakoutBox>
+          <Resizable
+            size={{
+              height: boxHeight,
+            }}
+            onResizeStart={() => {
+              this.setIsResizing(true);
+              this.setResizeStart(boxHeight);
+              this.onResizeHandle(boxHeight);
+            }}
+            onResize={(e, direction, ref, d) => {
+              this.onResizeHandle(d.height);
+            }}
+            onResizeStop={() => {
+              this.setResizeStart(0);
+              setTimeout(() => this.setIsResizing(false), 500);
+            }}
+            enable={{
+              bottom: true,
+            }}
+          >
+            <Styled.BreakoutBox id="breakoutBox-0" onDrop={drop(0)} onDragOver={allowDrop} tabIndex={0} boxHeight={boxHeight}>
+              {this.renderUserItemByRoom(0)}
+            </Styled.BreakoutBox>
+          </Resizable>
           <Styled.SpanWarn data-test="warningNoUserAssigned" valid={leastOneUserIsValid}>
             {intl.formatMessage(intlMessages.leastOneWarnBreakout)}
           </Styled.SpanWarn>
@@ -857,9 +904,30 @@ class BreakoutRoom extends PureComponent {
                   {intl.formatMessage(intlMessages.roomNameInputDesc)}
                 </div>
               </Styled.FreeJoinLabel>
-              <Styled.BreakoutBox id={`breakoutBox-${value}`} onDrop={drop(value)} onDragOver={allowDrop} tabIndex={0}>
-                {this.renderUserItemByRoom(value)}
-              </Styled.BreakoutBox>
+              <Resizable
+                size={{
+                  height: boxHeight,
+                }}
+                onResizeStart={() => {
+                  this.setIsResizing(true);
+                  this.setResizeStart(boxHeight);
+                  this.onResizeHandle(boxHeight);
+                }}
+                onResize={(e, direction, ref, d) => {
+                  this.onResizeHandle(d.height);
+                }}
+                onResizeStop={() => {
+                  this.setResizeStart(0);
+                  setTimeout(() => this.setIsResizing(false), 500);
+                }}
+                enable={{
+                  bottom: true,
+                }}
+              >
+                <Styled.BreakoutBox id={`breakoutBox-${value}`} onDrop={drop(value)} onDragOver={allowDrop} tabIndex={0} boxHeight={boxHeight}>
+                  {this.renderUserItemByRoom(value)}
+                </Styled.BreakoutBox>
+              </Resizable>
               {this.hasNameDuplicated(value) ? (
                 <Styled.SpanWarn valid={false}>
                   {intl.formatMessage(intlMessages.roomNameDuplicatedIsValid)}

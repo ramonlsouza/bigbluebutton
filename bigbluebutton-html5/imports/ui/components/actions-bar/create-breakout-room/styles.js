@@ -40,13 +40,6 @@ const Alert = styled.div`
       color: ${colorDanger};
     }
   `}
-
-  grid-row: span 3;
-
-  & > div {
-    height: 25.2rem;
-    max-height: 25.2rem;
-  }
 `;
 
 const FreeJoinLabel = styled.label`
@@ -85,11 +78,11 @@ const BreakoutNameInput = styled.input`
 
 const BreakoutBox = styled(ScrollboxVertical)`
   width: 100%;
-  min-height: 6rem;
-  max-height: 8rem;
   border: 1px solid ${colorGrayLightest};
   border-radius: ${borderRadius};
   padding: ${lgPaddingY} 0;
+  height: ${({ boxHeight }) => boxHeight}px;
+  resize: vertical;
 `;
 
 const SpanWarn = styled.span`
