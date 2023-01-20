@@ -6,7 +6,8 @@ import withShortcutHelper from '/imports/ui/components/shortcut-help/service';
 import Styled from './styles';
 import UserAvatar from '/imports/ui/components/user-avatar/component';
 import { ACTIONS, PANELS } from '../../layout/enums';
-import Icon from '/imports/ui/components/common/icon/component';
+import Icon from 'bigbluebutton-icons';
+import { colorGrayLight } from '/imports/ui/stylesheets/styled-components/palette';
 
 const DEBOUNCE_TIME = 1000;
 const CHAT_CONFIG = Meteor.settings.public.chat;
@@ -164,7 +165,7 @@ const ChatListItem = (props) => {
           {chat.icon
             ? (
               <Styled.ChatThumbnail>
-                <Icon iconName={chat.icon} />
+                <Icon iconName="happy" color={colorGrayLight} />
               </Styled.ChatThumbnail>
             ) : (
               <UserAvatar
