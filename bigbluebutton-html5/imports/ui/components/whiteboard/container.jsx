@@ -89,6 +89,25 @@ export default withTracker(({
   const shapes = getShapes(whiteboardId, curPageId, intl);
   const curPres = getCurrentPres();
 
+  const maxImageWidth = 2048;
+  const maxImageHeight = 1536;
+
+  if (slidePosition?.width && slidePosition?.height) {
+    const ratio = Math.min(maxImageWidth / slidePosition?.width, maxImageHeight / slidePosition?.height);
+    const scaledWidth = slidePosition?.width * ratio;
+    const scaledHeight = slidePosition?.height * ratio;
+
+    if(scaledWidth && scaledHeight){
+      slidePosition = {
+        ...slidePosition,
+        width: scaledWidth,
+        height: scaledHeight,
+        viewBoxWidth: scaledWidth,
+        viewBoxHeight: scaledHeight,
+      }
+    }
+  }
+
   shapes['slide-background-shape'] = {
     assetId: `slide-background-asset-${curPageId}`,
     childIndex: -1,
@@ -131,5 +150,6 @@ export default withTracker(({
     numberOfSlides: PresentationToolbarService.getNumberOfSlides(podId, presentationId),
     notifyNotAllowedChange,
     notifyShapeNumberExceeded,
+    slidePosition,
   };
 })(WhiteboardContainer);
