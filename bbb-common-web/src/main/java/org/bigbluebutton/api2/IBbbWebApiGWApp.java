@@ -43,12 +43,13 @@ public interface IBbbWebApiGWApp {
                      ArrayList<Group> groups,
                      ArrayList<String> disabledFeatures,
                      Boolean notifyRecordingIsOn,
-                     String uploadExternalDescription,
-                     String uploadExternalUrl);
+                     String presentationUploadExternalDescription,
+                     String presentationUploadExternalUrl);
 
   void registerUser(String meetingID, String internalUserId, String fullname, String role,
-                    String externUserID, String authToken, String avatarURL,
-                    Boolean guest, Boolean authed, String guestStatus, Boolean excludeFromDashboard);
+                    String externUserID, String authToken, String sessionToken, String avatarURL,
+                    Boolean guest, Boolean authed, String guestStatus, Boolean excludeFromDashboard,
+                    Map<String, String> customParameters);
   void guestWaitingLeft(String meetingID, String internalUserId);
 
   void destroyMeeting(DestroyMeetingMessage msg);

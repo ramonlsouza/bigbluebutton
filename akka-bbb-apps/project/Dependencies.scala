@@ -7,7 +7,7 @@ object Dependencies {
 
   object Versions {
     // Scala
-    val scala = "2.13.4"
+    val scala = "2.13.9"
     val junit = "4.12"
     val junitInterface = "0.11"
     val scalactic = "3.0.8"
@@ -16,8 +16,8 @@ object Dependencies {
     val akkaVersion = "2.6.17"
     val akkaHttpVersion = "10.2.7"
     val gson = "2.8.9"
-    val jackson = "2.13.0"
-    val logback = "1.2.10"
+    val jackson = "2.13.5"
+    val logback = "1.2.11"
     val quicklens = "1.7.5"
     val spray = "1.3.6"
 
@@ -26,7 +26,12 @@ object Dependencies {
     val codec = "1.15"
 
     // BigBlueButton
-    val bbbCommons = "0.0.21-SNAPSHOT"
+    val bbbCommons = "0.0.22-SNAPSHOT"
+
+    // Database
+    val slick = "3.4.1"
+    val postgresql = "42.5.0"
+    val slickPg = "0.21.1"
 
     // Test
     val scalaTest = "3.2.11"
@@ -55,6 +60,11 @@ object Dependencies {
     val apacheLang = "org.apache.commons" % "commons-lang3" % Versions.lang
 
     val bbbCommons = "org.bigbluebutton" % "bbb-common-message_2.13" % Versions.bbbCommons
+
+    val slick = "com.typesafe.slick" %% "slick" % Versions.slick
+    val slickHikaricp = "com.typesafe.slick" %% "slick-hikaricp" % Versions.slick
+    val slickPg = "com.github.tminglei" %% "slick-pg" % Versions.slickPg
+    val postgresql = "org.postgresql" % "postgresql" % Versions.postgresql
   }
 
   object Test {
@@ -87,5 +97,9 @@ object Dependencies {
     Compile.apacheLang,
     Compile.akkaHttp,
     Compile.akkaHttpSprayJson,
-    Compile.bbbCommons) ++ testing
+    Compile.bbbCommons,
+    Compile.slick,
+    Compile.slickHikaricp,
+    Compile.slickPg,
+    Compile.postgresql) ++ testing
 }

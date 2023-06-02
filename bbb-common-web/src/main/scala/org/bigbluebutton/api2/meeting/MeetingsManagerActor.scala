@@ -12,12 +12,13 @@ case class CreateBreakoutRoomMsg(meetingId: String, parentMeetingId: String,
                                  name: String, sequence: Integer, freeJoin: Boolean, dialNumber: String,
                                  voiceConfId: String, viewerPassword: String, moderatorPassword: String, duration: Int,
                                  sourcePresentationId: String, sourcePresentationSlide: Int,
-                                 record: Boolean, captureNotes: Boolean, captureSlides: Boolean) extends ApiMsg
+                                 record: Boolean, captureNotes: Boolean, captureSlides: Boolean, captureNotesFilename: String, captureSlidesFilename: String) extends ApiMsg
 
 case class AddUserSession(token: String, session: UserSession)
 case class RegisterUser(meetingId: String, intUserId: String, name: String, role: String,
-                        extUserId: String, authToken: String, avatarURL: String,
-                        guest: Boolean, authed: Boolean, guestStatus: String, excludeFromDashboard: Boolean)
+                        extUserId: String, authToken: String, sessionToken: String, avatarURL: String,
+                        guest: Boolean, authed: Boolean, guestStatus: String, excludeFromDashboard: Boolean,
+                        customParameters: Map[String, String])
 
 case class CreateMeetingMsg(defaultProps: DefaultProps)
 
