@@ -33,7 +33,8 @@ const WebcamContainer = ({
 
   const usingUsersContext = useContext(UsersContext);
   const { users } = usingUsersContext;
-  const currentUser = users[Auth.meetingID][Auth.userID];
+  const contextUsers = users[Auth.meetingID];
+  const currentUser = contextUsers[Auth.userID];
 
   const isGridEnabled = layoutType === LAYOUT_TYPE.VIDEO_FOCUS;
 
@@ -53,6 +54,7 @@ const WebcamContainer = ({
           displayPresentation,
           isRTL,
           isGridEnabled,
+          users: isGridEnabled ? contextUsers : null,
         }}
       />
     )

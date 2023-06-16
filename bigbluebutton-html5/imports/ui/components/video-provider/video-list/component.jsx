@@ -95,13 +95,12 @@ class VideoList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { layoutType, cameraDock, streams, focusedId, isGridEnabled, users } = this.props;
+    const { layoutType, cameraDock, streams, focusedId } = this.props;
     const { width: cameraDockWidth, height: cameraDockHeight } = cameraDock;
     const {
       layoutType: prevLayoutType,
       cameraDock: prevCameraDock,
       streams: prevStreams,
-      users: prevUsers,
       focusedId: prevFocusedId,
     } = prevProps;
     const { width: prevCameraDockWidth, height: prevCameraDockHeight } = prevCameraDock;
@@ -112,7 +111,6 @@ class VideoList extends Component {
       || focusedId !== prevFocusedId
       || cameraDockWidth !== prevCameraDockWidth
       || cameraDockHeight !== prevCameraDockHeight
-      || (isGridEnabled && users?.length !== prevUsers?.length)
       || streams.length !== prevStreams.length) {
       this.handleCanvasResize();
     }
@@ -179,14 +177,8 @@ class VideoList extends Component {
       streams,
       cameraDock,
       layoutContextDispatch,
-      isGridEnabled,
-      users,
     } = this.props;
     let numItems = streams.length;
-
-    if (isGridEnabled) {
-      numItems += users.length;
-    }
 
     if (numItems < 1 || !this.canvas || !this.grid) {
       return;
@@ -307,67 +299,46 @@ class VideoList extends Component {
       swapLayout,
       handleVideoFocus,
       focusedId,
-      users,
     } = this.props;
     const numOfStreams = streams.length;
+    const videoItems = streams;
 
-    const userItems = users ? users.map((user) => {
-      const { userId, name } = user;
+    return videoItems.map((item) => {
+      const { userId, name } = item;
 
-      return (
-        <Styled.VideoListItem
-          key={userId}
-          focused={false}
-          data-test="webcamVideoItem"
-        >
-          <VideoListItemContainer
-            numOfStreams={numOfStreams}
-            cameraId={userId}
-            userId={userId}
-            name={name}
-            focused={false}
-            isStream={false}
-            onVideoItemMount={() => {
-              this.handleCanvasResize();
-            }}
-            onVideoItemUnmount={onVideoItemUnmount}
-            swapLayout={swapLayout}
-          />
-        </Styled.VideoListItem>
-      );
-    }) : null;
+      const isStream = !!item.stream;
 
-    const videoItems = streams.map((vs) => {
-      const { stream, userId, name } = vs;
-      const isFocused = focusedId === stream && numOfStreams > 2;
+      const stream = isStream ? item.stream : null;
+      const key = isStream ? stream : userId;
+      const isFocused = isStream && focusedId === stream && numOfStreams > 2;
 
       return (
         <Styled.VideoListItem
-          key={stream}
+          key={key}
           focused={isFocused}
           data-test="webcamVideoItem"
         >
           <VideoListItemContainer
             numOfStreams={numOfStreams}
-            cameraId={stream}
+            cameraId={key}
             userId={userId}
             name={name}
             focused={isFocused}
-            isStream={true}
-            onHandleVideoFocus={handleVideoFocus}
+            isStream={isStream}
+            onHandleVideoFocus={isStream ? handleVideoFocus : () => {}}
             onVideoItemMount={(videoRef) => {
               this.handleCanvasResize();
-              onVideoItemMount(stream, videoRef);
+              if (isStream) {
+                onVideoItemMount(stream, videoRef);
+              }
             }}
             onVideoItemUnmount={onVideoItemUnmount}
             swapLayout={swapLayout}
-            onVirtualBgDrop={(type, name, data) => onVirtualBgDrop(stream, type, name, data)}
+            onVirtualBgDrop={(type, name, data) => isStream ? onVirtualBgDrop(stream, type, name, data) : null}
           />
         </Styled.VideoListItem>
       );
     });
-
-    return videoItems.concat(userItems);
   }
 
   render() {

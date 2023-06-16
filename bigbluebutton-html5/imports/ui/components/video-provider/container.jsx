@@ -8,7 +8,7 @@ const VideoProviderContainer = ({ children, ...props }) => {
   return (!streams.length && !isGridEnabled ? null : <VideoProvider {...props}>{children}</VideoProvider>);
 };
 
-export default withTracker(({ swapLayout, ...rest }) => {
+export default withTracker(({ swapLayout, users, ...rest }) => {
   // getVideoStreams returns a dictionary consisting of:
   // {
   //  streams: array of mapped streams
@@ -17,7 +17,7 @@ export default withTracker(({ swapLayout, ...rest }) => {
   const {
     streams,
     totalNumberOfStreams,
-  } = VideoService.getVideoStreams();
+  } = VideoService.getVideoStreams(users);
 
   return {
     swapLayout,

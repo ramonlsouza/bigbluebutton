@@ -378,7 +378,7 @@ class VideoProvider extends Component {
   findAllPrivilegedStreams () {
     const { streams } = this.props;
     // Privileged streams are: floor holders, pinned users
-    return streams.filter(stream => stream.floor || stream.pin);
+    return streams.filter(stream => stream?.floor || stream?.pin);
   }
 
   updateQualityThresholds(numberOfPublishers) {
@@ -400,7 +400,7 @@ class VideoProvider extends Component {
   }
 
   getStreamsToConnectAndDisconnect(streams) {
-    const streamsCameraIds = streams.map(s => s.stream);
+    const streamsCameraIds = streams.filter(s => !!s.stream).map(s => s?.stream);
     const streamsConnected = Object.keys(this.webRtcPeers);
 
     const streamsToConnect = streamsCameraIds.filter(stream => {

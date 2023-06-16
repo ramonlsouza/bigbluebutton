@@ -420,7 +420,7 @@ class VideoService {
     makeCall('changePin', userId, !userIsPinned);
   }
 
-  getVideoStreams() {
+  getVideoStreams(users) {
     const pageSize = this.getMyPageSize();
     const isPaginationDisabled = !this.isPaginationEnabled() || pageSize === 0;
     const { neededDataTypes } = isPaginationDisabled
@@ -438,8 +438,23 @@ class VideoService {
 
     const moderatorOnly = this.webcamsOnlyForModerator();
     if (moderatorOnly) streams = this.filterModeratorOnly(streams);
-    const connectingStream = this.getConnectingStream(streams);
+    const connectingStream = this.getConnectingStream(streams.filter(s => !s.isGridUser));
     if (connectingStream) streams.push(connectingStream);
+
+    const streamUsers = streams.map((stream) => stream.userId);
+    const gridUsers = users
+    ? Object.values(users).filter(
+      (user) => !user.loggedOut && !user.left && !streamUsers.includes(user.userId)
+    ) 
+    : null;
+
+    streams = gridUsers ? streams.concat(gridUsers.map((user) => ({
+      userId: user.userId,
+      name: user.name,
+      sortName: user.sortName,
+      stream: null,
+      isGridUser: true,
+    }))) : streams;
 
     // Pagination is either explictly disabled or pagination is set to 0 (which
     // is equivalent to disabling it), so return the mapped streams as they are
@@ -679,7 +694,7 @@ class VideoService {
   }
 
   isLocalStream(cameraId) {
-    return cameraId.startsWith(Auth.userID);
+    return cameraId?.startsWith(Auth.userID);
   }
 
   playStart(cameraId) {
@@ -980,7 +995,7 @@ export default {
   exitVideo: () => videoService.exitVideo(),
   joinVideo: deviceId => videoService.joinVideo(deviceId),
   stopVideo: cameraId => videoService.stopVideo(cameraId),
-  getVideoStreams: () => videoService.getVideoStreams(),
+  getVideoStreams: (users) => videoService.getVideoStreams(users),
   getInfo: () => videoService.getInfo(),
   getMyStreamId: deviceId => videoService.getMyStreamId(deviceId),
   isUserLocked: () => videoService.isUserLocked(),
