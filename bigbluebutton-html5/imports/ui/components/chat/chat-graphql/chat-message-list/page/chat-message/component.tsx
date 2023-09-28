@@ -123,6 +123,18 @@ const ChatMesssage: React.FC<ChatMessageProps> = ({
             />
           ),
         };
+      case ChatMessageType.BREAKOUT_ROOM:
+        return {
+          name: message.senderName,
+          color: '#0F70D7',
+          isModerator: true,
+          component: (
+            <ChatMessageTextContent
+              emphasizedMessage
+              text={message.message}
+            />
+          ),
+        };
       case ChatMessageType.TEXT:
       default:
         return {
@@ -146,7 +158,7 @@ const ChatMesssage: React.FC<ChatMessageProps> = ({
           color={messageContent.color}
           moderator={messageContent.isModerator}
         >
-          {message.user?.avatar.length === 0 ? messageContent.name.toLowerCase().slice(0, 2) || '' : ''}
+          {!message.user || message.user?.avatar.length === 0 ? messageContent.name.toLowerCase().slice(0, 2) || 'q' : 'a'}
         </ChatAvatar>
       )}
       <ChatContent sameSender={message?.user ? sameSender : false}>
