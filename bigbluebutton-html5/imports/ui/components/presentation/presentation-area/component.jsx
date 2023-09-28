@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PresentationPodsContainer from '../../presentation-pod/container';
+import PresentationContainer from '../../presentation/container';
 
 const PresentationArea = ({
   width,
@@ -16,7 +16,7 @@ const PresentationArea = ({
     presentationAreaHeight: height,
   };
   return (
-    <PresentationPodsContainer {...{ presentationAreaSize, presentationIsOpen, darkTheme, layoutType, setPresentationFitToWidth, fitToWidth }} />
+    <PresentationContainer {...{ presentationAreaSize, presentationIsOpen, darkTheme, layoutType, setPresentationFitToWidth, fitToWidth }} />
   );
 };
 
