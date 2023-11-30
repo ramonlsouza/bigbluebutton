@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import ChatAlert from './component';
 import { layoutSelect, layoutSelectInput, layoutDispatch } from '../../layout/context';
 import { PANELS } from '../../layout/enums';
-import { UsersContext } from '/imports/ui/components/components-data/users-context/context';
 import { ChatContext } from '/imports/ui/components/components-data/chat-context/context';
-import { GroupChatContext } from '/imports/ui/components/components-data/group-chat-context/context';
-import userListService from '/imports/ui/components/user-list/service';
+import UNREAD_CHATS_SUBSCRIPTION from './queries';
+import { useSubscription } from '@apollo/client';
 import UnreadMessages from '/imports/ui/services/unread-messages';
 
 const PUBLIC_CHAT_ID = Meteor.settings.public.chat.public_group_id;
@@ -27,29 +26,26 @@ const ChatAlertContainer = (props) => {
   let idChat = idChatOpen;
   if (sidebarContentPanel !== PANELS.CHAT) idChat = '';
 
-  const usingUsersContext = useContext(UsersContext);
   const usingChatContext = useContext(ChatContext);
-  const usingGroupChatContext = useContext(GroupChatContext);
 
-  const { users } = usingUsersContext;
   const { chats: groupChatsMessages } = usingChatContext;
-  const { groupChat: groupChats } = usingGroupChatContext;
 
-  const activeChats = userListService.getActiveChats({ groupChatsMessages, groupChats, users });
+  const { data: chatData } = useSubscription(UNREAD_CHATS_SUBSCRIPTION);
+  const chat = chatData?.chat || [];
 
   // audio alerts
-  const unreadMessagesCountByChat = audioAlertEnabled
-    ? activeChats.map((chat) => ({
-      chatId: chat.chatId, unreadCounter: chat.unreadCounter,
+  const unreadMessagesCountByChat = audioAlertEnabled && chat
+    ? chat.map((chatItem) => ({
+      chatId: chatItem.chatId, unreadCounter: chatItem.totalUnread,
     }))
     : null;
 
   // push alerts
   const unreadMessagesByChat = pushAlertEnabled
-    ? activeChats.filter(
-      (chat) => chat.unreadCounter > 0 && chat.chatId !== idChat,
-    ).map((chat) => {
-      const chatId = (chat.chatId === 'public') ? PUBLIC_CHAT_ID : chat.chatId;
+    ? chat.filter(
+      (chatItem) => chatItem.totalUnread > 0 && chatItem.chatId !== idChat,
+    ).map((chatItem) => {
+      const chatId = (chatItem.chatId === 'public') ? PUBLIC_CHAT_ID : chatItem.chatId;
       return UnreadMessages.getUnreadMessages(chatId, groupChatsMessages);
     })
     : null;
