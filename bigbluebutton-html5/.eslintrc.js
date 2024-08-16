@@ -1,5 +1,5 @@
 module.exports = {
-  extends: 'airbnb',
+  extends: ['airbnb', 'plugin:storybook/recommended'],
   parserOptions: {
     ecmaVersion: 2020,
   },

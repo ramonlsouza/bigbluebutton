@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'bbb-icons';
+    src: url('/public/fonts/BbbIcons/bbb-icons.woff2?v=VERSION') format('woff2'),
+    url('/public/fonts/BbbIcons/bbb-icons.woff?v=VERSION') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
