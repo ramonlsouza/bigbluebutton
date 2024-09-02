@@ -230,6 +230,17 @@ object Users2x {
     }
   }
 
+  def setUserChatLocked(users: Users2x, intId: String, isChatLocked: Boolean): Option[UserState] = {
+    for {
+      u <- findWithIntId(users, intId)
+    } yield {
+      val newUser = u.modify(_.isChatLocked).setTo(isChatLocked)
+      users.save(newUser)
+      UserStateDAO.update(newUser)
+      newUser
+    }
+  }
+
   def setUserLocked(users: Users2x, intId: String, locked: Boolean): Option[UserState] = {
     for {
       u <- findWithIntId(users, intId)
@@ -440,8 +451,8 @@ case class UserState(
     userLeftFlag:          UserLeftFlag,
     speechLocale:          String              = "",
     captionLocale:         String              = "",
+    isChatLocked:          Boolean,
     userMetadata:          Map[String, String] = Map.empty
-
 )
 
 case class UserIdAndName(id: String, name: String)

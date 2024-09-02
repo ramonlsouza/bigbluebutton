@@ -551,6 +551,13 @@ type Mutation {
 }
 
 type Mutation {
+  userSetChatLocked(
+    userId: String!
+    isChatLocked: Boolean!
+  ): Boolean
+}
+
+type Mutation {
   userSetLocked(
     userId: String!
     locked: Boolean!

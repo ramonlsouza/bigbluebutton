@@ -70,6 +70,7 @@ trait HandlerHelpers extends SystemConfiguration {
         mobile = mobile,
         presenter = false,
         locked = MeetingStatus2x.getPermissions(liveMeeting.status).lockOnJoin,
+        isChatLocked = false,
         avatar = regUser.avatarURL,
         webcamBackground = regUser.webcamBackgroundURL,
         color = regUser.color,

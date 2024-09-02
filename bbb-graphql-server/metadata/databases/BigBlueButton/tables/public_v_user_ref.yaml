@@ -27,6 +27,7 @@ select_permissions:
         - isModerator
         - currentlyInMeeting
         - joined
+        - isChatLocked
         - locked
         - loggedOut
         - mobile

@@ -54,6 +54,7 @@ trait UserJoinedVoiceConfEvtMsgHdlr extends SystemConfiguration {
         pin = false,
         mobile = false,
         presenter = false,
+        isChatLocked = false,
         locked = MeetingStatus2x.getPermissions(liveMeeting.status).lockOnJoin,
         avatar = "",
         webcamBackground = "",

@@ -590,6 +590,9 @@ class MeetingActor(
       case m: LockUserInMeetingCmdMsg =>
         handleLockUserInMeetingCmdMsg(m)
         updateUserLastActivity(m.body.lockedBy)
+      case m: LockUserChatInMeetingCmdMsg =>
+        handleLockUserChatInMeetingCmdMsg(m)
+        updateUserLastActivity(m.body.lockedBy)
       case m: LockUsersInMeetingCmdMsg =>
         handleLockUsersInMeetingCmdMsg(m)
         updateUserLastActivity(m.body.lockedBy)

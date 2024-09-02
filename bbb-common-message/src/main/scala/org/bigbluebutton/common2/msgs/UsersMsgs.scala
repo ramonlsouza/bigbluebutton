@@ -75,6 +75,7 @@ case class UserJoinedMeetingEvtMsgBody(
     away:             Boolean,
     pin:              Boolean,
     presenter:        Boolean,
+    isChatLocked:     Boolean,
     locked:           Boolean,
     avatar:           String,
     webcamBackground: String,
@@ -294,6 +295,20 @@ case class LockUserInMeetingCmdMsgBody(userId: String, lock: Boolean, lockedBy: 
 object UserLockedInMeetingEvtMsg { val NAME = "UserLockedInMeetingEvtMsg" }
 case class UserLockedInMeetingEvtMsg(header: BbbClientMsgHeader, body: UserLockedInMeetingEvtMsgBody) extends BbbCoreMsg
 case class UserLockedInMeetingEvtMsgBody(userId: String, locked: Boolean, lockedBy: String)
+
+/**
+ * Sent from client to lock user chat in meeting.
+ */
+object LockUserChatInMeetingCmdMsg { val NAME = "LockUserChatInMeetingCmdMsg" }
+case class LockUserChatInMeetingCmdMsg(header: BbbClientMsgHeader, body: LockUserChatInMeetingCmdMsgBody) extends StandardMsg
+case class LockUserChatInMeetingCmdMsgBody(lockedBy: String, userId: String, isChatLocked: Boolean)
+
+/**
+ * Send to client that user chat has been locked.
+ */
+object LockUserChatInMeetingEvtMsg { val NAME = "LockUserChatInMeetingEvtMsg" }
+case class LockUserChatInMeetingEvtMsg(header: BbbClientMsgHeader, body: LockUserChatInMeetingEvtMsgBody) extends BbbCoreMsg
+case class LockUserChatInMeetingEvtMsgBody(userId: String, isChatLocked: Boolean)
 
 /**
  * Sent by client to lock users.
