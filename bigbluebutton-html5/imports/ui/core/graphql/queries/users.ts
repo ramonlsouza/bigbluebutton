@@ -27,6 +27,7 @@ subscription UserListSubscription($offset: Int!, $limit: Int!) {
     avatar
     presenter
     pinned
+    isChatLocked
     locked
     authed
     mobile

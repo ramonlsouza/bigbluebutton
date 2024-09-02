@@ -26,6 +26,7 @@ subscription userCurrentSubscription {
     joinErrorCode
     joinErrorMessage
     joined
+    isChatLocked
     locked
     loggedOut
     mobile

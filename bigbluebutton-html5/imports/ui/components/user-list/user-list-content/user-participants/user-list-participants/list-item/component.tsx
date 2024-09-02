@@ -121,7 +121,7 @@ const UserListItem: React.FC<UserListItemProps> = ({ user, lockSettings }) => {
   if (user.mobile && LABEL.mobile) {
     subs.push(intl.formatMessage(messages.mobile));
   }
-  if (user.locked && lockSettings?.hasActiveLockSetting && !user.isModerator) {
+  if ((user.locked || user.isChatLocked) && lockSettings?.hasActiveLockSetting && !user.isModerator) {
     subs.push(
       <span key={uniqueId('lock-')}>
         <Icon iconName="lock" />

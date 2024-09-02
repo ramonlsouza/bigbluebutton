@@ -96,6 +96,7 @@ export interface User {
   whiteboardAccess?: boolean;
   isDialIn: boolean;
   voice?: Partial<Voice>;
+  isChatLocked: boolean;
   locked: boolean;
   registeredAt: string;
   hasDrawPermissionOnCurrentPage: boolean;

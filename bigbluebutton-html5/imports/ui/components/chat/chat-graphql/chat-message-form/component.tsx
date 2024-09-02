@@ -521,6 +521,7 @@ const ChatMessageFormContainer: React.FC = ({
 
   const { data: currentUser } = useCurrentUser((c) => ({
     isModerator: c?.isModerator,
+    isChatLocked: c?.isChatLocked,
     locked: c?.locked,
   }));
 
@@ -534,7 +535,7 @@ const ChatMessageFormContainer: React.FC = ({
 
   const isModerator = currentUser?.isModerator;
   const isPublicChat = chat?.public;
-  const isLocked = currentUser?.locked;
+  const isLocked = currentUser?.locked || currentUser?.isChatLocked;
   const disablePublicChat = meeting?.lockSettings?.disablePublicChat;
   const disablePrivateChat = meeting?.lockSettings?.disablePrivateChat;
 

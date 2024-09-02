@@ -99,6 +99,15 @@ export const USER_LEAVE_MEETING = gql`
   }
 `;
 
+export const SET_USER_CHAT_LOCKED = gql`
+  mutation UserSetChatLocked($userId: String!, $isChatLocked: Boolean!) {
+    userSetChatLocked(
+      userId: $userId,
+      isChatLocked: $isChatLocked,
+    )
+  }
+`;
+
 export default {
   SET_CAMERA_PINNED,
   SET_RAISE_HAND,
@@ -111,4 +120,5 @@ export default {
   SET_EXIT_REASON,
   SET_SPEECH_LOCALE,
   USER_LEAVE_MEETING,
+  SET_USER_CHAT_LOCKED,
 };
