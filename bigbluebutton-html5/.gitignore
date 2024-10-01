@@ -7,3 +7,4 @@ public/locales/ja_JP.json
 public/files
 dist/
 tsconfig.tsbuildinfo
+*storybook.log
