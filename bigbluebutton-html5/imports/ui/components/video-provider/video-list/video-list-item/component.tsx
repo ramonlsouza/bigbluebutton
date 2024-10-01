@@ -22,6 +22,9 @@ import useCurrentUser from '/imports/ui/core/hooks/useCurrentUser';
 import { VIDEO_TYPES } from '/imports/ui/components/video-provider/enums';
 import PluginButtonContainer from '../../../plugins/plugin-button/container';
 import { UserCameraHelperAreas } from '../../../plugins-engine/extensible-areas/components/user-camera-helper/types';
+import browserInfo from '/imports/utils/browserInfo';
+
+const { isChrome, isFirefox, isEdge } = browserInfo;
 
 const intlMessages = defineMessages({
   disableDesc: {
@@ -30,6 +33,7 @@ const intlMessages = defineMessages({
 });
 
 const VIDEO_CONTAINER_WIDTH_BOUND = 125;
+const hasPadding = isChrome || isFirefox || isEdge;
 
 interface VideoListItemProps {
   pluginUserCameraHelperPerPosition: UserCameraHelperAreas;
@@ -271,6 +275,8 @@ const VideoListItem: React.FC<VideoListItemProps> = (props) => {
         voiceUser={voiceUser}
         unhealthyStream={videoDataLoaded && !isStreamHealthy}
         squeezed={false}
+        animations={animations}
+        hasPadding={hasPadding}
       />
       <Styled.TopBar>
         {raiseHand && <Styled.RaiseHand>✋</Styled.RaiseHand>}
@@ -313,6 +319,8 @@ const VideoListItem: React.FC<VideoListItemProps> = (props) => {
         stream={stream}
         unhealthyStream={videoDataLoaded && !isStreamHealthy}
         squeezed
+        animations={animations}
+        hasPadding={hasPadding}
       />
       {renderSqueezedButton()}
     </Styled.WebcamConnecting>

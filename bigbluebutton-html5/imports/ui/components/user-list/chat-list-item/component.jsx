@@ -59,6 +59,8 @@ const ChatListItem = ({
   sidebarContentIsOpen,
   sidebarContentPanel,
   layoutContextDispatch,
+  animations,
+  hasPadding,
 }) => {
   const TOGGLE_CHAT_PUB_AK = shortcuts;
   const CHAT_CONFIG = window.meetingClientSettings.public.chat;
@@ -166,6 +168,8 @@ const ChatListItem = ({
                 moderator={chat.isModerator}
                 avatar={chat.avatar}
                 color={chat.color}
+                animations={animations}
+                hasPadding={hasPadding}
               >
                 {chat.name.toLowerCase().slice(0, 2)}
               </UserAvatar>

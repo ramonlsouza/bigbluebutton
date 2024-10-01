@@ -275,6 +275,8 @@ class ConnectionStatusComponent extends PureComponent {
     const {
       connectionData,
       intl,
+      animations,
+      hasPadding,
     } = this.props;
 
     const { selectedTab } = this.state;
@@ -305,6 +307,8 @@ class ConnectionStatusComponent extends PureComponent {
                 avatar={conn.user.avatar}
                 moderator={conn.user.isModerator}
                 color={conn.user.color}
+                animations={animations}
+                hasPadding={hasPadding}
               >
                 {conn.user.name.toLowerCase().slice(0, 2)}
               </UserAvatar>

@@ -176,8 +176,8 @@ const Avatar = styled.div`
   `}
 
   ${({
-    presenter, isChrome, isFirefox, isEdge,
-  }) => presenter && (isChrome || isFirefox || isEdge) && `
+    presenter, hasPadding,
+  }) => presenter && hasPadding && `
     &:before {
       padding: ${indicatorPadding} !important;
     }
@@ -206,8 +206,8 @@ const Avatar = styled.div`
   `}
 
   ${({
-    whiteboardAccess, isChrome, isFirefox, isEdge,
-  }) => whiteboardAccess && (isChrome || isFirefox || isEdge) && `
+    whiteboardAccess, hasPadding,
+  }) => whiteboardAccess && hasPadding && `
     &:before {
       padding: ${indicatorPadding};
     }

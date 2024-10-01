@@ -11,11 +11,13 @@ interface UserAvatarVideoProps {
   };
   squeezed: boolean;
   unhealthyStream: boolean;
+  animations: boolean;
+  hasPadding?: boolean;
 }
 
 const UserAvatarVideo: React.FC<UserAvatarVideoProps> = (props) => {
   const {
-    user, stream, unhealthyStream, squeezed, voiceUser = { talking: false },
+    user, stream, unhealthyStream, squeezed, animations, hasPadding, voiceUser = { talking: false },
   } = props;
   const data = { ...user, ...stream };
   const {
@@ -48,6 +50,8 @@ const UserAvatarVideo: React.FC<UserAvatarVideoProps> = (props) => {
       unhealthyStream={unhealthyStream}
       talking={talking}
       whiteboardAccess={undefined}
+      animations={animations}
+      hasPadding={hasPadding}
     >
       {handleUserIcon()}
     </Styled.UserAvatarStyled>
