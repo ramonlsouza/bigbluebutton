@@ -146,8 +146,6 @@ class ActionsBar extends PureComponent {
       layoutContextDispatch,
       actionsBarStyle,
       setMeetingLayout,
-      showPushLayout,
-      setPushLayout,
       setPresentationFitToWidth,
       isPresentationEnabled,
       ariaHidden,
