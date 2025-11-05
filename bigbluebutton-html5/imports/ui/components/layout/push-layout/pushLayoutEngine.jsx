@@ -354,11 +354,6 @@ const PushLayoutEngine = (props) => {
       }
     }
 
-    if (selectedLayout !== prevProps.selectedLayout
-      && selectedLayout !== LAYOUT_TYPE.UNIFIED_LAYOUT) {
-      Session.setItem('isGridEnabled', selectedLayout === LAYOUT_TYPE.VIDEO_FOCUS);
-    }
-
     if (selectedLayout === LAYOUT_TYPE.UNIFIED_LAYOUT
       && (selectedLayout !== prevProps.selectedLayout
         || presentationIsOpen !== prevProps.presentationIsOpen)) {

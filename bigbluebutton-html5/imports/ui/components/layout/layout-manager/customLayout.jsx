@@ -733,7 +733,7 @@ const CustomLayout = (props) => {
     layoutContextDispatch({
       type: ACTIONS.SET_CAMERA_DOCK_OUTPUT,
       value: {
-        display: cameraDockInput.numCameras > 0,
+        display: cameraDockInput.numCameras > 0 || !presentationInput.isOpen,
         position: cameraDockInput.position,
         minWidth: cameraDockBounds.minWidth,
         width: cameraDockBounds.width,

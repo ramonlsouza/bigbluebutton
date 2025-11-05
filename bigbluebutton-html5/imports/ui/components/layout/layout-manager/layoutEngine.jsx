@@ -85,20 +85,11 @@ const LayoutEngine = () => {
     const cameraDockBounds = {};
 
     const hasPresentation = isPresentationEnabled && slidesLength !== 0;
-
     const isGeneralMediaOff = !hasPresentation
       && !hasExternalVideo && !hasScreenShare
       && !isSharedNotesPinned && !genericContentId;
 
-    const isVideoFocusLayout = selectedLayout === LAYOUT_TYPE.VIDEO_FOCUS;
     const isUnifiedLayout = selectedLayout === LAYOUT_TYPE.UNIFIED_LAYOUT;
-
-    if (cameraDockInput.numCameras === 0 && !isVideoFocusLayout && !isUnifiedLayout) {
-      cameraDockBounds.width = 0;
-      cameraDockBounds.height = 0;
-
-      return cameraDockBounds;
-    }
 
     if (isUnifiedLayout && cameraDockInput.numCameras === 0 && hasPresentation && isOpen) {
       cameraDockBounds.width = 0;
