@@ -121,11 +121,13 @@ const PushLayoutEngine = (props) => {
     const contextLayout = enforcedLayout || changeLayout || defaultLayout
       || meetingLayout || currentLayout;
 
-    if (currentLayout === LAYOUT_TYPE.UNIFIED_LAYOUT) {
-      Session.setItem('isGridEnabled', !presentationIsOpen);
-    } else {
-      Session.setItem('isGridEnabled', currentLayout === LAYOUT_TYPE.VIDEO_FOCUS);
-    }
+    Settings.application.selectedLayout = enforcedLayout
+      || changeLayout
+      || defaultLayout
+      || meetingLayout;
+
+    let { selectedLayout: actualLayout } = Settings.application;
+    Session.setItem('isGridEnabled', !presentationIsOpen);
 
     setLayoutType(
       contextLayout,
