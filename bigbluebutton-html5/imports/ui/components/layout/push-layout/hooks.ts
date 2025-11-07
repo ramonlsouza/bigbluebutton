@@ -12,13 +12,13 @@ import { LAYOUT_TYPE } from '../defaultValues';
 import { ACTIONS } from '../enums';
 import { updateSettings } from '../../settings/service';
 
-const usePushLayoutUpdater = (pushLayout: boolean) => {
+const usePushLayoutUpdater = () => {
   const [setSyncWithPresenterLayout] = useMutation(SET_SYNC_WITH_PRESENTER_LAYOUT);
 
   const setPushLayout = () => {
     setSyncWithPresenterLayout({
       variables: {
-        syncWithPresenterLayout: pushLayout,
+        syncWithPresenterLayout: true,
       },
     });
   };
@@ -30,7 +30,7 @@ const useMeetingLayoutUpdater = (
   cameraDockOutput: Output['cameraDock'],
   cameraDockInput: Input['cameraDock'],
   presentationInput: Input['presentation'],
-  layoutSettings: { pushLayout: boolean, selectedLayout: boolean },
+  layoutSettings: { selectedLayout: boolean },
 ) => {
   const [setMeetingLayoutProps] = useMutation(SET_LAYOUT_PROPS);
 
@@ -39,11 +39,11 @@ const useMeetingLayoutUpdater = (
   const { isOpen: presentationIsOpen } = presentationInput;
   const { selectedLayout } = layoutSettings;
 
-  const setMeetingLayout = (pushLayout: boolean) => {
+  const setMeetingLayout = () => {
     setMeetingLayoutProps({
       variables: {
         layout: selectedLayout,
-        syncWithPresenterLayout: pushLayout,
+        syncWithPresenterLayout: true,
         presentationIsOpen,
         isResizing,
         cameraPosition: position || 'contentTop',
