@@ -3,6 +3,7 @@ import { layoutSelect, layoutSelectInput, layoutSelectOutput } from '/imports/ui
 import DEFAULT_VALUES from '/imports/ui/components/layout/defaultValues';
 import { LAYOUT_TYPE, DEVICE_TYPE } from '/imports/ui/components/layout/enums';
 
+import DefaultLayout from '/imports/ui/components/layout/layout-manager/defaultLayout';
 import CustomLayout from '/imports/ui/components/layout/layout-manager/customLayout';
 import SmartLayout from '/imports/ui/components/layout/layout-manager/smartLayout';
 import PresentationFocusLayout from '/imports/ui/components/layout/layout-manager/presentationFocusLayout';
@@ -79,17 +80,22 @@ const LayoutEngine = () => {
 
     const cameraDockBounds = {};
 
-    if (cameraDockInput.numCameras === 0 && selectedLayout !== LAYOUT_TYPE.VIDEO_FOCUS) {
+    const hasPresentation = isPresentationEnabled && slidesLength !== 0;
+
+    const isGeneralMediaOff = !hasPresentation
+      && !hasExternalVideo && !hasScreenShare
+      && !isSharedNotesPinned && !genericContentId;
+
+    const isVideoFocusLayout = selectedLayout === LAYOUT_TYPE.VIDEO_FOCUS;
+    const isDefaultLayout = selectedLayout === LAYOUT_TYPE.DEFAULT_LAYOUT;
+
+    if (cameraDockInput.numCameras === 0
+      && (!isVideoFocusLayout || (isDefaultLayout && (!hasPresentation || !isOpen)))) {
       cameraDockBounds.width = 0;
       cameraDockBounds.height = 0;
 
       return cameraDockBounds;
     }
-
-    const hasPresentation = isPresentationEnabled && slidesLength !== 0;
-    const isGeneralMediaOff = !hasPresentation
-      && !hasExternalVideo && !hasScreenShare
-      && !isSharedNotesPinned && !genericContentId;
 
     if (!isOpen || isGeneralMediaOff) {
       cameraDockBounds.width = mediaAreaBounds.width;
@@ -353,6 +359,9 @@ const LayoutEngine = () => {
   const layout = document.getElementById('layout');
   if (skipLayoutEngineRender) return null;
   switch (selectedLayout) {
+    case LAYOUT_TYPE.DEFAULT_LAYOUT:
+      layout?.setAttribute('data-layout', LAYOUT_TYPE.DEFAULT_LAYOUT);
+      return <DefaultLayout {...common} isPresentationEnabled={isPresentationEnabled} />;
     case LAYOUT_TYPE.CUSTOM_LAYOUT:
       layout?.setAttribute('data-layout', LAYOUT_TYPE.CUSTOM_LAYOUT);
       return <CustomLayout {...common} isPresentationEnabled={isPresentationEnabled} />;

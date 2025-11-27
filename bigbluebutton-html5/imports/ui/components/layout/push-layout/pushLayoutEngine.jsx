@@ -126,7 +126,12 @@ const PushLayoutEngine = (props) => {
       actualLayout = actualLayout === 'custom' ? 'smart' : actualLayout;
       Settings.application.selectedLayout = actualLayout;
     }
-    Session.setItem('isGridEnabled', actualLayout === LAYOUT_TYPE.VIDEO_FOCUS);
+
+    if (actualLayout === LAYOUT_TYPE.DEFAULT_LAYOUT) {
+      Session.setItem('isGridEnabled', !presentationIsOpen);
+    } else {
+      Session.setItem('isGridEnabled', actualLayout === LAYOUT_TYPE.VIDEO_FOCUS);
+    }
 
     Settings.save(setLocalSettings);
 
@@ -350,9 +355,17 @@ const PushLayoutEngine = (props) => {
       }
     }
 
-    if (selectedLayout !== prevProps.selectedLayout) {
+    if (selectedLayout !== prevProps.selectedLayout
+      && selectedLayout !== LAYOUT_TYPE.DEFAULT_LAYOUT) {
       Session.setItem('isGridEnabled', selectedLayout === LAYOUT_TYPE.VIDEO_FOCUS);
     }
+
+    if (selectedLayout === LAYOUT_TYPE.DEFAULT_LAYOUT
+      && (selectedLayout !== prevProps.selectedLayout
+        || presentationIsOpen !== prevProps.presentationIsOpen)) {
+      Session.setItem('isGridEnabled', !presentationIsOpen);
+    }
+
     return () => {};
   });
 

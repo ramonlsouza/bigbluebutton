@@ -1,4 +1,5 @@
 export const LAYOUT_TYPE = {
+  DEFAULT_LAYOUT: 'default',
   CUSTOM_LAYOUT: 'custom',
   SMART_LAYOUT: 'smart',
   PRESENTATION_FOCUS: 'presentationFocus',
