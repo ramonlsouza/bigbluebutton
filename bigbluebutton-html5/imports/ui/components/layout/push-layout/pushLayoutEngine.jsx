@@ -12,6 +12,7 @@ import {
   SYNC,
   LAYOUT_ELEMENTS,
   PANELS,
+  HIDDEN_LAYOUTS,
 } from '../enums';
 import { isMobile, LAYOUTS_SYNC } from '../utils';
 import { updateSettings, isKeepPushingLayoutEnabled } from '/imports/ui/components/settings/service';
@@ -373,6 +374,16 @@ const PushLayoutEngineContainer = (props) => {
   const isPushLayoutEnabled = isKeepPushingLayoutEnabled();
 
   const getKeepPushingLayout = () => {
+    // check if current layout is a hidden layout
+    if (selectedLayout && HIDDEN_LAYOUTS.includes(selectedLayout)) {
+      return false;
+    }
+
+    // always enabled for non-hidden layouts is legacy layout manager is disabled
+    if (!window.meetingClientSettings.public.layout.legacyLayoutManager) {
+      return true;
+    }
+
     if (!isPushLayoutEnabled) return false;
 
     const storageKey = `keepPushingLayout_${Auth.meetingID}`;

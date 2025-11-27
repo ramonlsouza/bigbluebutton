@@ -813,10 +813,11 @@ public:
   layout:
     hidePresentationOnJoin: false
     showParticipantsOnLogin: true
-    showPushLayoutButton: true
-    showPushLayoutToggle: true
+    showPushLayoutButton: false
+    showPushLayoutToggle: false
     showSessionDetailsOnJoin: true
     showScreenshareQuickSwapButton: false
+    legacyLayoutManager: false
   pads:
     url: ETHERPAD_HOST
   media:
