@@ -89,8 +89,14 @@ const LayoutEngine = () => {
     const isVideoFocusLayout = selectedLayout === LAYOUT_TYPE.VIDEO_FOCUS;
     const isDefaultLayout = selectedLayout === LAYOUT_TYPE.DEFAULT_LAYOUT;
 
-    if (cameraDockInput.numCameras === 0
-      && (!isVideoFocusLayout || (isDefaultLayout && (!hasPresentation || !isOpen)))) {
+    if (cameraDockInput.numCameras === 0 && !isVideoFocusLayout && !isDefaultLayout) {
+      cameraDockBounds.width = 0;
+      cameraDockBounds.height = 0;
+
+      return cameraDockBounds;
+    }
+
+    if (isDefaultLayout && cameraDockInput.numCameras === 0 && hasPresentation && isOpen) {
       cameraDockBounds.width = 0;
       cameraDockBounds.height = 0;
 
