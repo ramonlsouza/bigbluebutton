@@ -146,7 +146,7 @@ const PushLayoutEngine = (props) => {
     MediaService.setPresentationIsOpen(layoutContextDispatch, presentationLastState);
     Session.setItem('presentationLastState', presentationLastState);
 
-    if (actualLayout === 'custom') {
+    if (actualLayout === 'custom' || actualLayout === 'default') {
       setTimeout(() => {
         layoutContextDispatch({
           type: ACTIONS.SET_FOCUSED_CAMERA_ID,
@@ -352,7 +352,7 @@ const PushLayoutEngine = (props) => {
       && layoutPropagateElements.length > 0
     ) {
       if (pushLayout && (layoutChanged || pushLayout !== prevProps.pushLayout)) {
-        setMeetingLayout();
+        setMeetingLayout(pushLayout);
       }
     }
 
