@@ -121,6 +121,8 @@ export interface Meeting {
   durationInSeconds: number;
   extId: string;
   isBreakout: boolean;
+  parentMeetingId: string;
+  parentMeetingLockSettings: LockSettings;
   learningDashboardAccessToken: string;
   maxPinnedCameras: number;
   meetingCameraCap: number;

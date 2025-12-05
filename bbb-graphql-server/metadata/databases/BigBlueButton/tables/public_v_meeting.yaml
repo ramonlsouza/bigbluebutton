@@ -79,6 +79,15 @@ object_relationships:
         remote_table:
           name: v_meeting_lockSettings
           schema: public
+  - name: parentMeetingLockSettings
+    using:
+      manual_configuration:
+        column_mapping:
+          parentMeetingId: meetingId
+        insertion_order: null
+        remote_table:
+          name: v_meeting_lockSettings
+          schema: public
   - name: recording
     using:
       manual_configuration:
@@ -183,6 +192,10 @@ select_permissions:
         - meetingId
         - name
         - notifyRecordingIsOn
+        - parentMeetingId
+        - parentMeetingLockSettings {
+            disablePrivateChat
+          }
         - presentationUploadExternalDescription
         - presentationUploadExternalUrl
       filter:
@@ -217,6 +230,7 @@ select_permissions:
         - meetingId
         - name
         - notifyRecordingIsOn
+        - parentMeetingId
         - presentationUploadExternalDescription
         - presentationUploadExternalUrl
         - screenShareBridge

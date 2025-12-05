@@ -9,7 +9,13 @@ const lockContextContainer = (component) => (props) => {
 
   const { data: meeting } = useMeeting((m) => ({
     lockSettings: m.lockSettings,
+    isBreakout: m.isBreakout,
+    parentMeetingId: m.parentMeetingId,
+    parentMeetingLockSettings: m.parentMeetingLockSettings,
   }));
+
+  console.log('meeting:', meeting);
+
   const { data: user } = useCurrentUser((u) => ({
     role: u.role,
     locked: u.locked,

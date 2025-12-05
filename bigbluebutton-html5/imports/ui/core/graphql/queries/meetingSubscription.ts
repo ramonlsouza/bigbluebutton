@@ -3,6 +3,10 @@ import { gql } from '@apollo/client';
 const MEETING_SUBSCRIPTION = gql`
   subscription MeetingSubscription {
       meeting {
+        parentMeetingId
+        parentMeetingLockSettings {
+          disablePrivateChat
+        }
         durationInSeconds
         lockSettings {
           disableCam
