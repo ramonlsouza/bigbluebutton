@@ -411,6 +411,8 @@ export interface CameraSortingModes {
   defaultSorting: string
   paginationSorting: string
   partitionPrivilegedStreams: boolean
+  showAudioOnlyOnFirstPage: boolean
+  maxAudioOnlyUsers: number
 }
 
 export interface CameraQualityThresholds {
