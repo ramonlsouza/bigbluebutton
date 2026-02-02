@@ -78,7 +78,7 @@ export const useMergedCursorData = () => {
   }, [cursorUsersSubscriptionDataString]);
 
   useEffect(() => {
-    if (userCursor) {
+    if (Object.keys(userCursor).length > 0) {
       const mergedData = Object.keys(userCursor).map((userId) => {
         const cursor = userCursor[userId];
         const coordinates = cursorCoordinates[userId];
@@ -97,6 +97,16 @@ export const useMergedCursorData = () => {
         };
       }) as mergedData[];
       setUserCursorMerged(mergedData);
+    } else {
+      // multi-user is disabled, just show presenter cursor based on coordinates
+      const coordinatesOnlyData = Object.keys(cursorCoordinates).map((user) => {
+        const coordinates = cursorCoordinates[user];
+        return {
+          ...coordinates,
+          presenter: true,
+        };
+      }) as mergedData[];
+      setUserCursorMerged(coordinatesOnlyData);
     }
   }, [cursorCoordinates, userCursor]);
 

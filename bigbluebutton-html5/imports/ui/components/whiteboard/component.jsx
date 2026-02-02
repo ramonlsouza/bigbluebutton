@@ -1996,7 +1996,7 @@ const Whiteboard = React.memo((props) => {
               id,
               currentPageId: `page:${curPageIdRef.current}`,
               userId,
-              userName: name,
+              userName: isMultiUserActive ? name : '',
               cursor,
               color,
             }),
