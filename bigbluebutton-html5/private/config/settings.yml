@@ -196,7 +196,7 @@ public:
     userSettingsStorage: session
     defaultSettings:
       layout:
-        selectedLayout: 'custom'
+        selectedLayout: 'unified'
         animations: true
         chatAudioAlerts: false
         chatPushAlerts: false
